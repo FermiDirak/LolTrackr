@@ -1,0 +1,14 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#555555"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="manuele.bryan.lolwinrate.ListFragment">
+
+    <ListView
+        android:id="@+id/mainListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/main_list_item"/>
+
+</FrameLayout>
