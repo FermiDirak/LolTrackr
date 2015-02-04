@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="#111111"
     android:orientation="vertical"
-    tools:context="manuele.bryan.lolwinrate.QueryFragment">
+    tools:context="manuele.bryan.lolwinrate.Fragments.QueryFragment">
 
 <LinearLayout
     android:layout_width="match_parent"

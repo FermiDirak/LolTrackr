@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-import manuele.bryan.lolwinrate.Champion;
+import manuele.bryan.lolwinrate.LolStatistics.Champion;
 
 public class DataBaseIO {
     Context context;

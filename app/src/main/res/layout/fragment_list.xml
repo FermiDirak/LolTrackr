@@ -3,7 +3,7 @@
     android:background="#555555"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="manuele.bryan.lolwinrate.ListFragment">
+    tools:context="manuele.bryan.lolwinrate.Fragments.ListFragment">
 
     <ListView
         android:id="@+id/mainListView"

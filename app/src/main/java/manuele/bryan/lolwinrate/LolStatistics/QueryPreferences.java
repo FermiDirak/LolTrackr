@@ -1,4 +1,4 @@
-package manuele.bryan.lolwinrate;
+package manuele.bryan.lolwinrate.LolStatistics;
 
 import android.content.Context;
 import android.content.SharedPreferences;

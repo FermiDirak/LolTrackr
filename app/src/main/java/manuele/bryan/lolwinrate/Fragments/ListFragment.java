@@ -1,4 +1,4 @@
-package manuele.bryan.lolwinrate;
+package manuele.bryan.lolwinrate.Fragments;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,13 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import java.io.IOException;
-import java.util.List;
-
+import manuele.bryan.lolwinrate.LolStatistics.ChampionList;
 import manuele.bryan.lolwinrate.Databases.DataBaseIO;
-import manuele.bryan.lolwinrate.Databases.PreferencesDataBase;
+import manuele.bryan.lolwinrate.Adapters.ListAdapterMain;
+import manuele.bryan.lolwinrate.LolStatistics.QueryPreferences;
+import manuele.bryan.lolwinrate.R;
+import manuele.bryan.lolwinrate.LolStatistics.SortPreferences;
 
 public class ListFragment extends Fragment {
     private ListAdapterMain listAdapterMain;

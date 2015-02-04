@@ -1,4 +1,4 @@
-package manuele.bryan.lolwinrate;
+package manuele.bryan.lolwinrate.Fragments;
 
 import android.app.Activity;
 import android.net.Uri;
@@ -7,6 +7,8 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import manuele.bryan.lolwinrate.R;
 
 //only talks--doesn't listen
 public class SortFragment extends Fragment {

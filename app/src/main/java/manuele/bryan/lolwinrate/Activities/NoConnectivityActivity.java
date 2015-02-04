@@ -1,17 +1,24 @@
-package manuele.bryan.lolwinrate;
+package manuele.bryan.lolwinrate.Activities;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import manuele.bryan.lolwinrate.R;
 
 
 public class NoConnectivityActivity extends ActionBarActivity {
+
+    TextView retryText1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_no_connectivity);
+
+        retryText1 = (TextView) findViewById(R.id.retryText1);
     }
 
 

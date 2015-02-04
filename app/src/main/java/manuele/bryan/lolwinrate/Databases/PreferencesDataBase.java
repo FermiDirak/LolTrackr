@@ -5,8 +5,8 @@ import android.content.SharedPreferences;
 
 import java.util.HashMap;
 
-import manuele.bryan.lolwinrate.QueryPreferences;
-import manuele.bryan.lolwinrate.SortPreferences;
+import manuele.bryan.lolwinrate.LolStatistics.QueryPreferences;
+import manuele.bryan.lolwinrate.LolStatistics.SortPreferences;
 
 public class PreferencesDataBase {
     public Context context;

@@ -1,4 +1,4 @@
-package manuele.bryan.lolwinrate;
+package manuele.bryan.lolwinrate.Adapters;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -11,6 +11,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.List;
+
+import manuele.bryan.lolwinrate.LolStatistics.Champion;
+import manuele.bryan.lolwinrate.R;
 
 public class ListAdapterMain extends BaseAdapter {
     public Context context;

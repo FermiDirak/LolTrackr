@@ -1,4 +1,4 @@
-package manuele.bryan.lolwinrate;
+package manuele.bryan.lolwinrate.LolStatistics;
 
 import java.util.ArrayList;
 import java.util.List;

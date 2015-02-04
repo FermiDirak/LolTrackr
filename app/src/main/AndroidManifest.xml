@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".NoConnectivityActivity"
+            android:name=".Activities.NoConnectivityActivity"
             android:label="@string/title_activity_no_connectivity" >
         </activity>
     </application>

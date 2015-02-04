@@ -1,7 +1,9 @@
-package manuele.bryan.lolwinrate;
+package manuele.bryan.lolwinrate.LolStatistics;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import manuele.bryan.lolwinrate.LolStatistics.Champion;
 
 public class ChampionList {
     public List<Champion> champions = new ArrayList<>();

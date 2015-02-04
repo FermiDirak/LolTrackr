@@ -3,22 +3,19 @@ package manuele.bryan.lolwinrate.Activities;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
-import android.widget.Toast;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
-import manuele.bryan.lolwinrate.Champion;
+import manuele.bryan.lolwinrate.LolStatistics.Champion;
 import manuele.bryan.lolwinrate.Databases.DataBaseIO;
 import manuele.bryan.lolwinrate.Databases.PreferencesDataBase;
-import manuele.bryan.lolwinrate.LeagueScrapper;
+import manuele.bryan.lolwinrate.LolStatistics.LeagueScrapper;
 import manuele.bryan.lolwinrate.R;
 
 
