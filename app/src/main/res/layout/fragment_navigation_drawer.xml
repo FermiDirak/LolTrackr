@@ -1,0 +1,42 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="manuele.bryan.lolwinrate.Fragments.NavigationDrawerFragment">
+
+    <RelativeLayout
+        android:layout_width="240dp"
+        android:layout_height="150dp">
+
+        <ImageView
+            android:id="@+id/champBaner"
+            android:background="@android:color/holo_purple"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/accountName"
+            android:text="swag"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:paddingLeft="15dp"
+            android:textColor="@android:color/white"
+            android:layout_alignParentBottom="true"
+            android:background="#88333333"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/drawer_list"
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="#ffff"
+        android:choiceMode="singleChoice"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp" />
+
+</LinearLayout>

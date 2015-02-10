@@ -1,52 +1,33 @@
 package manuele.bryan.lolwinrate.Activities;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListView;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import manuele.bryan.lolwinrate.Adapters.DrawerAdapter;
-import manuele.bryan.lolwinrate.Adapters.DrawerItem;
+import manuele.bryan.lolwinrate.Fragments.NavigationDrawerFragment;
 import manuele.bryan.lolwinrate.Fragments.QueryFragment;
 import manuele.bryan.lolwinrate.R;
 
 
-public class MainActivity extends Activity
+public class MainActivity extends ActionBarActivity
         implements QueryFragment.QueryFragmentListener {
 
     private DrawerLayout drawerLayout;
-    private ListView drawerList;
-    private ActionBarDrawerToggle drawerToggle;
-
+    private NavigationDrawerFragment drawerFragment;
     private CharSequence drawerTitle;
-    DrawerAdapter drawerAdapter;
 
-    List<DrawerItem> dataList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        dataList = new ArrayList<>();
-        dataList.add(new DrawerItem("Message", R.drawable.ic_launcher));
-
         drawerTitle = getTitle();
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawerList = (ListView) findViewById(R.id.left_drawer);
         drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
-
-        drawerAdapter = new DrawerAdapter(this, dataList);
-        drawerList.setAdapter(drawerAdapter);
-
-
 
     }
 

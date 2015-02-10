@@ -11,14 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <ListView
-        android:id="@+id/left_drawer"
-        android:layout_width="240dp"
+    <fragment android:id="@+id/left_drawer"
+        android:name="manuele.bryan.lolwinrate.Fragments.NavigationDrawerFragment"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="#ffff"
-        android:choiceMode="singleChoice"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="0dp" />
+        tools:layout="@layout/fragment_navigation_drawer" />
 
 </android.support.v4.widget.DrawerLayout>
