@@ -26,6 +26,10 @@
             android:name=".Activities.NoConnectivityActivity"
             android:label="@string/title_activity_no_connectivity" >
         </activity>
+        <activity
+            android:name=".Activities.SetUpSummonerActivity"
+            android:label="@string/title_activity_set_up_summoner" >
+        </activity>
     </application>
 
 </manifest>

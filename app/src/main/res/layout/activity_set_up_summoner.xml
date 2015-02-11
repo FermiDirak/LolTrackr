@@ -1,0 +1,79 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_material_dark"
+    tools:context="manuele.bryan.lolwinrate.Activities.SetUpSummonerActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:layout_centerVertical="true"
+        android:background="#555555"
+        android:layout_margin="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:background="#aeaaea"
+            android:layout_width="match_parent"
+            android:layout_height="36dp" />
+
+        <TextView
+            android:text="User Profile Set Up"
+            android:textSize="26dp"
+            android:textColor="#ffffff"
+            android:layout_margin="10dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/nameInput"
+                android:textColor="#ffffff"
+                android:textColorHint="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:hint="Summoner account name" />
+
+            <Spinner
+                android:id="@+id/regionSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:layout="@android:layout/simple_spinner_dropdown_item"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:text="(your password will never be requested)"
+            android:textColor="#D8D5CD"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_height="50dp"
+            android:layout_width="0dp" />
+
+        <Button
+            android:textColor="#ffffff"
+            android:background="#72CDF4"
+            android:id="@+id/submitButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="6dp"
+            android:text="sumbit" />
+    </LinearLayout>
+
+</RelativeLayout>

@@ -22,6 +22,10 @@ public class PreferencesDataBase {
             KEY_FILTER = "filter",
             KEY_SORT_ORDER = "sortorder";
 
+    public static final String KEY_USER_NAME = "username",
+        KEY_USER_REGION = "region";
+    //TODO:implement this
+
     public PreferencesDataBase(Context context) {
         this.context = context;
     }
