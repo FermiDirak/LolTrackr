@@ -1,0 +1,10 @@
+<resources>
+
+    <item name="textheaderblue" type="color">#C9D4D7</item>
+    <item name="textblue" type="color">#869DA4</item>
+
+    <item name="darkgray" type="color">#869DA4</item>
+    <item name="backgroundgray" type="color">#444</item>
+
+
+</resources>

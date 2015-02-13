@@ -2,19 +2,21 @@ package manuele.bryan.lolwinrate.Activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
+import android.widget.TextView;
 
 import java.io.IOException;
 import java.util.List;
 
-import manuele.bryan.lolwinrate.LolStatistics.Champion;
 import manuele.bryan.lolwinrate.Databases.DataBaseIO;
 import manuele.bryan.lolwinrate.Databases.PreferencesDataBase;
+import manuele.bryan.lolwinrate.LolStatistics.Champion;
 import manuele.bryan.lolwinrate.LolStatistics.LeagueScrapper;
 import manuele.bryan.lolwinrate.R;
 
@@ -22,11 +24,18 @@ import manuele.bryan.lolwinrate.R;
 public class SplashScreenActivity extends ActionBarActivity {
     final String PREFS = "prefs";
 
+    TextView leagueStatisticsTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_splash_screen);
+
+        leagueStatisticsTextView = (TextView) findViewById(R.id.leagueStatisticsTextView);
+
+        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/robotolight.ttf");
+        leagueStatisticsTextView.setTypeface(typeface);
 
         SharedPreferences settings = getSharedPreferences(PREFS, 0);
         if (settings.getBoolean("my_first_time", true)) {

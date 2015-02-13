@@ -81,7 +81,7 @@ public class NavigationDrawerFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
 
-        champBanner = (ImageView) view.findViewById(R.id.champBaner);
+        champBanner = (ImageView) view.findViewById(R.id.champBanner);
         userName = (TextView) view.findViewById(R.id.accountName);
         listView = (ListView) view.findViewById(R.id.drawer_list);
 

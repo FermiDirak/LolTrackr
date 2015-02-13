@@ -2,22 +2,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#222222"
+    android:background="@color/darkgray"
     android:orientation="horizontal"
     android:paddingBottom="8dp"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingTop="8dp"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/position"
+    <LinearLayout
         android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:text="123"
-        android:textAlignment="center"
-        android:textColor="@android:color/white"
-        android:textSize="28sp" />
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:background="@drawable/circle">
+
+        <TextView
+            android:id="@+id/position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="123"
+            android:textAlignment="center"
+            android:textColor="@color/darkgray"
+            android:textSize="28sp" />
+
+    </LinearLayout>
 
     <Space
         android:layout_width="10dp"
@@ -51,28 +59,30 @@
 
                 <TextView
                     android:text="winrate: "
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/textheaderblue"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
 
                 <TextView
                     android:id="@+id/winrateTextView"
                     android:text="54.3%"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/textheaderblue"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
 
             </LinearLayout>
 
-            <!--40 min. 57 max. 1 decimal place-->
             <ProgressBar
                 android:id="@+id/winrateBar"
                 android:progress="85"
                 android:max="100"
+                android:progressDrawable="@drawable/progressbar_color"
                 style="?android:progressBarStyleHorizontal"
                 android:visibility="visible"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"/>
 
         </LinearLayout>
 
@@ -87,14 +97,14 @@
 
                 <TextView
                     android:text="matches played: "
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/textheaderblue"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
 
                 <TextView
                     android:id="@+id/matchesTextView"
                     android:text="523k"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/textheaderblue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -104,10 +114,13 @@
                 android:id="@+id/matchesBar"
                 android:progress="50"
                 android:max="100"
+                android:progressDrawable="@drawable/progressbar_color"
                 style="?android:progressBarStyleHorizontal"
                 android:visibility="visible"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp" />
 
         </LinearLayout>
 

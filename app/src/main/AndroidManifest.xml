@@ -15,7 +15,8 @@
         </activity>
         <activity
             android:name=".Activities.SplashScreenActivity"
-            android:label="@string/title_activity_splash_screen" >
+            android:label="@string/title_activity_splash_screen"
+            android:theme="@style/Theme.AppCompat.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,6 +30,9 @@
         <activity
             android:name=".Activities.SetUpSummonerActivity"
             android:label="@string/title_activity_set_up_summoner" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Activities.SplashScreenActivity" />
         </activity>
     </application>
 

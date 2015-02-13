@@ -1,5 +1,8 @@
 package manuele.bryan.lolwinrate.Activities;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -7,6 +10,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import manuele.bryan.lolwinrate.Fragments.ListFragment;
 import manuele.bryan.lolwinrate.Fragments.NavigationDrawerFragment;
 import manuele.bryan.lolwinrate.Fragments.QueryFragment;
 import manuele.bryan.lolwinrate.R;
@@ -29,6 +33,15 @@ public class MainActivity extends ActionBarActivity
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
 
+        replaceFragment(ListFragment.newInstance());
+
+    }
+
+    private void replaceFragment(Fragment newFragment) {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.content_frame, newFragment);
+        fragmentTransaction.commit();
     }
 
 
@@ -41,12 +54,8 @@ public class MainActivity extends ActionBarActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
