@@ -131,4 +131,49 @@
 
     </LinearLayout>
 
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="20dp" />
+
+    <LinearLayout
+        android:background="@color/highlightgray"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="Ally Tips:"
+            android:textSize="18dp"
+            android:textColor="@color/textwhite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/allytips"
+            android:text="\u2022 swag \n\u2022 money"
+            android:textColor="@color/textgray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="20dp" />
+
+        <TextView
+            android:text="Enemy Tips:"
+            android:textSize="18dp"
+            android:textColor="@color/textwhite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/enemytips"
+            android:text="\u2022 swag \n\u2022 money"
+            android:textColor="@color/textgray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
 </LinearLayout>
