@@ -1,10 +1,12 @@
 <resources>
 
-    <item name="textheaderblue" type="color">#C9D4D7</item>
-    <item name="textblue" type="color">#869DA4</item>
+    <item name="textgold" type="color">#FFCD03</item>
+    <item name="textwhite" type="color">#E0E0E0</item>
+    <item name="textgray" type="color">#C8C8C8</item>
 
-    <item name="darkgray" type="color">#869DA4</item>
-    <item name="backgroundgray" type="color">#444</item>
-
+    <item name="backgroundgray" type="color">#212121</item>
+    <item name="darkgray" type="color">#343434</item>
+    <item name="darkergray" type="color">#1A1A1A</item>
+    <item name="highlightgray" type="color">#383838</item>
 
 </resources>

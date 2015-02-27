@@ -11,38 +11,43 @@
 
         <ImageView
             android:id="@+id/champBanner"
-            android:background="@android:color/holo_purple"
+            android:background="@color/darkgray"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <TextView
-            android:id="@+id/accountName"
-            android:text="swag"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"
-            android:paddingLeft="15dp"
-            android:textColor="@android:color/white"
-            android:layout_alignParentBottom="true"
-            android:background="#88333333"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+
+            <ImageView
+                android:background="@color/textgray"
+                android:layout_margin="18dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp" />
+            
+            <TextView
+                android:id="@+id/accountName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="User001"
+                android:textColor="@color/textwhite"
+                android:textSize="18dp"
+                android:layout_gravity="center_vertical"
+                android:padding="10dp"
+                />
+
+        </LinearLayout>
 
     </RelativeLayout>
 
-    <TextView
-        android:text="profile stats"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
-
     <ListView
         android:id="@+id/drawer_list"
-        android:layout_width="240dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="#ffff"
+        android:background="@color/darkgray"
         android:choiceMode="singleChoice"
-        android:divider="@android:color/transparent"
         android:dividerHeight="0dp" />
 
     <TextView

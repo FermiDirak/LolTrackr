@@ -5,7 +5,7 @@
     </item>
     <item android:id="@android:id/progress">
         <clip>
-            <color android:color="@color/textblue"/>
+            <color android:color="@color/accent_material_dark"/>
         </clip>
     </item>
 </layer-list>
