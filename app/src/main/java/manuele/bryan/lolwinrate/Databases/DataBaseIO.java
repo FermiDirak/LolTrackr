@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-import manuele.bryan.lolwinrate.LolStatistics.Champion;
+import manuele.bryan.lolwinrate.LolStatistics.StatisticsChampion;
 
 public class DataBaseIO {
     Context context;
@@ -19,8 +19,8 @@ public class DataBaseIO {
 
     //______________________CHAMPIONS__________________________
 
-    public List<Champion> getChampions() {
-        List<Champion> champions = new ArrayList<>();
+    public List<StatisticsChampion> getChampions() {
+        List<StatisticsChampion> statisticsChampions = new ArrayList<>();
 
         DataBase dataBase = new DataBase(context);
         SQLiteDatabase qdb = dataBase.getReadableDatabase();
@@ -43,23 +43,23 @@ public class DataBaseIO {
                 int matches = Integer.parseInt(
                         cursor.getString(cursor.getColumnIndex(DataBase.KEY_CHAMPMATCHES)));
 
-                Champion champ = new Champion(champName,wins, losses, matches);
-                champions.add(champ);
+                StatisticsChampion champ = new StatisticsChampion(champName,wins, losses, matches);
+                statisticsChampions.add(champ);
             }
         }
 
-        return champions;
+        return statisticsChampions;
     }
 
-    public void addChampions(List<Champion> championList) {
+    public void addChampions(List<StatisticsChampion> statisticsChampionList) {
         clearChampions();
 
-        for (Champion champ : championList) {
+        for (StatisticsChampion champ : statisticsChampionList) {
             addChampion(champ);
         }
     }
 
-    public void addChampion(Champion champ) {
+    public void addChampion(StatisticsChampion champ) {
         DataBase database = new DataBase(context);
         SQLiteDatabase qdb = database.getWritableDatabase();
 

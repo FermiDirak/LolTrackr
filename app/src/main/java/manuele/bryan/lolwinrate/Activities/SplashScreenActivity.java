@@ -6,8 +6,6 @@ import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.Window;
 import android.widget.TextView;
 
@@ -16,7 +14,7 @@ import java.util.List;
 
 import manuele.bryan.lolwinrate.Databases.DataBaseIO;
 import manuele.bryan.lolwinrate.Databases.PreferencesDataBase;
-import manuele.bryan.lolwinrate.LolStatistics.Champion;
+import manuele.bryan.lolwinrate.LolStatistics.StatisticsChampion;
 import manuele.bryan.lolwinrate.LolStatistics.LeagueScrapper;
 import manuele.bryan.lolwinrate.R;
 
@@ -50,48 +48,25 @@ public class SplashScreenActivity extends ActionBarActivity {
 
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_splash_screen, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     private class DownloadDataTask extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... params) {
 
             LeagueScrapper leagueScrapper = new LeagueScrapper(getBaseContext());
-            List<Champion> champions = null;
+            List<StatisticsChampion> statisticsChampions = null;
             try {
-                champions = leagueScrapper.createDataTable();
+                statisticsChampions = leagueScrapper.createDataTable();
             } catch (IOException e) {
                 //no internet connection!!
             }
 
             //TODO: no connectivity case
-            if (champions == null) {
+            if (statisticsChampions == null) {
 
             }
 
             DataBaseIO dataBaseIO = new DataBaseIO(getBaseContext());
-            dataBaseIO.addChampions(champions);
+            dataBaseIO.addChampions(statisticsChampions);
 
             return "";
         }

@@ -20,7 +20,7 @@ public class LeagueScrapper {
         this.queryPreferences = new QueryPreferences(context);
     }
 
-    public List<Champion> createDataTable() throws IOException {
+    public List<StatisticsChampion> createDataTable() throws IOException {
         Document doc = Jsoup.connect(queryPreferences.createLink()).get();
         Element body = doc.body();
         Elements tbodys = body.getElementsByTag("tbody");
@@ -33,7 +33,7 @@ public class LeagueScrapper {
         Elements champWins = champTable.getElementsByClass("ar5");
         Elements champLosses = champTable.getElementsByClass("ar6");
 
-        List<Champion> table = new ArrayList<>();
+        List<StatisticsChampion> table = new ArrayList<>();
 
         for (int i = 0; i < NUMBEROFCHAMPIONS; i++) {
             String name = nameOfChamp(champName, i);
@@ -50,7 +50,7 @@ public class LeagueScrapper {
             int winCountInt = Integer.parseInt(winCount);
             int lossCountInt = Integer.parseInt(lossCount);
 
-            Champion champ = new Champion(name, winCountInt, lossCountInt, matchCountInt);
+            StatisticsChampion champ = new StatisticsChampion(name, winCountInt, lossCountInt, matchCountInt);
 
             table.add(champ);
         }

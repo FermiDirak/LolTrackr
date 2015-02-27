@@ -3,14 +3,12 @@ package manuele.bryan.lolwinrate.LolStatistics;
 import java.util.ArrayList;
 import java.util.List;
 
-import manuele.bryan.lolwinrate.LolStatistics.Champion;
-
-public class ChampionList {
-    public List<Champion> champions = new ArrayList<>();
+public class StatisticsChampionList {
+    public List<StatisticsChampion> statisticsChampions = new ArrayList<>();
     public static int totalMatches = 0;
 
-    public ChampionList(List<Champion> champions) {
-        this.champions = champions;
+    public StatisticsChampionList(List<StatisticsChampion> statisticsChampions) {
+        this.statisticsChampions = statisticsChampions;
 
         calculateTotalMatches();
         calculateChampionListPopularity();
@@ -21,25 +19,25 @@ public class ChampionList {
 
     private void calculateTotalMatches() {
         totalMatches = 0;
-        for (Champion champ : champions) {
+        for (StatisticsChampion champ : statisticsChampions) {
             totalMatches += champ.matches;
         }
     }
 
     private void calculateChampionListPopularity() {
-        for (int i = 0; i < champions.size(); i++) {
-            champions.get(i).popularity = 1.0 * champions.get(i).matches / totalMatches;
+        for (int i = 0; i < statisticsChampions.size(); i++) {
+            statisticsChampions.get(i).popularity = 1.0 * statisticsChampions.get(i).matches / totalMatches;
         }
     }
 
-    public List<Champion> sortByPopularity() {
-        List<Champion> destructableChampsList = champions;
-        List<Champion> sortedChampList = new ArrayList<>();
+    public List<StatisticsChampion> sortByPopularity() {
+        List<StatisticsChampion> destructableChampsList = statisticsChampions;
+        List<StatisticsChampion> sortedChampList = new ArrayList<>();
 
         while (destructableChampsList.size() > 0) {
 
             int mostPopularsPosition = 0;
-            Champion mostPopular = destructableChampsList.get(mostPopularsPosition);
+            StatisticsChampion mostPopular = destructableChampsList.get(mostPopularsPosition);
             for (int i = 0; i < destructableChampsList.size(); i++) {
                 if (destructableChampsList.get(i).matches > mostPopular.matches) {
                     mostPopular = destructableChampsList.get(i);
@@ -51,18 +49,18 @@ public class ChampionList {
             destructableChampsList.remove(mostPopularsPosition);
         }
 
-        champions = sortedChampList;
+        statisticsChampions = sortedChampList;
         return sortedChampList;
     }
 
-    public List<Champion> sortByWinrate() {
-        List<Champion> destructableChampsList = champions;
-        List<Champion> sortedChampList = new ArrayList<>();
+    public List<StatisticsChampion> sortByWinrate() {
+        List<StatisticsChampion> destructableChampsList = statisticsChampions;
+        List<StatisticsChampion> sortedChampList = new ArrayList<>();
 
         while (destructableChampsList.size() > 0) {
 
             int bestsPosition = 0;
-            Champion best = destructableChampsList.get(bestsPosition);
+            StatisticsChampion best = destructableChampsList.get(bestsPosition);
             for (int i = 0; i < destructableChampsList.size(); i++) {
                 if (destructableChampsList.get(i).winrate > best.winrate) {
                     best = destructableChampsList.get(i);
@@ -74,31 +72,31 @@ public class ChampionList {
             destructableChampsList.remove(bestsPosition);
         }
 
-        champions = sortedChampList;
+        statisticsChampions = sortedChampList;
         return sortedChampList;
     }
 
-    public List<Champion> sortByInversePopularity() {
-        List<Champion> destructableChampList = sortByPopularity();
-        List<Champion> sortedChampList = new ArrayList<>();
+    public List<StatisticsChampion> sortByInversePopularity() {
+        List<StatisticsChampion> destructableChampList = sortByPopularity();
+        List<StatisticsChampion> sortedChampList = new ArrayList<>();
 
         while (destructableChampList.size() > 0) {
             sortedChampList.add(destructableChampList.remove(destructableChampList.size() - 1));
         }
 
-        champions = sortedChampList;
+        statisticsChampions = sortedChampList;
         return sortedChampList;
     }
 
-    public List<Champion> sortByInverseWinrate() {
-        List<Champion> destructableChampList = sortByWinrate();
-        List<Champion> sortedChampList = new ArrayList<>();
+    public List<StatisticsChampion> sortByInverseWinrate() {
+        List<StatisticsChampion> destructableChampList = sortByWinrate();
+        List<StatisticsChampion> sortedChampList = new ArrayList<>();
 
         while (destructableChampList.size() > 0) {
             sortedChampList.add(destructableChampList.remove(destructableChampList.size() - 1));
         }
 
-        champions = sortedChampList;
+        statisticsChampions = sortedChampList;
         return sortedChampList;
     }
 

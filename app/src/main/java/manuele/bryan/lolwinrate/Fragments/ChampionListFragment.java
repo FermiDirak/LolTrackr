@@ -9,15 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import manuele.bryan.lolwinrate.LolStatistics.ChampionList;
+import manuele.bryan.lolwinrate.Adapters.ChampionListItemAdapter;
+import manuele.bryan.lolwinrate.LolStatistics.StatisticsChampionList;
 import manuele.bryan.lolwinrate.Databases.DataBaseIO;
-import manuele.bryan.lolwinrate.Adapters.ListAdapterMain;
 import manuele.bryan.lolwinrate.LolStatistics.QueryPreferences;
 import manuele.bryan.lolwinrate.R;
 import manuele.bryan.lolwinrate.LolStatistics.SortPreferences;
 
-public class ListFragment extends Fragment {
-    private ListAdapterMain listAdapterMain;
+public class ChampionListFragment extends Fragment {
+    private ChampionListItemAdapter championListItemAdapter;
 
     private QueryPreferences queryPreferences;
     private SortPreferences sortPreferences;
@@ -26,13 +26,13 @@ public class ListFragment extends Fragment {
 
     private ListView listView;
 
-    public static ListFragment newInstance() {
-        ListFragment listFragment = new ListFragment();
+    public static ChampionListFragment newInstance() {
+        ChampionListFragment championListFragment = new ChampionListFragment();
 
         Bundle args = new Bundle();
-        listFragment.setArguments(args);
+        championListFragment.setArguments(args);
 
-        return listFragment;
+        return championListFragment;
     }
 
     @Override
@@ -43,15 +43,15 @@ public class ListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_champion_list, container, false);
 
         listView = (ListView) view.findViewById(R.id.mainListView);
 
         DataBaseIO dataBaseIO = new DataBaseIO(context);
-        ChampionList championList = new ChampionList(dataBaseIO.getChampions());
+        StatisticsChampionList statisticsChampionList = new StatisticsChampionList(dataBaseIO.getChampions());
 
-        listAdapterMain = new ListAdapterMain(context, championList.champions);
-        listView.setAdapter(listAdapterMain);
+        championListItemAdapter = new ChampionListItemAdapter(context, statisticsChampionList.statisticsChampions);
+        listView.setAdapter(championListItemAdapter);
 
         return view;
     }

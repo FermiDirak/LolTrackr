@@ -12,16 +12,16 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import manuele.bryan.lolwinrate.LolStatistics.Champion;
+import manuele.bryan.lolwinrate.LolStatistics.StatisticsChampion;
 import manuele.bryan.lolwinrate.R;
 
-public class ListAdapterMain extends BaseAdapter {
+public class ChampionListItemAdapter extends BaseAdapter {
     public Context context;
-    public List<Champion> champs;
+    public List<StatisticsChampion> champs;
 
     private LayoutInflater layoutInflater;
 
-    public ListAdapterMain(Context context, List<Champion> champs) {
+    public ChampionListItemAdapter(Context context, List<StatisticsChampion> champs) {
         if (champs == null) {
             throw new IllegalArgumentException("champs data null");
         }
@@ -57,19 +57,19 @@ public class ListAdapterMain extends BaseAdapter {
             holder = (ViewHolder) itemView.getTag();
         }
 
-        Champion champ = champs.get(position);
+        StatisticsChampion champ = champs.get(position);
 
         holder.place.setText(("" + (position + 1)));
         Drawable portraitImage = context.getResources().getDrawable(
                 context.getResources().getIdentifier(champ.champName, "drawable",
                         context.getApplicationContext().getPackageName()));
         holder.portrait.setImageDrawable(portraitImage);
-        holder.winRateTextView.setText("" + champ.winrate + "%");
+        holder.winRateTextView.setText("" + champ.winratePercent + "%");
 
         //progressBar max value is 100 bc max winrate is 60%; lowest is 40%
         holder.winRateBar.setProgress((int) ((champ.winrate * 500.0) - 200.0));
 
-        holder.matchesTextView.setText("" + champ.matches);
+        holder.matchesTextView.setText("" + ((int) (champ.matches / 1000.0)) + "k");
         holder.popularityBar.setProgress((int) (100.0 * champ.popularity));
 
         return itemView;

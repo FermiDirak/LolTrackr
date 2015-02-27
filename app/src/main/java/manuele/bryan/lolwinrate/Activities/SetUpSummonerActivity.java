@@ -1,9 +1,7 @@
 package manuele.bryan.lolwinrate.Activities;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,12 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import java.io.IOException;
-import java.util.List;
-
-import manuele.bryan.lolwinrate.Databases.DataBaseIO;
-import manuele.bryan.lolwinrate.LolStatistics.Champion;
-import manuele.bryan.lolwinrate.LolStatistics.LeagueScrapper;
 import manuele.bryan.lolwinrate.R;
 
 public class SetUpSummonerActivity extends Activity {

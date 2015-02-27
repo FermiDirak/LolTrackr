@@ -10,7 +10,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import manuele.bryan.lolwinrate.Fragments.ListFragment;
+import manuele.bryan.lolwinrate.Fragments.ChampionListFragment;
 import manuele.bryan.lolwinrate.Fragments.NavigationDrawerFragment;
 import manuele.bryan.lolwinrate.Fragments.QueryFragment;
 import manuele.bryan.lolwinrate.R;
@@ -33,7 +33,7 @@ public class MainActivity extends ActionBarActivity
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
 
-        replaceFragment(ListFragment.newInstance());
+        replaceFragment(ChampionListFragment.newInstance());
 
     }
 

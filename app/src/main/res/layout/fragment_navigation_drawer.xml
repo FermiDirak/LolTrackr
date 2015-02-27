@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/darkgray"
     android:orientation="vertical"
     tools:context="manuele.bryan.lolwinrate.Fragments.NavigationDrawerFragment">
 
@@ -41,6 +42,15 @@
 
     </RelativeLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="1dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="1dp"
+        android:background="@color/backgroundgray" />
+
     <ListView
         android:id="@+id/drawer_list"
         android:layout_width="match_parent"
@@ -48,7 +58,8 @@
         android:layout_gravity="start"
         android:background="@color/darkgray"
         android:choiceMode="singleChoice"
-        android:dividerHeight="0dp" />
+        android:dividerHeight="0dp"
+        tools:listitem="@layout/drawer_item"/>
 
     <TextView
         android:text="League Statistics"
