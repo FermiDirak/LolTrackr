@@ -24,7 +24,7 @@ public class LeagueScrapper {
         Document doc = Jsoup.connect(queryPreferences.createLink()).get();
         Element body = doc.body();
         Elements tbodys = body.getElementsByTag("tbody");
-        Element champTable = tbodys.get(12);
+        Element champTable = tbodys.get(11);
 
 		Elements champOrder = champTable.getElementsByClass("ar1"); //useless
         Elements champName = champTable.getElementsByClass("ar2");
