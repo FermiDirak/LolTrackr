@@ -10,6 +10,7 @@ public class StatisticsChampion {
 
     public double winrate = 0;
     public double winratePercent = 0;
+    public String winrateString = "";
     public double popularity = 0;
 
     public StatisticsChampion(String champName, int wins, int losses, int matches) {
@@ -21,6 +22,8 @@ public class StatisticsChampion {
         DecimalFormat decimalFormal = new DecimalFormat(".####");
         this.winrate = Double.valueOf(decimalFormal.format(winrate));
         this.winratePercent = winrate * 100.0;
+
+        this.winrateString = Double.toString(Math.round(winratePercent * 100) / 100.0);
 
         this.matches = matches;
     }

@@ -64,13 +64,17 @@ public class ChampionListItemAdapter extends BaseAdapter {
                 context.getResources().getIdentifier(champ.champName, "drawable",
                         context.getApplicationContext().getPackageName()));
         holder.portrait.setImageDrawable(portraitImage);
-        holder.winRateTextView.setText("" + champ.winratePercent + "%");
+        holder.winRateTextView.setText("" + champ.winrateString + "%");
 
         //progressBar max value is 100 bc max winrate is 60%; lowest is 40%
-        holder.winRateBar.setProgress((int) ((champ.winrate * 500.0) - 200.0));
+
+        int displayWinrate = (int) ((champ.winrate * 500.0) - 200.0);
+        holder.winRateBar.setProgress(displayWinrate);
 
         holder.matchesTextView.setText("" + ((int) (champ.matches / 1000.0)) + "k");
-        holder.popularityBar.setProgress((int) (100.0 * champ.popularity));
+
+        int displayPopularity = (int) (champ.popularity * 3333.0);
+        holder.popularityBar.setProgress(displayPopularity);
 
         return itemView;
     }

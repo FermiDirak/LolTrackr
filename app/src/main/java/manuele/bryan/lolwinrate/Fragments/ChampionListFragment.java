@@ -64,7 +64,7 @@ public class ChampionListFragment extends Fragment {
                         get(position);
 
                 String championName = champion.champName;
-                String winrate = "" + champion.winratePercent + "%";
+                String winrate = "" + champion.winrateString + "%";
                 String popularity = "" + ((int) (champion.matches / 1000.0)) + "k";
 
                 openChampionInfoActivity(championName, winrate, popularity);
