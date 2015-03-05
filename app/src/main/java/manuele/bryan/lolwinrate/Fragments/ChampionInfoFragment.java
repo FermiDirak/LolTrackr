@@ -33,6 +33,7 @@ public class ChampionInfoFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             champName = getArguments().getString(KEY_CHAMPNAME);
+            champName = Character.toUpperCase(champName.charAt(0)) + champName.substring(1);
             winrate = getArguments().getString(KEY_WINRATE);
             popularity = getArguments().getString(KEY_POPULARITY);
         }
