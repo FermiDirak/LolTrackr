@@ -12,7 +12,7 @@
 
         <ImageView
             android:id="@+id/champBanner"
-            android:background="@color/darkgray"
+            android:background="@color/bright_foreground_disabled_material_dark"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

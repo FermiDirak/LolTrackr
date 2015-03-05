@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -24,6 +25,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import manuele.bryan.lolwinrate.Adapters.DrawerAdapter;
@@ -85,8 +87,16 @@ public class NavigationDrawerFragment extends Fragment {
         userName = (TextView) view.findViewById(R.id.accountName);
         listView = (ListView) view.findViewById(R.id.drawer_list);
 
+        ArrayList<String> drawerStrings = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.drawer_items)));
+        TypedArray drawerImages = getResources().obtainTypedArray(R.array.drawer_drawings);
+
         dataList = new ArrayList<>();
-        dataList.add(new DrawerItem("Message", R.drawable.ic_launcher));
+
+        for (int i = 0; i < drawerStrings.size(); i++) {
+            DrawerItem drawerItem = new DrawerItem(drawerStrings.get(i), drawerImages.getResourceId(i, -1));
+            dataList.add(drawerItem);
+        }
+
 
         drawerAdapter = new DrawerAdapter(context, dataList);
         listView.setAdapter(drawerAdapter);
@@ -174,6 +184,24 @@ public class NavigationDrawerFragment extends Fragment {
         if (itemClickListener != null) {
             itemClickListener.onItemClick(position);
         }
+
+        System.out.println(position);
+
+        switch (position) {
+            case 0: //user lookup
+                break;
+            case 1: //Items
+                break;
+            case 2: //Champion winrates
+                break;
+            case 3: //champion popularity
+                break;
+            case 4: //settings
+                break;
+            case 5: //about
+                break;
+        }
+
     }
 
     @Override

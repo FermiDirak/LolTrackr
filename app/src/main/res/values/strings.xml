@@ -22,11 +22,22 @@
     <string name="navigation_drawer_close">Close drawer</string>
 
     <string-array name="drawer_items">
-        <item name="profile">Profile</item>
-        <item name="user_lookup">User LookUp</item>
+        <item name="user_lookup">User Lookup</item>
+        <item name="item_lookup">Items</item>
         <item name="champion_winrates">Champion Winrates</item>
         <item name="champion_popularity">Champion Popularity</item>
+        <item name="settings">Settings</item>
+        <item name="about">About</item>
     </string-array>
+    <string-array name="drawer_drawings">
+        <item>@drawable/ic_action_book</item>
+        <item>@drawable/ic_action_chest</item>
+        <item>@drawable/ic_action_ribbon</item>
+        <item>@drawable/ic_action_ribbon</item>
+        <item>@drawable/ic_action_settings</item>
+        <item>@drawable/ic_action_about</item>
+    </string-array>
+
     <string name="title_activity_champion_info">ChampionInfoActivity</string>
 
 </resources>
