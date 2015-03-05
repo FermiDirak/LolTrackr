@@ -29,7 +29,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import manuele.bryan.lolwinrate.Adapters.DrawerAdapter;
-import manuele.bryan.lolwinrate.Adapters.DrawerItem;
+import manuele.bryan.lolwinrate.Items.DrawerItem;
 import manuele.bryan.lolwinrate.R;
 
 public class NavigationDrawerFragment extends Fragment {

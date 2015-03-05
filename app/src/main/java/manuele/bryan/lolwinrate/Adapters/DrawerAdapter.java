@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import manuele.bryan.lolwinrate.Items.DrawerItem;
 import manuele.bryan.lolwinrate.R;
 
 public class DrawerAdapter extends BaseAdapter {

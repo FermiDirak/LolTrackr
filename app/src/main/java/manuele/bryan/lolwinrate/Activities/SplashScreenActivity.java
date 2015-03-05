@@ -47,6 +47,7 @@ public class SplashScreenActivity extends ActionBarActivity {
             List<StatisticsChampion> statisticsChampions = null;
             try {
                 statisticsChampions = leagueScrapper.createDataTable();
+
             } catch (IOException e) {
                 //no internet connection!!
             }

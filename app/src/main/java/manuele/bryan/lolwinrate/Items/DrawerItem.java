@@ -1,4 +1,4 @@
-package manuele.bryan.lolwinrate.Adapters;
+package manuele.bryan.lolwinrate.Items;
 
 public class DrawerItem {
 

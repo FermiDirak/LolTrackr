@@ -7,6 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import manuele.bryan.lolwinrate.Helpers.JsonHelper;
+import manuele.bryan.lolwinrate.Helpers.StringHelper;
+import manuele.bryan.lolwinrate.Items.StaticChampion;
 import manuele.bryan.lolwinrate.R;
 
 public class ChampionInfoFragment extends Fragment {
@@ -15,6 +18,7 @@ public class ChampionInfoFragment extends Fragment {
     public static final String KEY_WINRATE = "winrate";
     public static final String KEY_POPULARITY = "popularity";
     String champName = "";
+    String champDisplayName = "";
     String winrate = "";
     String popularity = "";
 
@@ -33,7 +37,7 @@ public class ChampionInfoFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             champName = getArguments().getString(KEY_CHAMPNAME);
-            champName = Character.toUpperCase(champName.charAt(0)) + champName.substring(1);
+            champDisplayName = StringHelper.capitalizeFirstLetter(champName);
             winrate = getArguments().getString(KEY_WINRATE);
             popularity = getArguments().getString(KEY_POPULARITY);
         }
@@ -44,22 +48,32 @@ public class ChampionInfoFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_champion_info, container, false);
 
-        TextView championNameTV = (TextView) view.findViewById(R.id.championName);
-        TextView championTitleTV = (TextView) view.findViewById(R.id.championTitle);
-        TextView winrateTV = (TextView) view.findViewById(R.id.winrate);
-        TextView popularityTV = (TextView) view.findViewById(R.id.popularity);
-        TextView bioTV = (TextView) view.findViewById(R.id.bioText);
-        TextView allyTipsTV = (TextView) view.findViewById(R.id.allytips);
-        TextView enemyTipsTV = (TextView) view.findViewById(R.id.enemytips);
+        TextView championNameTextView = (TextView) view.findViewById(R.id.championName);
+        TextView championTitleTextView = (TextView) view.findViewById(R.id.championTitle);
+        TextView winrateTextView = (TextView) view.findViewById(R.id.winrate);
+        TextView popularityTextView = (TextView) view.findViewById(R.id.popularity);
+        TextView bioTextView = (TextView) view.findViewById(R.id.bioText);
+        TextView allyTipsTextView = (TextView) view.findViewById(R.id.allytips);
+        TextView enemyTipsTextView = (TextView) view.findViewById(R.id.enemytips);
 
-        championNameTV.setText(champName);
-        winrateTV.setText(winrate);
-        popularityTV.setText(popularity);
+        winrateTextView.setText(winrate);
+        popularityTextView.setText(popularity);
 
-        //TODO: access ddragon to get all the other info
+        StaticChampion championInfo = JsonHelper.loadChampionInfo(getActivity(), champName);
+
+        championNameTextView.setText(championInfo.name);
+        championTitleTextView.setText(championInfo.title);
+        bioTextView.setText(championInfo.lore);
+
+        String allytips = StringHelper.createBulletPointText(championInfo.allytips);
+        String enemytips = StringHelper.createBulletPointText(championInfo.enemytips);
+
+        allyTipsTextView.setText(allytips);
+        enemyTipsTextView.setText(enemytips);
+
+
 
         return view;
     }
-
 
 }
