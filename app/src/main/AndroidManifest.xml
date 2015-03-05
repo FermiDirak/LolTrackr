@@ -35,10 +35,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Activities.SplashScreenActivity" />
         </activity>
-        <activity
-            android:name=".Activities.ChampionInfoActivity"
-            android:label="@string/title_activity_champion_info" >
-        </activity>
     </application>
 
 </manifest>
