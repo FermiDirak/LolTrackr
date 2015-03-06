@@ -71,6 +71,9 @@ public class NavigationDrawerFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mDrawerLayout = (DrawerLayout) getActivity().findViewById(R.id.drawer_layout);
+        System.out.println("!!!!!!" + (mDrawerLayout == null));
+
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
         mUserLearnedDrawer = sp.getBoolean(PREF_USER_LEARNED_DRAWER, false);
         if (getArguments() != null) {
@@ -88,21 +91,8 @@ public class NavigationDrawerFragment extends Fragment {
         userName = (TextView) view.findViewById(R.id.accountName);
         listView = (ListView) view.findViewById(R.id.drawer_list);
 
-        ArrayList<String> drawerStrings = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.drawer_items)));
-        TypedArray drawerImages = getResources().obtainTypedArray(R.array.drawer_drawings);
+        updateDrawer();
 
-        dataList = new ArrayList<>();
-
-        for (int i = 0; i < drawerStrings.size(); i++) {
-            DrawerItem drawerItem = new DrawerItem(drawerStrings.get(i), drawerImages.getResourceId(i, -1));
-            dataList.add(drawerItem);
-        }
-
-        drawerImages.recycle();
-
-
-        drawerAdapter = new DrawerAdapter(context, dataList);
-        listView.setAdapter(drawerAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -117,6 +107,33 @@ public class NavigationDrawerFragment extends Fragment {
 
     public boolean isDrawerOpen() {
         return mDrawerLayout != null && mDrawerLayout.isDrawerOpen(view);
+    }
+
+    public void updateDrawer() {
+        ArrayList<String> drawerStrings = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.drawer_items)));
+        TypedArray drawerImages = getResources().obtainTypedArray(R.array.drawer_drawings);
+
+        dataList = new ArrayList<>();
+
+        PreferencesDataBase preferences = new PreferencesDataBase(context);
+        int lastOpenedTab = preferences.getLastOpenedTab();
+
+        for (int i = 0; i < drawerStrings.size(); i++) {
+            DrawerItem drawerItem = new DrawerItem(drawerStrings.get(i), drawerImages.getResourceId(i, -1));
+            if (i == lastOpenedTab) {
+                drawerItem.currentlySelected = true;
+            } else {
+                drawerItem.currentlySelected = false;
+            }
+
+            dataList.add(drawerItem);
+        }
+
+        drawerImages.recycle();
+
+
+        drawerAdapter = new DrawerAdapter(context, dataList);
+        listView.setAdapter(drawerAdapter);
     }
 
     public void setUp(int fragmentId, DrawerLayout drawerLayout) {
@@ -193,6 +210,8 @@ public class NavigationDrawerFragment extends Fragment {
         if (navigationDrawerListener != null) {
             navigationDrawerListener.updateFragmentHolder();
         }
+
+        updateDrawer();
 
     }
 

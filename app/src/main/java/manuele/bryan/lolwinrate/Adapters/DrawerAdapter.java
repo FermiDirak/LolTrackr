@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -54,6 +55,12 @@ public class DrawerAdapter extends BaseAdapter {
 
         DrawerItem drawerItem = drawerItemList.get(position);
 
+        if (drawerItem.currentlySelected) {
+            holder.backgroundLayout.setBackgroundColor(context.getResources().getColor(
+                    R.color.darkergray
+            ));
+        }
+
         holder.itemName.setText(drawerItem.itemName);
         holder.icon.setImageDrawable(itemView.getResources()
                 .getDrawable(drawerItem.imgId));
@@ -62,10 +69,12 @@ public class DrawerAdapter extends BaseAdapter {
     }
 
     private static final class DrawerItemHolder {
+        LinearLayout backgroundLayout;
         TextView itemName;
         ImageView icon;
 
         DrawerItemHolder(View view) {
+            backgroundLayout = (LinearLayout) view.findViewById(R.id.itemLayout);
             itemName = (TextView) view.findViewById(R.id.drawer_itemName);
             icon = (ImageView) view.findViewById(R.id.drawer_icon);
         }
