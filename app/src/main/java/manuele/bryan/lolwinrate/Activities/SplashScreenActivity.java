@@ -6,12 +6,14 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Window;
+import android.widget.ImageView;
 
 import java.io.IOException;
 import java.util.List;
 
 import manuele.bryan.lolwinrate.Databases.DataBaseIO;
 import manuele.bryan.lolwinrate.Databases.PreferencesDataBase;
+import manuele.bryan.lolwinrate.Helpers.JsonHelper;
 import manuele.bryan.lolwinrate.LolStatistics.LeagueScrapper;
 import manuele.bryan.lolwinrate.LolStatistics.StatisticsChampion;
 import manuele.bryan.lolwinrate.R;
@@ -20,11 +22,15 @@ import manuele.bryan.lolwinrate.R;
 public class SplashScreenActivity extends ActionBarActivity {
     final String PREFS = "prefs";
 
+    ImageView splashImage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_splash_screen);
+
+        splashImage = (ImageView) findViewById(R.id.splashImage);
 
         SharedPreferences settings = getSharedPreferences(PREFS, 0);
         if (settings.getBoolean("my_first_time", true)) {

@@ -1,6 +1,7 @@
 package manuele.bryan.lolwinrate.Helpers;
 
 import android.app.Activity;
+import android.content.res.AssetManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,19 +16,51 @@ import manuele.bryan.lolwinrate.Items.StaticChampion;
 import manuele.bryan.lolwinrate.Items.StaticSpell;
 
 public class JsonHelper {
+    public static String KEY_RIOTAPI = "riotapi";
+    
+    public static String FAIL = "fail";
+
+    public static String getRiotApiKey(AssetManager assets) {
+        return loadApiKeyJSON(assets, KEY_RIOTAPI);
+    }
+
+    public static String loadApiKeyJSON(AssetManager assets, String key) {
+        String apiKey = "";
+
+        try {
+            InputStream inputStream = assets.open("json/apikeys.json");
+            int size = inputStream.available();
+
+            byte[] buffer = new byte[size];
+
+            inputStream.read(buffer);
+            inputStream.close();
+
+            String json = new String(buffer, "UTF-8");
+            JSONObject JSONApiKeysObject = new JSONObject(json);
+
+            apiKey = JSONApiKeysObject.getString(key);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return FAIL;
+        }
+
+        return apiKey;
+    }
 
     public static StaticChampion loadChampionInfo(Activity activity, String champName) {
-        String json = loadJSONFromAsset(activity, champName);
+        String json = loadChampionJSONFromAsset(activity, champName);
 
         champName = StringHelper.capitalizeFirstLetter(champName);
         return parseChampionJSON(json, champName);
     }
 
-    public static String loadJSONFromAsset(Activity activity, String champName) {
+    public static String loadChampionJSONFromAsset(Activity activity, String champName) {
         String json = null;
         try {
-
-            InputStream inputStream = activity.getAssets().open("json/" + champName + ".json");
+            InputStream inputStream = activity.getAssets().open("json/champions/" + champName + ".json");
             int size = inputStream.available();
 
             byte[] buffer = new byte[size];
@@ -39,10 +72,8 @@ public class JsonHelper {
 
         } catch (IOException e) {
             e.printStackTrace();
-            return "FAIL";
+            return FAIL;
         }
-
-        System.out.println(json);
 
         return json;
     }

@@ -10,6 +10,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import manuele.bryan.lolwinrate.Databases.PreferencesDataBase;
 import manuele.bryan.lolwinrate.Fragments.ChampionListFragment;
 import manuele.bryan.lolwinrate.Fragments.NavigationDrawerFragment;
 import manuele.bryan.lolwinrate.Fragments.QueryFragment;
@@ -17,7 +18,8 @@ import manuele.bryan.lolwinrate.R;
 
 
 public class MainActivity extends ActionBarActivity
-        implements QueryFragment.QueryFragmentListener {
+        implements QueryFragment.QueryFragmentListener,
+        NavigationDrawerFragment.NavigationDrawerListener {
 
     private DrawerLayout drawerLayout;
     private NavigationDrawerFragment drawerFragment;
@@ -76,7 +78,35 @@ public class MainActivity extends ActionBarActivity
     public void onQuerySubmit(int sortBy, int region, int filter, int sortOrder,
                               int queueType, int rankedTier, int time) {
 
+    }
 
+
+    @Override
+    public void updateFragmentHolder() {
+        PreferencesDataBase preferences = new PreferencesDataBase(getBaseContext());
+
+        int lastOpenedTabPosition = preferences.getLastOpenedTab();
+
+        switch (lastOpenedTabPosition) {
+            case 0:
+                //user lookup
+                return;
+            case 1:
+                //items
+                return;
+            case 2:
+                //champion winrates
+                return;
+            case 3:
+                //champion popularity
+                return;
+            case 4:
+                //settings
+                return;
+            case 5:
+                //about
+                return;
+        }
 
     }
 }

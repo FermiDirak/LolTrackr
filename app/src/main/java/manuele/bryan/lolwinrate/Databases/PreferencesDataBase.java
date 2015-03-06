@@ -22,17 +22,19 @@ public class PreferencesDataBase {
             KEY_FILTER = "filter",
             KEY_SORT_ORDER = "sortorder";
 
+    public static final String KEY_LAST_OPENED_TAB = "lostopened";
+
     public static final String KEY_USER_NAME = "username",
         KEY_USER_REGION = "region";
     //TODO:implement this
+
 
     public PreferencesDataBase(Context context) {
         this.context = context;
     }
 
     public void updateSetting(String key, int value) {
-        SharedPreferences settings = context.getSharedPreferences(PACKAGE_NAME,
-                Context.MODE_PRIVATE);
+        SharedPreferences settings = getSharedPreferences();
         SharedPreferences.Editor settingsEditor = settings.edit();
 
         settingsEditor.putInt(key, value);
@@ -40,9 +42,13 @@ public class PreferencesDataBase {
         settingsEditor.apply();
     }
 
-    public void createDefaultSettings() {
-        SharedPreferences settings = context.getSharedPreferences(PACKAGE_NAME,
+    public SharedPreferences getSharedPreferences() {
+        return context.getSharedPreferences(PACKAGE_NAME,
                 Context.MODE_PRIVATE);
+    }
+
+    public void createDefaultSettings() {
+        SharedPreferences settings = getSharedPreferences();
 
         SharedPreferences.Editor settingsEditor = settings.edit();
 
@@ -57,7 +63,18 @@ public class PreferencesDataBase {
         settingsEditor.putInt(KEY_FILTER, SortPreferences.FILTER_ALL);
         settingsEditor.putInt(KEY_SORT_ORDER, SortPreferences.DESCENDING_ORDER);
 
+        settingsEditor.putInt(KEY_LAST_OPENED_TAB, 2);
+
         settingsEditor.apply();
+    }
+
+    public void updateLastOpenedTab(int i) {
+        updateSetting(KEY_LAST_OPENED_TAB, i);
+    }
+
+    public int getLastOpenedTab() {
+        SharedPreferences settings = getSharedPreferences();
+        return settings.getInt(KEY_LAST_OPENED_TAB, 2);
     }
 
     public HashMap<String, Integer> getQueryPreferences() {

@@ -4,21 +4,14 @@
     android:layout_height="match_parent"
     tools:context="manuele.bryan.lolwinrate.Activities.SplashScreenActivity">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/splashImage"
+        android:layout_width="234dp"
+        android:layout_height="256dp"
+        android:scaleType="matrix"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true">
-
-        <ImageView
-            android:layout_width="234dp"
-            android:layout_height="256dp"
-            android:scaleType="matrix"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/bigleague" />
-
-    </LinearLayout>
-
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/bigleague" />
 
 </RelativeLayout>

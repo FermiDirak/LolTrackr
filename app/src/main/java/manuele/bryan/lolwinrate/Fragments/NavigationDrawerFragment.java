@@ -29,12 +29,15 @@ import java.util.Arrays;
 import java.util.List;
 
 import manuele.bryan.lolwinrate.Adapters.DrawerAdapter;
+import manuele.bryan.lolwinrate.Databases.PreferencesDataBase;
 import manuele.bryan.lolwinrate.Items.DrawerItem;
 import manuele.bryan.lolwinrate.R;
 
 public class NavigationDrawerFragment extends Fragment {
-    public interface ItemClickListener {
-        void onItemClick(int pos);
+    public NavigationDrawerListener navigationDrawerListener;
+
+    public interface NavigationDrawerListener {
+        public void updateFragmentHolder();
     }
 
     private static final String STATE_SELECTED_POSITION = "selected_navigation_drawer_position";
@@ -48,8 +51,6 @@ public class NavigationDrawerFragment extends Fragment {
 
 
     public Context context;
-
-    public ItemClickListener itemClickListener;
 
     List<DrawerItem> dataList;
     DrawerAdapter drawerAdapter;
@@ -97,12 +98,16 @@ public class NavigationDrawerFragment extends Fragment {
             dataList.add(drawerItem);
         }
 
+        drawerImages.recycle();
+
 
         drawerAdapter = new DrawerAdapter(context, dataList);
         listView.setAdapter(drawerAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+
                 selectItem(position);
             }
         });
@@ -181,25 +186,12 @@ public class NavigationDrawerFragment extends Fragment {
         if (mDrawerLayout != null) {
             mDrawerLayout.closeDrawer(view);
         }
-        if (itemClickListener != null) {
-            itemClickListener.onItemClick(position);
-        }
 
-        System.out.println(position);
+        PreferencesDataBase preferences = new PreferencesDataBase(context);
+        preferences.updateLastOpenedTab(position);
 
-        switch (position) {
-            case 0: //user lookup
-                break;
-            case 1: //Items
-                break;
-            case 2: //Champion winrates
-                break;
-            case 3: //champion popularity
-                break;
-            case 4: //settings
-                break;
-            case 5: //about
-                break;
+        if (navigationDrawerListener != null) {
+            navigationDrawerListener.updateFragmentHolder();
         }
 
     }
@@ -219,12 +211,6 @@ public class NavigationDrawerFragment extends Fragment {
 
     private ActionBar getActionBar() {
         return ((ActionBarActivity) getActivity()).getSupportActionBar();
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        context = activity;
     }
 
     @Override
@@ -265,7 +251,17 @@ public class NavigationDrawerFragment extends Fragment {
         outState.putInt(STATE_SELECTED_POSITION, mCurrentSelectedPosition);
     }
 
-
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        context = activity;
+        try {
+            navigationDrawerListener = (NavigationDrawerListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
 
 
 }
