@@ -41,4 +41,9 @@ public class StringHelper {
         return ArrayListToString(list);
     }
 
+    public static String formatChampionBio(String bio) {
+        return bio.replaceAll("<br><br>", "\n");
+
+    }
+
 }

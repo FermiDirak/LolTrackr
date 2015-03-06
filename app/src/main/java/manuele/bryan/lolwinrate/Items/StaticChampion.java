@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import manuele.bryan.lolwinrate.Helpers.StringHelper;
+
 public class StaticChampion {
 
     public String name = "";
@@ -27,7 +29,7 @@ public class StaticChampion {
                           int attackRank, int defenseRank, int magicRank, int difficultyRank) {
         this.name = name;
         this.title = title;
-        this.lore = lore;
+        this.lore = StringHelper.formatChampionBio(lore);
         this.allytips = allytips;
         this.enemytips = enemytips;
         this.tags = tags;

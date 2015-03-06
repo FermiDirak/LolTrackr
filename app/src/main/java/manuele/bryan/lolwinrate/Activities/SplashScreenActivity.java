@@ -6,14 +6,17 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import java.io.IOException;
 import java.util.List;
 
 import manuele.bryan.lolwinrate.Databases.DataBaseIO;
 import manuele.bryan.lolwinrate.Databases.PreferencesDataBase;
-import manuele.bryan.lolwinrate.Helpers.JsonHelper;
 import manuele.bryan.lolwinrate.LolStatistics.LeagueScrapper;
 import manuele.bryan.lolwinrate.LolStatistics.StatisticsChampion;
 import manuele.bryan.lolwinrate.R;
@@ -22,6 +25,7 @@ import manuele.bryan.lolwinrate.R;
 public class SplashScreenActivity extends ActionBarActivity {
     final String PREFS = "prefs";
 
+    RelativeLayout splashLayout;
     ImageView splashImage;
 
     @Override
@@ -30,6 +34,7 @@ public class SplashScreenActivity extends ActionBarActivity {
         supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_splash_screen);
 
+        splashLayout = (RelativeLayout) findViewById(R.id.splashLayout);
         splashImage = (ImageView) findViewById(R.id.splashImage);
 
         SharedPreferences settings = getSharedPreferences(PREFS, 0);
@@ -41,8 +46,22 @@ public class SplashScreenActivity extends ActionBarActivity {
             settings.edit().putBoolean("my_first_time", false).apply();
         }
 
+        startAnimations();
+
         new DownloadDataTask().execute("");
 
+    }
+
+    private void startAnimations() {
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.alpha);
+        animation.reset();
+        splashLayout.clearAnimation();
+        splashLayout.startAnimation(animation);
+
+        animation = AnimationUtils.loadAnimation(this, R.anim.translateup);
+        animation.reset();
+        splashImage.clearAnimation();
+        splashImage.startAnimation(animation);
     }
 
     private class DownloadDataTask extends AsyncTask<String, String, String> {
