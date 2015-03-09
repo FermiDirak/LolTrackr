@@ -87,6 +87,8 @@ public class MainActivity extends ActionBarActivity
 
         int lastOpenedTabPosition = preferences.getLastOpenedTab();
 
+        drawerLayout.closeDrawer(findViewById(R.id.left_drawer));
+
         switch (lastOpenedTabPosition) {
             case 0:
                 //user lookup
