@@ -9,7 +9,6 @@ import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import java.io.IOException;
@@ -75,11 +74,14 @@ public class SplashScreenActivity extends ActionBarActivity {
 
             } catch (IOException e) {
                 //no internet connection!!
+
+                System.out.println("no internet connection");
+                return "";
             }
 
             //TODO: no connectivity case
             if (statisticsChampions == null) {
-
+                return "";
             }
 
             DataBaseIO dataBaseIO = new DataBaseIO(getBaseContext());
@@ -92,8 +94,14 @@ public class SplashScreenActivity extends ActionBarActivity {
         protected void onPostExecute(String string) {
             super.onPostExecute(string);
 
-            Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);
-            startActivity(intent);
+            PreferencesDataBase preferences = new PreferencesDataBase(getBaseContext());
+            if (preferences.getUsername().equals(PreferencesDataBase.DEFAULT_USER_NAME)) {
+                Intent intent = new Intent(SplashScreenActivity.this, SetUpSummonerActivity.class);
+                startActivity(intent);
+            } else {
+                Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
 
             finish();
 

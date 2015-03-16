@@ -30,7 +30,8 @@
         </activity>
         <activity
             android:name=".Activities.SetUpSummonerActivity"
-            android:label="@string/title_activity_set_up_summoner" >
+            android:label="@string/title_activity_set_up_summoner"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Activities.SplashScreenActivity" />

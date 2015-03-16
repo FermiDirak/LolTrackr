@@ -1,14 +1,15 @@
 package manuele.bryan.lolwinrate.Activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import manuele.bryan.lolwinrate.R;
@@ -17,9 +18,9 @@ public class SetUpSummonerActivity extends Activity {
 
     EditText accountNameInput;
     Spinner regionSpinner;
+    ImageButton infoButton;
     Button submitButton;
 
-    String[] regionArray = getBaseContext().getResources().getStringArray(R.array.regions);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,13 +29,15 @@ public class SetUpSummonerActivity extends Activity {
 
         accountNameInput = (EditText) findViewById(R.id.nameInput);
         regionSpinner = (Spinner) findViewById(R.id.regionSpinner);
+        infoButton = (ImageButton) findViewById(R.id.setupInformationButton);
         submitButton = (Button) findViewById(R.id.submitButton);
 
-        //inflating spinner
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(getBaseContext(),
-                android.R.layout.simple_spinner_item, regionArray);
-        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        regionSpinner.setAdapter(spinnerArrayAdapter);
+        infoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                infoPopup();
+            }
+        });
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,12 +48,18 @@ public class SetUpSummonerActivity extends Activity {
 
     }
 
+    private void infoPopup() {
+        new AlertDialog.Builder(this)
+                .setMessage("Summoner information is requested to provide personalized statistics")
+                .show();
+    }
+
     private void submit() {
         String username = "";
         String region = "";
 
         username = accountNameInput.getText().toString();
-        region = String.valueOf(regionSpinner.getSelectedItem());
+        region = String.valueOf(regionSpinner.getSelectedItem()).toLowerCase();
 
         new VerifyUserTask().execute();
     }

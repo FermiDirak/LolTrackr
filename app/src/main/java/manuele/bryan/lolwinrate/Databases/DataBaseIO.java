@@ -46,6 +46,8 @@ public class DataBaseIO {
                 StatisticsChampion champ = new StatisticsChampion(champName,wins, losses, matches);
                 statisticsChampions.add(champ);
             }
+
+            cursor.close();
         }
 
         return statisticsChampions;
