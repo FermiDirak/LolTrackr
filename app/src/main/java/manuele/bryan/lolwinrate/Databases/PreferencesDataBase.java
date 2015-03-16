@@ -27,8 +27,8 @@ public class PreferencesDataBase {
     public static final String KEY_USER_NAME = "username",
         KEY_USER_REGION = "region";
 
-    public static final String DEFAULT_USER_NAME = "zed",
-            DEFAULT_USER_REGION = "na";
+    public static final String DEFAULT_USER_NAME = "zed";
+    public static final int    DEFAULT_USER_REGION = 0;
 
 
     public PreferencesDataBase(Context context) {
@@ -75,7 +75,7 @@ public class PreferencesDataBase {
         settingsEditor.putInt(KEY_LAST_OPENED_TAB, 2);
 
         settingsEditor.putString(KEY_USER_NAME, DEFAULT_USER_NAME);
-        settingsEditor.putString(KEY_USER_REGION, DEFAULT_USER_REGION);
+        settingsEditor.putInt(KEY_USER_REGION, DEFAULT_USER_REGION);
 
         settingsEditor.apply();
     }
@@ -99,9 +99,9 @@ public class PreferencesDataBase {
         return settings.getString(KEY_USER_NAME, DEFAULT_USER_NAME);
     }
 
-    public String getRegion() {
+    public int getRegion() {
         SharedPreferences settings = getSharedPreferences();
-        return settings.getString(KEY_USER_REGION, DEFAULT_USER_REGION);
+        return settings.getInt(KEY_USER_REGION, DEFAULT_USER_REGION);
     }
 
     public HashMap<String, Integer> getQueryPreferences() {

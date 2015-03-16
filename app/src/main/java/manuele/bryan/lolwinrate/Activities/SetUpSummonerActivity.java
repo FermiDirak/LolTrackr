@@ -11,7 +11,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+import manuele.bryan.lolwinrate.Helpers.StringHelper;
 import manuele.bryan.lolwinrate.R;
 
 public class SetUpSummonerActivity extends Activity {
@@ -55,13 +60,9 @@ public class SetUpSummonerActivity extends Activity {
     }
 
     private void submit() {
-        String username = "";
-        String region = "";
-
-        username = accountNameInput.getText().toString();
-        region = String.valueOf(regionSpinner.getSelectedItem()).toLowerCase();
 
         new VerifyUserTask().execute();
+
     }
 
 
@@ -87,20 +88,49 @@ public class SetUpSummonerActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-
-    //TODO: create a database of user statistics
-    private class VerifyUserTask extends AsyncTask<String, String, String> {
+    private class VerifyUserTask extends AsyncTask<String, String, Integer> {
         @Override
-        protected String doInBackground(String... params) {
+        protected Integer doInBackground(String... params) {
+            String username = StringHelper.formatSummonerName(accountNameInput.getText().toString());
+            String region = String.valueOf(regionSpinner.getSelectedItem()).toLowerCase();
 
-            return "";
+            int code = 0;
+
+            //TODO: change api's region
+            String urlString = "https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/" + username + "?api_key=cbbfab19-c674-40f6-acb4-4df0b39a82e4";
+
+            try {
+                URL url = new URL(urlString);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("GET");
+                connection.connect();
+
+                code = connection.getResponseCode();
+                System.out.println("code: " + code);
+
+            } catch (Exception e) {
+                //TODO: Handle the lack of internet
+                e.printStackTrace();
+            }
+
+            return code;
         }
 
         @Override
-        protected void onPostExecute(String string) {
-            super.onPostExecute(string);
+        protected void onPostExecute(Integer code) {
+            super.onPostExecute(code);
 
-            
+            switch (code) {
+                case 0:
+                    Toast.makeText(getBaseContext(), "No connection", Toast.LENGTH_SHORT).show();
+                    return;
+                case 200:
+                    //it works!!
+                    return;
+                case 404:
+                    Toast.makeText(getBaseContext(), "Summoner name doesn't exist", Toast.LENGTH_SHORT).show();
+                    return;
+            }
 
         }
     }

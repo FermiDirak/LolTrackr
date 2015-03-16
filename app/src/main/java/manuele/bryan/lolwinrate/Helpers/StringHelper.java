@@ -43,7 +43,10 @@ public class StringHelper {
 
     public static String formatChampionBio(String bio) {
         return bio.replaceAll("<br><br>", "\n");
+    }
 
+    public static String formatSummonerName(String name) {
+        return name.replaceAll("\\s+", "").toLowerCase();
     }
 
 }
