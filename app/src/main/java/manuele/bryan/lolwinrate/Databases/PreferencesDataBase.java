@@ -30,7 +30,8 @@ public class PreferencesDataBase {
     public static final String DEFAULT_USER_NAME = "zed",
             DEFAULT_USER_REGION = "na";
 
-    public static final String KEY_JSON_USER_STATS = "jsonstats",
+    public static final String KEY_JSON_USER_INFO = "jsoninfo",
+        KEY_JSON_USER_STATS = "jsonstats",
         KEY_JSON_USER_SUMMARY = "jsonsummary";
 
 
@@ -95,9 +96,16 @@ public class PreferencesDataBase {
         return settings.getInt(KEY_LAST_OPENED_TAB, 2);
     }
 
-    public void updateJSON(String jsonUserStats, String jsonUserSummary) {
+    public void updateJSON(String jsonUserInfo, String jsonUserStats, String jsonUserSummary) {
+        updateSetting(KEY_JSON_USER_INFO, jsonUserInfo);
         updateSetting(KEY_JSON_USER_SUMMARY, jsonUserSummary);
         updateSetting(KEY_JSON_USER_STATS, jsonUserStats);
+    }
+
+    public void emptyJSON() {
+        updateSetting(KEY_JSON_USER_INFO, "");
+        updateSetting(KEY_JSON_USER_SUMMARY, "");
+        updateSetting(KEY_JSON_USER_STATS, "");
     }
 
     public void updateUser(String username, String region) {
@@ -110,7 +118,7 @@ public class PreferencesDataBase {
         return settings.getString(KEY_USER_NAME, DEFAULT_USER_NAME);
     }
 
-    public String getRegion() {
+    public String getUserRegion() {
         SharedPreferences settings = getSharedPreferences();
         return settings.getString(KEY_USER_REGION, DEFAULT_USER_REGION);
     }

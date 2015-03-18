@@ -15,7 +15,10 @@ import java.io.IOException;
 import java.util.List;
 
 import manuele.bryan.lolwinrate.Databases.DataBaseIO;
+import manuele.bryan.lolwinrate.Databases.JsonIO;
 import manuele.bryan.lolwinrate.Databases.PreferencesDataBase;
+import manuele.bryan.lolwinrate.Helpers.LolStatsApplication;
+import manuele.bryan.lolwinrate.Items.UserInfo;
 import manuele.bryan.lolwinrate.LolStatistics.LeagueScrapper;
 import manuele.bryan.lolwinrate.LolStatistics.StatisticsChampion;
 import manuele.bryan.lolwinrate.R;
@@ -97,12 +100,33 @@ public class SplashScreenActivity extends ActionBarActivity {
             PreferencesDataBase preferences = new PreferencesDataBase(getBaseContext());
 
             String username = preferences.getUsername();
-            String region = preferences.getRegion();
+            String region = preferences.getUserRegion();
+
+            try {
+
+                String infoURLString = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v1.4/summoner/by-name/" + username + "?api_key=" + LolStatsApplication.riotApiKey;
+
+                String infoJsonString = JsonIO.getJSONFromWeb(infoURLString);
+                UserInfo userInfo = JsonIO.parseUserJson(username, infoJsonString);
+                int id = userInfo.id;
+
+                System.out.println("ID: " + id);
+
+//                URL statsURL = new URL("https://" + region + ".api.pvp.net/api/lol/" + region + "/v1.3/stats/by-summoner/" + id +
+//                        "/ranked?season=SEASON2015&api_key=" + LolStatsApplication.riotApiKey);
+//
+//                URL summaryURL = new URL("https://" + region + ".api.pvp.net/api/lol/" + region + "/v1.3/stats/by-summoner/" + id +
+//                        "/summary?season=SEASON2015&api_key=" + LolStatsApplication.riotApiKey);
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
             return 1;
         }
 
-        @Override
+         @Override
         protected Integer doInBackground(String... params) {
             if ( leagueScrape() == 1) {
                 return updateUser();

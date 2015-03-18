@@ -32,7 +32,6 @@ public class SetUpSummonerActivity extends Activity {
     String username = "";
     String region = "";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,6 +104,7 @@ public class SetUpSummonerActivity extends Activity {
             String urlString = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v1.4/summoner/by-name/" + username + "?api_key=" + LolStatsApplication.riotApiKey;
 
             try {
+
                 URL url = new URL(urlString);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");
@@ -130,6 +130,7 @@ public class SetUpSummonerActivity extends Activity {
                 case 200:
                     //it works!!
                     PreferencesDataBase preferences = new PreferencesDataBase(getBaseContext());
+                    preferences.emptyJSON();
                     preferences.updateUser(username, region);
                     Intent intent = new Intent(SetUpSummonerActivity.this, SplashScreenActivity.class);
                     startActivity(intent);

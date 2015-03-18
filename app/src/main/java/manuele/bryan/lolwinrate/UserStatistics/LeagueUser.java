@@ -8,6 +8,7 @@ import dto.MatchHistory.PlayerHistory;
 import dto.Summoner.Summoner;
 import main.java.riotapi.RiotApiException;
 import manuele.bryan.lolwinrate.Helpers.LolStatsApplication;
+import manuele.bryan.lolwinrate.Helpers.StringHelper;
 
 public class LeagueUser {
 
@@ -22,7 +23,7 @@ public class LeagueUser {
 
         try {
 
-            Summoner summoner = LolStatsApplication.riotApi.getSummonerByName(userName).get(userName.replaceAll("\\s+", "").toLowerCase());
+            Summoner summoner = LolStatsApplication.riotApi.getSummonerByName(userName).get(StringHelper.formatSummonerName(userName));
 
             id = summoner.getId();
             name = summoner.getName();
