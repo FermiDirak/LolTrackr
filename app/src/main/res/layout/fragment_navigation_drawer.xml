@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/darkgray"
     android:orientation="vertical"
-    tools:context="manuele.bryan.lolwinrate.Fragments.NavigationDrawerFragment">
+    tools:context="manuele.bryan.lolwinrate.fragments.NavigationDrawerFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"

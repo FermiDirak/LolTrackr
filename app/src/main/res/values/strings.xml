@@ -12,9 +12,14 @@
     
     <string-array name="regions">
         <item name="NA">NA</item>
-        <item name="EU">EU</item>
+        <item name="EU">EUNE</item>
         <item name="EUW">EUW</item>
         <item name="BR">BR</item>
+        <item name="BR">LAN</item>
+        <item name="BR">LAS</item>
+        <item name="BR">OCE</item>
+        <item name="BR">RU</item>
+        <item name="BR">TR</item>
     </string-array>
 
 

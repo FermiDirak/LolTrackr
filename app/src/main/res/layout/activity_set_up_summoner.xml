@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/darkgray"
     android:orientation="vertical"
-    tools:context="manuele.bryan.lolwinrate.Activities.SetUpSummonerActivity">
+    tools:context="manuele.bryan.lolwinrate.activities.SetUpSummonerActivity">
 
     <Space
         android:layout_width="match_parent"
@@ -34,6 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:hint="Summoner name"
+            android:inputType="textPersonName"
             android:textColor="@color/textwhite"
             android:textColorHint="@color/textgray" />
 
