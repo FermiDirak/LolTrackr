@@ -25,10 +25,13 @@ public class PreferencesDataBase {
     public static final String KEY_LAST_OPENED_TAB = "lostopened";
 
     public static final String KEY_USER_NAME = "username",
-        KEY_USER_REGION = "region";
+        KEY_USER_REGION = "userregion";
 
-    public static final String DEFAULT_USER_NAME = "zed";
-    public static final int    DEFAULT_USER_REGION = 0;
+    public static final String DEFAULT_USER_NAME = "zed",
+            DEFAULT_USER_REGION = "na";
+
+    public static final String KEY_JSON_USER_STATS = "jsonstats",
+        KEY_JSON_USER_SUMMARY = "jsonsummary";
 
 
     public PreferencesDataBase(Context context) {
@@ -51,7 +54,7 @@ public class PreferencesDataBase {
         settingsEditor.apply();
     }
 
-    public SharedPreferences getSharedPreferences() {
+    private SharedPreferences getSharedPreferences() {
         return context.getSharedPreferences(PACKAGE_NAME,
                 Context.MODE_PRIVATE);
     }
@@ -75,7 +78,10 @@ public class PreferencesDataBase {
         settingsEditor.putInt(KEY_LAST_OPENED_TAB, 2);
 
         settingsEditor.putString(KEY_USER_NAME, DEFAULT_USER_NAME);
-        settingsEditor.putInt(KEY_USER_REGION, DEFAULT_USER_REGION);
+        settingsEditor.putString(KEY_USER_REGION, DEFAULT_USER_REGION);
+
+        settingsEditor.putString(KEY_JSON_USER_STATS, "");
+        settingsEditor.putString(KEY_JSON_USER_SUMMARY, "");
 
         settingsEditor.apply();
     }
@@ -89,7 +95,12 @@ public class PreferencesDataBase {
         return settings.getInt(KEY_LAST_OPENED_TAB, 2);
     }
 
-    public void updateUser(String username, int region) {
+    public void updateJSON(String jsonUserStats, String jsonUserSummary) {
+        updateSetting(KEY_JSON_USER_SUMMARY, jsonUserSummary);
+        updateSetting(KEY_JSON_USER_STATS, jsonUserStats);
+    }
+
+    public void updateUser(String username, String region) {
         updateSetting(KEY_USER_NAME, username);
         updateSetting(KEY_USER_REGION, region);
     }
@@ -99,9 +110,9 @@ public class PreferencesDataBase {
         return settings.getString(KEY_USER_NAME, DEFAULT_USER_NAME);
     }
 
-    public int getRegion() {
+    public String getRegion() {
         SharedPreferences settings = getSharedPreferences();
-        return settings.getInt(KEY_USER_REGION, DEFAULT_USER_REGION);
+        return settings.getString(KEY_USER_REGION, DEFAULT_USER_REGION);
     }
 
     public HashMap<String, Integer> getQueryPreferences() {

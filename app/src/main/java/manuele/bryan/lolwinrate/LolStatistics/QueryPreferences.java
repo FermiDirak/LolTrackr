@@ -1,10 +1,8 @@
 package manuele.bryan.lolwinrate.LolStatistics;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 
 import java.util.HashMap;
-import java.util.List;
 
 import manuele.bryan.lolwinrate.Databases.PreferencesDataBase;
 

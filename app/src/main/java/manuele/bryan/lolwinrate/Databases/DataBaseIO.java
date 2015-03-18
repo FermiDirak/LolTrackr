@@ -50,6 +50,8 @@ public class DataBaseIO {
             cursor.close();
         }
 
+        qdb.close();
+
         return statisticsChampions;
     }
 
@@ -72,6 +74,8 @@ public class DataBaseIO {
         values.put(DataBase.KEY_CHAMPMATCHES, champ.matches);
 
         qdb.insert(DataBase.KEY_TABLE_CHAMPIONS, null, values);
+
+        qdb.close();
     }
 
     public void clearChampions() {
@@ -79,6 +83,8 @@ public class DataBaseIO {
         SQLiteDatabase qdb = dataBase.getWritableDatabase();
 
         qdb.delete(DataBase.KEY_TABLE_CHAMPIONS, null, null);
+
+        qdb.close();
     }
 
 }

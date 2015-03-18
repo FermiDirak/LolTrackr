@@ -17,7 +17,6 @@ public class DataBase extends SQLiteOpenHelper {
             KEY_CHAMPLOSSES = "losses",
             KEY_CHAMPMATCHES = "matches";
 
-
     public DataBase(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
         this.context = context;
@@ -25,13 +24,13 @@ public class DataBase extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String championTable = "CREATE TABLE " + KEY_TABLE_CHAMPIONS + " ( " +
+        String championTable1 = "CREATE TABLE " + KEY_TABLE_CHAMPIONS + " ( " +
                 KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 KEY_CHAMPNAME + " TEXT NOT NULL," +
                 KEY_CHAMPWINS + " TEXT NOT NULL," +
                 KEY_CHAMPLOSSES + " TEXT NOT NULL," +
                 KEY_CHAMPMATCHES + " TEXT NOT NULL)";
-        db.execSQL(championTable);
+        db.execSQL(championTable1);
 
     }
 

@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/darkgray"
     android:orientation="vertical"
-    tools:context="manuele.bryan.lolwinrate.activities.SetUpSummonerActivity">
+    tools:context="manuele.bryan.lolwinrate.Activities.SetUpSummonerActivity">
 
     <Space
         android:layout_width="match_parent"

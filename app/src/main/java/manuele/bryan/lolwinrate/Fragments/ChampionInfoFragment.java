@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import manuele.bryan.lolwinrate.Helpers.JsonHelper;
+import manuele.bryan.lolwinrate.Databases.JsonIO;
 import manuele.bryan.lolwinrate.Helpers.StringHelper;
 import manuele.bryan.lolwinrate.Items.StaticChampion;
 import manuele.bryan.lolwinrate.R;
@@ -59,7 +59,7 @@ public class ChampionInfoFragment extends Fragment {
         winrateTextView.setText(winrate);
         popularityTextView.setText(popularity);
 
-        StaticChampion championInfo = JsonHelper.loadChampionInfo(getActivity(), champName);
+        StaticChampion championInfo = JsonIO.loadChampionInfo(getActivity(), champName);
 
         championNameTextView.setText(championInfo.name);
         championTitleTextView.setText(championInfo.title);

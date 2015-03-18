@@ -12,7 +12,7 @@
         android:layout_height="match_parent" />
 
     <fragment android:id="@+id/left_drawer"
-        android:name="manuele.bryan.lolwinrate.fragments.NavigationDrawerFragment"
+        android:name="manuele.bryan.lolwinrate.Fragments.NavigationDrawerFragment"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"

@@ -1,4 +1,4 @@
-package manuele.bryan.lolwinrate.Helpers;
+package manuele.bryan.lolwinrate.Databases;
 
 import android.app.Activity;
 import android.content.res.AssetManager;
@@ -12,10 +12,11 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import manuele.bryan.lolwinrate.Helpers.StringHelper;
 import manuele.bryan.lolwinrate.Items.StaticChampion;
 import manuele.bryan.lolwinrate.Items.StaticSpell;
 
-public class JsonHelper {
+public class JsonIO {
     public static String KEY_RIOTAPI = "riotapi";
     
     public static String FAIL = "fail";
@@ -135,7 +136,6 @@ public class JsonHelper {
         }
 
         return staticChampion;
-
     }
 
     public static ArrayList<String> JSONArrayToArrayList(JSONArray jsonArray) throws JSONException {
@@ -148,7 +148,6 @@ public class JsonHelper {
         }
 
         return arrayList;
-
     }
 
 }

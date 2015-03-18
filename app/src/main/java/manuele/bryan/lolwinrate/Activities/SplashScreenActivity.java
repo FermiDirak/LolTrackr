@@ -45,10 +45,14 @@ public class SplashScreenActivity extends ActionBarActivity {
             settings.edit().putBoolean("my_first_time", false).apply();
         }
 
-        startAnimations();
-
-        new DownloadDataTask().execute("");
-
+        PreferencesDataBase preferences = new PreferencesDataBase(getBaseContext());
+        if (preferences.getUsername().equals(PreferencesDataBase.DEFAULT_USER_NAME)) {
+            Intent intent = new Intent(SplashScreenActivity.this, SetUpSummonerActivity.class);
+            startActivity(intent);
+        } else {
+            startAnimations();
+            new DownloadDataTask().execute("");
+        }
     }
 
     private void startAnimations() {
@@ -63,10 +67,10 @@ public class SplashScreenActivity extends ActionBarActivity {
         splashImage.startAnimation(animation);
     }
 
-    private class DownloadDataTask extends AsyncTask<String, String, String> {
-        @Override
-        protected String doInBackground(String... params) {
+    private class DownloadDataTask extends AsyncTask<String, String, Integer> {
+        //0 means no connection, 1 means connection
 
+        protected Integer leagueScrape() {
             LeagueScrapper leagueScrapper = new LeagueScrapper(getBaseContext());
             List<StatisticsChampion> statisticsChampions = null;
             try {
@@ -76,35 +80,52 @@ public class SplashScreenActivity extends ActionBarActivity {
                 //no internet connection!!
 
                 System.out.println("no internet connection");
-                return "";
+                return 0;
             }
 
-            //TODO: no connectivity case
             if (statisticsChampions == null) {
-                return "";
+                return 0;
             }
 
             DataBaseIO dataBaseIO = new DataBaseIO(getBaseContext());
             dataBaseIO.addChampions(statisticsChampions);
 
-            return "";
+            return 1;
+        }
+
+        protected Integer updateUser() {
+            PreferencesDataBase preferences = new PreferencesDataBase(getBaseContext());
+
+            String username = preferences.getUsername();
+            String region = preferences.getRegion();
+
+            return 1;
         }
 
         @Override
-        protected void onPostExecute(String string) {
-            super.onPostExecute(string);
+        protected Integer doInBackground(String... params) {
+            if ( leagueScrape() == 1) {
+                return updateUser();
+            }
 
-            PreferencesDataBase preferences = new PreferencesDataBase(getBaseContext());
-            if (preferences.getUsername().equals(PreferencesDataBase.DEFAULT_USER_NAME)) {
-                Intent intent = new Intent(SplashScreenActivity.this, SetUpSummonerActivity.class);
-                startActivity(intent);
-            } else {
-                Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);
-                startActivity(intent);
+            return 0;
+        }
+
+        @Override
+        protected void onPostExecute(Integer code) {
+            super.onPostExecute(code);
+
+            switch (code) {
+                case 0:
+                    Intent intent1 = new Intent(SplashScreenActivity.this, NoConnectivityActivity.class);
+                    startActivity(intent1);
+                    return;
+                case 1:
+                    Intent intent2 = new Intent(SplashScreenActivity.this, MainActivity.class);
+                    startActivity(intent2);
             }
 
             finish();
-
         }
     }
 

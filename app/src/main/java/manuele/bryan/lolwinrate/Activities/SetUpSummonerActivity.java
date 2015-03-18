@@ -2,6 +2,7 @@ package manuele.bryan.lolwinrate.Activities;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -16,6 +17,8 @@ import android.widget.Toast;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import manuele.bryan.lolwinrate.Databases.PreferencesDataBase;
+import manuele.bryan.lolwinrate.Helpers.LolStatsApplication;
 import manuele.bryan.lolwinrate.Helpers.StringHelper;
 import manuele.bryan.lolwinrate.R;
 
@@ -25,6 +28,9 @@ public class SetUpSummonerActivity extends Activity {
     Spinner regionSpinner;
     ImageButton infoButton;
     Button submitButton;
+
+    String username = "";
+    String region = "";
 
 
     @Override
@@ -91,13 +97,12 @@ public class SetUpSummonerActivity extends Activity {
     private class VerifyUserTask extends AsyncTask<String, String, Integer> {
         @Override
         protected Integer doInBackground(String... params) {
-            String username = StringHelper.formatSummonerName(accountNameInput.getText().toString());
-            String region = String.valueOf(regionSpinner.getSelectedItem()).toLowerCase();
+            username = StringHelper.formatSummonerName(accountNameInput.getText().toString());
+            region = String.valueOf(regionSpinner.getSelectedItem()).toLowerCase();
 
             int code = 0;
 
-            //TODO: change api's region
-            String urlString = "https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/" + username + "?api_key=cbbfab19-c674-40f6-acb4-4df0b39a82e4";
+            String urlString = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v1.4/summoner/by-name/" + username + "?api_key=" + LolStatsApplication.riotApiKey;
 
             try {
                 URL url = new URL(urlString);
@@ -106,10 +111,8 @@ public class SetUpSummonerActivity extends Activity {
                 connection.connect();
 
                 code = connection.getResponseCode();
-                System.out.println("code: " + code);
 
             } catch (Exception e) {
-                //TODO: Handle the lack of internet
                 e.printStackTrace();
             }
 
@@ -126,6 +129,10 @@ public class SetUpSummonerActivity extends Activity {
                     return;
                 case 200:
                     //it works!!
+                    PreferencesDataBase preferences = new PreferencesDataBase(getBaseContext());
+                    preferences.updateUser(username, region);
+                    Intent intent = new Intent(SetUpSummonerActivity.this, SplashScreenActivity.class);
+                    startActivity(intent);
                     return;
                 case 404:
                     Toast.makeText(getBaseContext(), "Summoner name doesn't exist", Toast.LENGTH_SHORT).show();
