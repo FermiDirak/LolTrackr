@@ -21,7 +21,9 @@ import java.util.List;
 import manuele.bryan.lolwinrate.Helpers.StringHelper;
 import manuele.bryan.lolwinrate.Items.StaticChampion;
 import manuele.bryan.lolwinrate.Items.StaticSpell;
-import manuele.bryan.lolwinrate.Items.UserInfo;
+import manuele.bryan.lolwinrate.UserStatistics.RankedStatsInfo;
+import manuele.bryan.lolwinrate.UserStatistics.UserInfo;
+import manuele.bryan.lolwinrate.UserStatistics.UserSummaryInfo;
 
 public class JsonIO {
     public static String KEY_RIOTAPI = "riotapi";
@@ -45,8 +47,6 @@ public class JsonIO {
             HttpEntity resEntityGet = responseGet.getEntity();
             json = EntityUtils.toString(resEntityGet);
 
-
-            System.out.println("JSON: " + json);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -211,4 +211,117 @@ public class JsonIO {
         return userInfo;
     }
 
+    //_______________________RANKED_STATS_INFO_______________________________
+
+    public static RankedStatsInfo parseRankedStatsJson(String jsonString) {
+
+        RankedStatsInfo rankedStatsInfo = null;
+
+        try {
+            JSONObject json = new JSONObject(jsonString);
+            int summonerId = json.getInt("summonerId");
+
+            JSONArray championJsonArray = json.getJSONArray("champions");
+
+            List<RankedStatsInfo.ChampionInfo> championInfos = new ArrayList<>();
+            for (int i = 0; i < championJsonArray.length(); i++) {
+                JSONObject championObject = championJsonArray.getJSONObject(i);
+
+                int championId = championObject.getInt("id");
+                JSONObject statsObject = championObject.getJSONObject("stats");
+
+                int totalSessionsPlayed = statsObject.getInt("totalSessionsPlayed");
+                int totalSessionsLost = statsObject.getInt("totalSessionsLost");
+                int totalSessionsWon = statsObject.getInt("totalSessionsWon");
+                int totalChampionKills = statsObject.getInt("totalChampionKills");
+                int totalDamageDealt = statsObject.getInt("totalDamageDealt");
+                int totalDamageTaken = statsObject.getInt("totalDamageTaken");
+                int mostChampionKillsPerSession = statsObject.getInt("mostChampionKillsPerSession");
+                int totalMinionKills = statsObject.getInt("totalMinionKills");
+                int totalDoubleKills = statsObject.getInt("totalDoubleKills");
+                int totalTripleKills = statsObject.getInt("totalTripleKills");
+                int totalQuadraKills = statsObject.getInt("totalQuadraKills");
+                int totalPentaKills  = statsObject.getInt("totalPentaKills");
+                int totalUnrealKills = statsObject.getInt("totalUnrealKills");
+                int totalDeathsPerSession = statsObject.getInt("totalDeathsPerSession");
+                int totalGoldEarned = statsObject.getInt("totalGoldEarned");
+                int totalTurretsKilled = statsObject.getInt("totalTurretsKilled");
+                int totalPhysicalDamageDealt = statsObject.getInt("totalPhysicalDamageDealt");
+                int totalMagicDamageDealt = statsObject.getInt("totalMagicDamageDealt");
+                int totalFirstBlood = statsObject.getInt("totalFirstBlood");
+                int totalAssists = statsObject.getInt("totalAssists");
+                int maxChampionsKilled = statsObject.getInt("maxChampionsKilled");
+                int maxNumDeaths = statsObject.getInt("maxNumDeaths");
+
+                RankedStatsInfo.ChampionInfo championInfo = new RankedStatsInfo.ChampionInfo(championId,
+                        new RankedStatsInfo.ChampionInfo.Stats(totalSessionsPlayed, totalSessionsLost, totalSessionsWon,
+                        totalChampionKills, totalDamageDealt, totalDamageTaken, mostChampionKillsPerSession, totalMinionKills, totalDoubleKills, totalTripleKills,
+                        totalQuadraKills, totalPentaKills, totalUnrealKills, totalDeathsPerSession, totalGoldEarned, totalTurretsKilled, totalPhysicalDamageDealt,
+                        totalMagicDamageDealt, totalFirstBlood, totalAssists, maxChampionsKilled, maxNumDeaths));
+
+                championInfos.add(championInfo);
+            }
+
+            rankedStatsInfo = new RankedStatsInfo(summonerId, championInfos);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return rankedStatsInfo;
+    }
+
+    //_______________________USER_SUMMARY_INFO_______________________________
+
+    public static UserSummaryInfo parseUserSummaryJson(String jsonString) {
+        UserSummaryInfo userSummaryInfo = null;
+
+        try {
+            JSONObject jsonObject = new JSONObject(jsonString);
+
+            int summonerId = jsonObject.getInt("summonerId");
+
+            JSONArray playerStatSummaries = jsonObject.getJSONArray("playerStatSummaries");
+
+            List<UserSummaryInfo.PlayerSummaries> playerSummaries = new ArrayList<>();
+            for (int i = 0; i < playerStatSummaries.length(); i++) {
+                JSONObject pso = playerStatSummaries.getJSONObject(i);
+
+                String playerStatsSummaryType = pso.getString("playerStatSummaryType");
+                int wins = pso.getInt("wins");
+
+                JSONObject aggregatedStats = pso.getJSONObject("aggregatedStats");
+
+                int totalChampionKills, totalMinionKills, totalTurretsKilled, totalNeutralMinionsKilled, totalAssists;
+                totalChampionKills = totalMinionKills = totalTurretsKilled = totalNeutralMinionsKilled = totalAssists = -1;
+
+                if (aggregatedStats.has("totalChampionKills")) {
+                    totalChampionKills = aggregatedStats.getInt("totalChampionKills");
+                }
+                if (aggregatedStats.has("totalMinionKills")) {
+                    totalMinionKills = aggregatedStats.getInt("totalMinionKills");
+                }
+                if (aggregatedStats.has("totalTurretsKilled")) {
+                    totalTurretsKilled = aggregatedStats.getInt("totalTurretsKilled");
+                }
+                if (aggregatedStats.has("totalNeutralMinionsKilled")) {
+                    totalNeutralMinionsKilled = aggregatedStats.getInt("totalNeutralMinionsKilled");
+                }
+                if (aggregatedStats.has("totalAssists")) {
+                    totalAssists = aggregatedStats.getInt("totalAssists");
+                }
+
+                UserSummaryInfo.PlayerSummaries playerSummary = new UserSummaryInfo.PlayerSummaries(playerStatsSummaryType, wins, totalChampionKills, totalMinionKills,
+                        totalTurretsKilled, totalNeutralMinionsKilled, totalAssists);
+                playerSummaries.add(playerSummary);
+            }
+
+            userSummaryInfo = new UserSummaryInfo(playerSummaries, summonerId);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return userSummaryInfo;
+    }
 }

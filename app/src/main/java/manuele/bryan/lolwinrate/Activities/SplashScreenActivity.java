@@ -18,7 +18,6 @@ import manuele.bryan.lolwinrate.Databases.DataBaseIO;
 import manuele.bryan.lolwinrate.Databases.JsonIO;
 import manuele.bryan.lolwinrate.Databases.PreferencesDataBase;
 import manuele.bryan.lolwinrate.Helpers.LolStatsApplication;
-import manuele.bryan.lolwinrate.Items.UserInfo;
 import manuele.bryan.lolwinrate.LolStatistics.LeagueScrapper;
 import manuele.bryan.lolwinrate.LolStatistics.StatisticsChampion;
 import manuele.bryan.lolwinrate.R;
@@ -107,17 +106,23 @@ public class SplashScreenActivity extends ActionBarActivity {
                 String infoURLString = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v1.4/summoner/by-name/" + username + "?api_key=" + LolStatsApplication.riotApiKey;
 
                 String infoJsonString = JsonIO.getJSONFromWeb(infoURLString);
-                UserInfo userInfo = JsonIO.parseUserJson(username, infoJsonString);
-                int id = userInfo.id;
+                LolStatsApplication.userInfo = JsonIO.parseUserJson(username, infoJsonString);
 
-                System.out.println("ID: " + id);
+                int id = LolStatsApplication.userInfo.id;
 
-//                URL statsURL = new URL("https://" + region + ".api.pvp.net/api/lol/" + region + "/v1.3/stats/by-summoner/" + id +
-//                        "/ranked?season=SEASON2015&api_key=" + LolStatsApplication.riotApiKey);
-//
-//                URL summaryURL = new URL("https://" + region + ".api.pvp.net/api/lol/" + region + "/v1.3/stats/by-summoner/" + id +
-//                        "/summary?season=SEASON2015&api_key=" + LolStatsApplication.riotApiKey);
+                String statsURLString = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v1.3/stats/by-summoner/" + id +
+                        "/ranked?season=SEASON2015&api_key=" + LolStatsApplication.riotApiKey;
 
+                String statsJsonString = JsonIO.getJSONFromWeb(statsURLString);
+                LolStatsApplication.rankedStatsInfo = JsonIO.parseRankedStatsJson(statsJsonString);
+
+                String summaryURLString = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v1.3/stats/by-summoner/" + id +
+                        "/summary?season=SEASON2015&api_key=" + LolStatsApplication.riotApiKey;
+
+                String summaryJsonString = JsonIO.getJSONFromWeb(summaryURLString);
+                LolStatsApplication.userSummaryInfo = JsonIO.parseUserSummaryJson(summaryJsonString);
+
+                preferences.updateJSON(infoJsonString, statsJsonString, summaryJsonString);
 
             } catch (Exception e) {
                 e.printStackTrace();

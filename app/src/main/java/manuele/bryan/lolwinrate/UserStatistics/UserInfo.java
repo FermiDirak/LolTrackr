@@ -1,4 +1,4 @@
-package manuele.bryan.lolwinrate.Items;
+package manuele.bryan.lolwinrate.UserStatistics;
 
 public class UserInfo {
 
