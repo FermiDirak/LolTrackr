@@ -4,17 +4,16 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
 
 import manuele.bryan.lolwinrate.Adapters.ChampionListItemAdapter;
 import manuele.bryan.lolwinrate.Databases.DataBaseIO;
 import manuele.bryan.lolwinrate.LolStatistics.QueryPreferences;
 import manuele.bryan.lolwinrate.LolStatistics.SortPreferences;
-import manuele.bryan.lolwinrate.LolStatistics.StatisticsChampion;
 import manuele.bryan.lolwinrate.LolStatistics.StatisticsChampionList;
 import manuele.bryan.lolwinrate.R;
 
@@ -26,7 +25,8 @@ public class ChampionListFragment extends Fragment {
 
     Context context;
 
-    private ListView listView;
+    private RecyclerView recyclerView;
+    private LinearLayoutManager linearLayoutManager;
 
     public static ChampionListFragment newInstance() {
         ChampionListFragment championListFragment = new ChampionListFragment();
@@ -43,34 +43,33 @@ public class ChampionListFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_champion_list, container, false);
 
-        listView = (ListView) view.findViewById(R.id.mainListView);
+        recyclerView = (RecyclerView) view.findViewById(R.id.mainRecyclerView);
+        recyclerView.setHasFixedSize(false);
+        linearLayoutManager = new LinearLayoutManager(context);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
 
         DataBaseIO dataBaseIO = new DataBaseIO(context);
         final StatisticsChampionList statisticsChampionList = new StatisticsChampionList(dataBaseIO.getChampions());
 
         championListItemAdapter = new ChampionListItemAdapter(context, statisticsChampionList.statisticsChampions);
-        listView.setAdapter(championListItemAdapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                StatisticsChampion champion = statisticsChampionList.statisticsChampions.
-                        get(position);
-
-                String championName = champion.champName;
-                String winrate = "" + champion.winrateString + "%";
-                String popularity = "" + ((int) (champion.matches / 1000.0)) + "k";
-
-                openChampionInfoActivity(championName, winrate, popularity);
-            }
-        });
+        recyclerView.setAdapter(championListItemAdapter);
 
         return view;
     }
+
+    //todo: paste back into onitemtouch
+
+//    StatisticsChampion champion = statisticsChampionList.statisticsChampions.get(position);
+//
+//    String championName = champion.champName;
+//    String winrate = "" + champion.winrateString + "%";
+//    String popularity = "" + ((int) (champion.matches / 1000.0)) + "k";
+//
+//    openChampionInfoActivity(championName, winrate, popularity);
 
     public void openChampionInfoActivity(String champName, String winrate, String popularity) {
         Fragment championInfoFragment = ChampionInfoFragment.newInstance(champName, winrate, popularity);
@@ -91,6 +90,6 @@ public class ChampionListFragment extends Fragment {
         context = activity;
     }
 
-    //TODO: implement Listeners to update the listView adapter for queryFragment and sortPrefs
+    //TODO: implement Listeners to update the recyclerView adapter for queryFragment and sortPrefs
 
 }
