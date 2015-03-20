@@ -23,7 +23,7 @@ public class ChampionListFragment extends Fragment {
     private QueryPreferences queryPreferences;
     private SortPreferences sortPreferences;
 
-    Context context;
+    static Context context;
 
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
@@ -61,24 +61,17 @@ public class ChampionListFragment extends Fragment {
         return view;
     }
 
-    //todo: paste back into onitemtouch
-
-//    StatisticsChampion champion = statisticsChampionList.statisticsChampions.get(position);
-//
-//    String championName = champion.champName;
-//    String winrate = "" + champion.winrateString + "%";
-//    String popularity = "" + ((int) (champion.matches / 1000.0)) + "k";
-//
-//    openChampionInfoActivity(championName, winrate, popularity);
-
-    public void openChampionInfoActivity(String champName, String winrate, String popularity) {
+    public static void openChampionInfoActivity(String champName, String winrate, String popularity) {
         Fragment championInfoFragment = ChampionInfoFragment.newInstance(champName, winrate, popularity);
         replaceFragment(championInfoFragment);
 
     }
 
-    public void replaceFragment(Fragment newFragment) {
-        getActivity().getFragmentManager().beginTransaction()
+    public static void replaceFragment(Fragment newFragment) {
+
+        Activity activity = (Activity) context;
+
+        activity.getFragmentManager().beginTransaction()
                 .replace(R.id.content_frame, newFragment)
                 .addToBackStack(null)
                 .commit();

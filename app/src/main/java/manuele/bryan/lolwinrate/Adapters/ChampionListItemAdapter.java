@@ -12,12 +12,13 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import manuele.bryan.lolwinrate.Fragments.ChampionListFragment;
 import manuele.bryan.lolwinrate.LolStatistics.StatisticsChampion;
 import manuele.bryan.lolwinrate.R;
 
 public class ChampionListItemAdapter extends RecyclerView.Adapter<ChampionListItemAdapter.ChampionListItemHolder> {
-    public Context context;
-    public List<StatisticsChampion> champs;
+    public static Context context;
+    public static List<StatisticsChampion> champs;
 
     public ChampionListItemAdapter(Context context, List<StatisticsChampion> champs) {
         if (champs == null) {
@@ -58,25 +59,11 @@ public class ChampionListItemAdapter extends RecyclerView.Adapter<ChampionListIt
     @Override
     public ChampionListItemHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.main_list_item, viewGroup, false);
-
-        ChampionListItemAdapter.ChampionListItemHolder viewHolder = new ChampionListItemHolder(itemView,
-                new ChampionListItemHolder.ViewHolderClicksListener() {
-                    @Override
-                    public void onClick() {
-                        System.out.println("click!");
-                    }
-                }
-        );
-
+        ChampionListItemAdapter.ChampionListItemHolder viewHolder = new ChampionListItemHolder(itemView);
         return viewHolder;
     }
 
-    public static class ChampionListItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public ViewHolderClicksListener clickListener;
-
-        public static interface ViewHolderClicksListener {
-            public void onClick();
-        }
+    public static class ChampionListItemHolder extends RecyclerView.ViewHolder {
 
         public TextView place;
         public ImageView portrait;
@@ -85,7 +72,7 @@ public class ChampionListItemAdapter extends RecyclerView.Adapter<ChampionListIt
         public TextView matchesTextView;
         public ProgressBar popularityBar;
 
-        public ChampionListItemHolder(View itemView, ViewHolderClicksListener clickListener) {
+        public ChampionListItemHolder(View itemView) {
             super(itemView);
             place = (TextView) itemView.findViewById(R.id.position);
             portrait = (ImageView) itemView.findViewById(R.id.portrait);
@@ -94,15 +81,21 @@ public class ChampionListItemAdapter extends RecyclerView.Adapter<ChampionListIt
             matchesTextView = (TextView) itemView.findViewById(R.id.matchesTextView);
             popularityBar = (ProgressBar) itemView.findViewById(R.id.matchesBar);
 
-            this.clickListener = clickListener;
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = Integer.parseInt(place.getText().toString());
 
-            itemView.setOnClickListener(this);
+                    StatisticsChampion champion = champs.get(position);
 
-        }
+                    String championName = champion.champName;
+                    String winrate = "" + champion.winrateString + "%";
+                    String popularity = "" + ((int) (champion.matches / 1000.0)) + "k";
 
-        @Override
-        public void onClick(View v) {
-            clickListener.onClick();
+                    ChampionListFragment.openChampionInfoActivity(championName, winrate, popularity);
+                }
+            });
         }
     }
+
 }
