@@ -1,6 +1,7 @@
 package manuele.bryan.lolwinrate.Adapters;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -54,6 +55,14 @@ public class ChampionListItemAdapter extends RecyclerView.Adapter<ChampionListIt
         int displayPopularity = (int) (champ.popularity * 3333.0);
         holder.popularityBar.setProgress(displayPopularity);
 
+        Typeface typeface = Typeface.createFromAsset(context.getAssets(), "fonts/robotolight.ttf");
+
+        holder.place.setTypeface(typeface);
+        holder.winRateTextView.setTypeface(typeface);
+        holder.matchesTextView.setTypeface(typeface);
+        holder.winrateStatic.setTypeface(typeface);
+        holder.matchesStatic.setTypeface(typeface);
+
     }
 
     @Override
@@ -72,6 +81,9 @@ public class ChampionListItemAdapter extends RecyclerView.Adapter<ChampionListIt
         public TextView matchesTextView;
         public ProgressBar popularityBar;
 
+        public TextView winrateStatic;
+        public TextView matchesStatic;
+
         public ChampionListItemHolder(View itemView) {
             super(itemView);
             place = (TextView) itemView.findViewById(R.id.position);
@@ -81,12 +93,15 @@ public class ChampionListItemAdapter extends RecyclerView.Adapter<ChampionListIt
             matchesTextView = (TextView) itemView.findViewById(R.id.matchesTextView);
             popularityBar = (ProgressBar) itemView.findViewById(R.id.matchesBar);
 
+            winrateStatic = (TextView) itemView.findViewById(R.id.winrateStatic);
+            matchesStatic = (TextView) itemView.findViewById(R.id.matchesStatic);
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int position = Integer.parseInt(place.getText().toString());
 
-                    StatisticsChampion champion = champs.get(position);
+                    StatisticsChampion champion = champs.get(position-1);
 
                     String championName = champion.champName;
                     String winrate = "" + champion.winrateString + "%";

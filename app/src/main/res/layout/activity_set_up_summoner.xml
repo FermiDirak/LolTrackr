@@ -73,6 +73,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:height="5dp"
         android:background="@color/material_blue_grey_800"
         android:text="sumbit"
         android:textColor="@color/textwhite" />
