@@ -16,6 +16,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import manuele.bryan.lolwinrate.Helpers.StringHelper;
@@ -126,6 +127,7 @@ public class JsonIO {
             JSONObject champion = data.getJSONObject(champName);
 
             String name = champion.getString("name");
+            int key = champion.getInt("key");
             String title = champion.getString("title");
             String lore = champion.getString("lore");
             JSONArray JSONallytips = champion.getJSONArray("allytips");
@@ -163,7 +165,7 @@ public class JsonIO {
                 }
             }
 
-            staticChampion = new StaticChampion(name, title, lore,
+            staticChampion = new StaticChampion(name, key, title, lore,
                     allytips, enemytips,
                     tags, resourcetype, spells,
                     attackRank, defenseRank, magicRank, difficultyRank);
@@ -223,7 +225,8 @@ public class JsonIO {
 
             JSONArray championJsonArray = json.getJSONArray("champions");
 
-            List<RankedStatsInfo.ChampionInfo> championInfos = new ArrayList<>();
+            HashMap<Integer, RankedStatsInfo.ChampionStats> championInfos = new HashMap<Integer, RankedStatsInfo.ChampionStats>();
+
             for (int i = 0; i < championJsonArray.length(); i++) {
                 JSONObject championObject = championJsonArray.getJSONObject(i);
 
@@ -253,13 +256,12 @@ public class JsonIO {
                 int maxChampionsKilled = statsObject.getInt("maxChampionsKilled");
                 int maxNumDeaths = statsObject.getInt("maxNumDeaths");
 
-                RankedStatsInfo.ChampionInfo championInfo = new RankedStatsInfo.ChampionInfo(championId,
-                        new RankedStatsInfo.ChampionInfo.Stats(totalSessionsPlayed, totalSessionsLost, totalSessionsWon,
+                RankedStatsInfo.ChampionStats champStats = new RankedStatsInfo.ChampionStats(totalSessionsPlayed, totalSessionsLost, totalSessionsWon,
                         totalChampionKills, totalDamageDealt, totalDamageTaken, mostChampionKillsPerSession, totalMinionKills, totalDoubleKills, totalTripleKills,
                         totalQuadraKills, totalPentaKills, totalUnrealKills, totalDeathsPerSession, totalGoldEarned, totalTurretsKilled, totalPhysicalDamageDealt,
-                        totalMagicDamageDealt, totalFirstBlood, totalAssists, maxChampionsKilled, maxNumDeaths));
+                        totalMagicDamageDealt, totalFirstBlood, totalAssists, maxChampionsKilled, maxNumDeaths);
 
-                championInfos.add(championInfo);
+                championInfos.put(championId, champStats);
             }
 
             rankedStatsInfo = new RankedStatsInfo(summonerId, championInfos);

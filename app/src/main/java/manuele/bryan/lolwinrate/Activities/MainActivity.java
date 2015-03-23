@@ -14,6 +14,7 @@ import manuele.bryan.lolwinrate.Databases.PreferencesDataBase;
 import manuele.bryan.lolwinrate.Fragments.ChampionListFragment;
 import manuele.bryan.lolwinrate.Fragments.NavigationDrawerFragment;
 import manuele.bryan.lolwinrate.Fragments.QueryFragment;
+import manuele.bryan.lolwinrate.Fragments.SettingsFragment;
 import manuele.bryan.lolwinrate.R;
 
 
@@ -22,21 +23,18 @@ public class MainActivity extends ActionBarActivity
         NavigationDrawerFragment.NavigationDrawerListener {
 
     private DrawerLayout drawerLayout;
-    private NavigationDrawerFragment drawerFragment;
-    private CharSequence drawerTitle;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        drawerTitle = getTitle();
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
 
-        replaceFragment(ChampionListFragment.newInstance());
+        drawerLayout.openDrawer(findViewById(R.id.left_drawer));
 
+        updateFragmentHolder();
     }
 
     public void replaceFragment(Fragment newFragment) {
@@ -58,7 +56,6 @@ public class MainActivity extends ActionBarActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
@@ -98,12 +95,14 @@ public class MainActivity extends ActionBarActivity
                 return;
             case 2:
                 //champion winrates
+                replaceFragment(ChampionListFragment.newInstance());
                 return;
             case 3:
                 //champion popularity
                 return;
             case 4:
                 //settings
+                replaceFragment(SettingsFragment.newInstance());
                 return;
             case 5:
                 //about

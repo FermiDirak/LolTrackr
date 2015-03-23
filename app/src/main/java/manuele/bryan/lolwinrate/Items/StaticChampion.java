@@ -8,6 +8,8 @@ import manuele.bryan.lolwinrate.Helpers.StringHelper;
 
 public class StaticChampion {
 
+    public int key = 0;
+
     public String name = "";
     public String title = "";
     public String lore = "";
@@ -23,11 +25,12 @@ public class StaticChampion {
     public int magicRank = 0;
     public int difficultyRank = 0;
 
-    public StaticChampion(String name, String title, String lore,
+    public StaticChampion(String name, int key, String title, String lore,
                           List<String> allytips, List<String> enemytips,
                           List<String> tags, String resoucetype, StaticSpell[] spells,
                           int attackRank, int defenseRank, int magicRank, int difficultyRank) {
         this.name = name;
+        this.key = key;
         this.title = title;
         this.lore = StringHelper.formatChampionBio(lore);
         this.allytips = allytips;

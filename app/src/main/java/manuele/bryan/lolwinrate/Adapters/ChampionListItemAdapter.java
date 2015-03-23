@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.util.List;
 
 import manuele.bryan.lolwinrate.Fragments.ChampionListFragment;
@@ -39,10 +40,20 @@ public class ChampionListItemAdapter extends RecyclerView.Adapter<ChampionListIt
         StatisticsChampion champ = champs.get(i);
 
         holder.place.setText(("" + (i + 1)));
-        Drawable portraitImage = context.getResources().getDrawable(
-                context.getResources().getIdentifier(champ.champName, "drawable",
-                        context.getApplicationContext().getPackageName()));
-        holder.portrait.setImageDrawable(portraitImage);
+
+        Drawable portraitImage = null;
+
+        try {
+            portraitImage = Drawable.createFromStream(context.getAssets().open("images/champicons/" + champ.champName + ".png"), null);
+            holder.portrait.setImageDrawable(portraitImage);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+//        Drawable portraitImage = context.getResources().getDrawable(
+//                context.getResources().getIdentifier(champ.champName, "drawable",
+//                        context.getApplicationContext().getPackageName()));
+
         holder.winRateTextView.setText("" + champ.winrateString + "%");
 
         //progressBar max value is 100 bc max winrate is 60%; lowest is 40%
@@ -55,20 +66,12 @@ public class ChampionListItemAdapter extends RecyclerView.Adapter<ChampionListIt
         int displayPopularity = (int) (champ.popularity * 3333.0);
         holder.popularityBar.setProgress(displayPopularity);
 
-        Typeface typeface = Typeface.createFromAsset(context.getAssets(), "fonts/robotolight.ttf");
-
-        holder.place.setTypeface(typeface);
-        holder.winRateTextView.setTypeface(typeface);
-        holder.matchesTextView.setTypeface(typeface);
-        holder.winrateStatic.setTypeface(typeface);
-        holder.matchesStatic.setTypeface(typeface);
-
     }
 
     @Override
     public ChampionListItemHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.main_list_item, viewGroup, false);
-        ChampionListItemAdapter.ChampionListItemHolder viewHolder = new ChampionListItemHolder(itemView);
+        ChampionListItemAdapter.ChampionListItemHolder viewHolder = new ChampionListItemHolder(context, itemView);
         return viewHolder;
     }
 
@@ -84,7 +87,7 @@ public class ChampionListItemAdapter extends RecyclerView.Adapter<ChampionListIt
         public TextView winrateStatic;
         public TextView matchesStatic;
 
-        public ChampionListItemHolder(View itemView) {
+        public ChampionListItemHolder(Context context, View itemView) {
             super(itemView);
             place = (TextView) itemView.findViewById(R.id.position);
             portrait = (ImageView) itemView.findViewById(R.id.portrait);
@@ -95,6 +98,14 @@ public class ChampionListItemAdapter extends RecyclerView.Adapter<ChampionListIt
 
             winrateStatic = (TextView) itemView.findViewById(R.id.winrateStatic);
             matchesStatic = (TextView) itemView.findViewById(R.id.matchesStatic);
+
+            Typeface typeface = Typeface.createFromAsset(context.getAssets(), "fonts/robotolight.ttf");
+
+            place.setTypeface(typeface);
+            winRateTextView.setTypeface(typeface);
+            matchesTextView.setTypeface(typeface);
+            winrateStatic.setTypeface(typeface);
+            matchesStatic.setTypeface(typeface);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
