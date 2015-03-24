@@ -50,10 +50,6 @@ public class ChampionListItemAdapter extends RecyclerView.Adapter<ChampionListIt
             e.printStackTrace();
         }
 
-//        Drawable portraitImage = context.getResources().getDrawable(
-//                context.getResources().getIdentifier(champ.champName, "drawable",
-//                        context.getApplicationContext().getPackageName()));
-
         holder.winRateTextView.setText("" + champ.winrateString + "%");
 
         //progressBar max value is 100 bc max winrate is 60%; lowest is 40%

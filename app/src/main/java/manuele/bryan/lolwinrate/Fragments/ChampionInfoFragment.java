@@ -16,15 +16,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
 import manuele.bryan.lolwinrate.Databases.JsonIO;
+import manuele.bryan.lolwinrate.Helpers.ImageHelper;
 import manuele.bryan.lolwinrate.Helpers.LolStatsApplication;
 import manuele.bryan.lolwinrate.Helpers.StringHelper;
-import manuele.bryan.lolwinrate.Items.StaticChampion;
+import manuele.bryan.lolwinrate.LolStatistics.StaticChampion;
 import manuele.bryan.lolwinrate.R;
 import manuele.bryan.lolwinrate.UserStatistics.RankedStatsInfo;
 
@@ -174,14 +177,17 @@ public class ChampionInfoFragment extends Fragment {
 
         //_____________________________INFLATING_VIEWS_____________________________________
 
-        StaticChampion championInfo = JsonIO.loadChampionInfo(getActivity(), champName);
-        int championId = championInfo.key;
+        final StaticChampion championInfo = JsonIO.loadChampionInfo(getActivity(), champName);
 
-        RankedStatsInfo rankedStatsInfo = LolStatsApplication.rankedStatsInfo;
+        Picasso.with(context)
+                .load("http://www.mobafire.com/images/champion/skins/landscape/" + champName + "-classic.jpg")
+                .into(championBanner);
 
         championNameTextView.setText(championInfo.name);
         championTitleTextView.setText(championInfo.title);
 
+        int championId = championInfo.key;
+        final RankedStatsInfo rankedStatsInfo = LolStatsApplication.rankedStatsInfo;
         if (rankedStatsInfo != null) {
             //ranked
             RankedStatsInfo.ChampionStats championStats = rankedStatsInfo.championList.get(championId);
@@ -205,11 +211,58 @@ public class ChampionInfoFragment extends Fragment {
         } else {
             //unranked
             rankedStatsLayout.setVisibility(View.GONE);
-
         }
 
         winrateTextView.setText(winrate);
         popularityTextView.setText(popularity);
+
+        try {
+            Drawable spell1 = Drawable.createFromStream(context.getAssets().open("images/spells/" + championInfo.spells[0].spellImageName + ".png"), null);
+            Drawable spell2 = Drawable.createFromStream(context.getAssets().open("images/spells/" + championInfo.spells[1].spellImageName + ".png"), null);
+            Drawable spell3 = Drawable.createFromStream(context.getAssets().open("images/spells/" + championInfo.spells[2].spellImageName + ".png"), null);
+            Drawable spell4 = Drawable.createFromStream(context.getAssets().open("images/spells/" + championInfo.spells[3].spellImageName + ".png"), null);
+
+            spell1Icon.setImageDrawable(ImageHelper.getRoundedCornerBitmap(spell1, 16));
+            spell2Icon.setImageDrawable(ImageHelper.getRoundedCornerBitmap(spell2, 16));
+            spell3Icon.setImageDrawable(ImageHelper.getRoundedCornerBitmap(spell3, 16));
+            spell4Icon.setImageDrawable(ImageHelper.getRoundedCornerBitmap(spell4, 16));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        spellTitleTextView.setText(championInfo.spells[0].name);
+        spellDescriptionTextView.setText(StringHelper.tabString(championInfo.spells[0].description));
+
+        spell1Icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                spellTitleTextView.setText(championInfo.spells[0].name);
+                spellDescriptionTextView.setText(StringHelper.tabString(championInfo.spells[0].description));
+            }
+        });
+        spell2Icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                spellTitleTextView.setText(championInfo.spells[1].name);
+                spellDescriptionTextView.setText(StringHelper.tabString(championInfo.spells[1].description));
+            }
+        });
+        spell3Icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                spellTitleTextView.setText(championInfo.spells[2].name);
+                spellDescriptionTextView.setText(StringHelper.tabString(championInfo.spells[2].description));
+            }
+        });
+        spell4Icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                spellTitleTextView.setText(championInfo.spells[3].name);
+                spellDescriptionTextView.setText(StringHelper.tabString(championInfo.spells[3].description));
+            }
+        });
+
+
 
         bioTextView.setText(championInfo.lore);
 

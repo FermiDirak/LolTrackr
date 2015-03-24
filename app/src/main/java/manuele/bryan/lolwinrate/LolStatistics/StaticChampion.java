@@ -1,4 +1,4 @@
-package manuele.bryan.lolwinrate.Items;
+package manuele.bryan.lolwinrate.LolStatistics;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -60,5 +60,18 @@ public class StaticChampion {
                 ", magicRank=" + magicRank +
                 ", difficultyRank=" + difficultyRank +
                 '}';
+    }
+
+    public static class StaticSpell {
+        public String spellImageName = "";;
+        public String name = "";
+        public String description = "";
+
+        public StaticSpell(String spellImageName, String name, String description) {
+            this.spellImageName = spellImageName;
+            this.name = name;
+            this.description = description;
+        }
+
     }
 }

@@ -20,11 +20,11 @@ import java.util.HashMap;
 import java.util.List;
 
 import manuele.bryan.lolwinrate.Helpers.StringHelper;
-import manuele.bryan.lolwinrate.Items.StaticChampion;
-import manuele.bryan.lolwinrate.Items.StaticSpell;
+import manuele.bryan.lolwinrate.LolStatistics.StaticChampion;
 import manuele.bryan.lolwinrate.UserStatistics.RankedStatsInfo;
 import manuele.bryan.lolwinrate.UserStatistics.UserInfo;
 import manuele.bryan.lolwinrate.UserStatistics.UserSummaryInfo;
+import manuele.bryan.lolwinrate.UserStatistics.UsersLeagueInfo;
 
 public class JsonIO {
     public static String KEY_RIOTAPI = "riotapi";
@@ -122,9 +122,10 @@ public class JsonIO {
         StaticChampion staticChampion = null;
 
         try {
+
             JSONObject json = new JSONObject(jsonString);
             JSONObject data = json.getJSONObject("data");
-            JSONObject champion = data.getJSONObject(champName);
+            JSONObject champion = data.getJSONObject(data.keys().next());
 
             String name = champion.getString("name");
             int key = champion.getInt("key");
@@ -148,17 +149,17 @@ public class JsonIO {
 
             JSONArray JSONspells = champion.getJSONArray("spells");
 
-            StaticSpell[] spells = new StaticSpell[4];
+            StaticChampion.StaticSpell[] spells = new StaticChampion.StaticSpell[4];
 
             if (JSONspells != null) {
-                for (int i = 0; i < JSONspells.length(); i++) {
+                for (int i = 0; i < 4; i++) {
                     JSONObject spell = JSONspells.getJSONObject(i);
 
                     String spellImageName = spell.getString("id");
                     String spellName = spell.getString("name");
                     String spellDescription = spell.getString("description");
 
-                    StaticSpell staticSpell = new StaticSpell(spellImageName, spellName, spellDescription);
+                    StaticChampion.StaticSpell staticSpell = new StaticChampion.StaticSpell(spellImageName, spellName, spellDescription);
 
                     spells[i] = staticSpell;
 
@@ -326,4 +327,61 @@ public class JsonIO {
 
         return userSummaryInfo;
     }
+
+    //_______________________________USER_LEAGUE_INFO___________________________________
+
+    public static UsersLeagueInfo parseUsersLeagueJSon(String jsonString) {
+        UsersLeagueInfo usersLeagueInfo = null;
+
+        try {
+            JSONObject jsonObject = new JSONObject(jsonString);
+            JSONArray queueJsonArray = jsonObject.getJSONArray(jsonObject.keys().next());
+
+            HashMap<String, UsersLeagueInfo.RankedQueue> queues = new HashMap<>();
+            for (int i = 0; i < queueJsonArray.length(); i++) {
+
+                JSONObject queue = queueJsonArray.getJSONObject(i);
+
+                String name = queue.getString("name");
+                String tier = queue.getString("tier");
+                String queueType = queue.getString("queue");
+
+                JSONArray entries = queue.getJSONArray("entries");
+                JSONObject entry = entries.getJSONObject(0);
+                String playerOrTeamName = entry.getString("playerOrTeamName");
+                String division = entry.getString("division");
+                int leaguePoints = entry.getInt("leaguePoints");
+                int wins = entry.getInt("wins");
+                int losses = entry.getInt("losses");
+                boolean isHotStreak = entry.getBoolean("isHotStreak");
+                boolean isVeteran = entry.getBoolean("isVeteran");
+                boolean isFreshBlood = entry.getBoolean("isFreshBlood");
+                boolean isInactive = entry.getBoolean("isInactive");
+
+                boolean inSeries = false;
+                int seriesWins = 0;
+                int seriesLosses = 0;
+
+                if (entry.has("miniSeries")) {
+                    JSONObject miniSeries = entry.getJSONObject("miniSeries");
+
+                    inSeries = true;
+                    seriesWins = miniSeries.getInt("wins");
+                    seriesLosses = miniSeries.getInt("losses");
+                }
+
+                queues.put(queueType, new UsersLeagueInfo.RankedQueue(name, tier, queueType, playerOrTeamName, division, leaguePoints, wins, losses,
+                        isHotStreak, isVeteran, isFreshBlood, isInactive, inSeries, seriesWins, seriesLosses));
+
+            }
+
+            usersLeagueInfo = new UsersLeagueInfo(queues);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return usersLeagueInfo;
+    }
+
 }

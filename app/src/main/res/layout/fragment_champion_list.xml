@@ -6,7 +6,7 @@
     tools:context="manuele.bryan.lolwinrate.Fragments.ChampionListFragment">
 
     <Space
-        android:layout_height="5dp"
+        android:layout_height="10dp"
         android:layout_width="0dp" />
 
     <android.support.v7.widget.RecyclerView
