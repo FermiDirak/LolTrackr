@@ -86,6 +86,8 @@ public class MainActivity extends ActionBarActivity
 
         drawerLayout.closeDrawer(findViewById(R.id.left_drawer));
 
+        Fragment currentFragment = getFragmentManager().findFragmentById(R.id.content_frame);
+
         switch (lastOpenedTabPosition) {
             case 0:
                 //user lookup
@@ -95,10 +97,19 @@ public class MainActivity extends ActionBarActivity
                 return;
             case 2:
                 //champion winrates
-                replaceFragment(ChampionListFragment.newInstance());
+                if (currentFragment instanceof ChampionListFragment) {
+                    ((ChampionListFragment) currentFragment).sortList(ChampionListFragment.SORT_BY_WINRATE);
+                } else {
+                    replaceFragment(ChampionListFragment.newInstance(ChampionListFragment.SORT_BY_WINRATE));
+                }
                 return;
             case 3:
                 //champion popularity
+                if (currentFragment instanceof ChampionListFragment) {
+                    ((ChampionListFragment) currentFragment).sortList(ChampionListFragment.SORT_BY_POPULARITY);
+                } else {
+                    replaceFragment(ChampionListFragment.newInstance(ChampionListFragment.SORT_BY_POPULARITY));
+                }
                 return;
             case 4:
                 //settings

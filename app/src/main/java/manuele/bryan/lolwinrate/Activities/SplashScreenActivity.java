@@ -20,6 +20,7 @@ import manuele.bryan.lolwinrate.Databases.PreferencesDataBase;
 import manuele.bryan.lolwinrate.Helpers.LolStatsApplication;
 import manuele.bryan.lolwinrate.LolStatistics.LeagueScrapper;
 import manuele.bryan.lolwinrate.LolStatistics.StatisticsChampion;
+import manuele.bryan.lolwinrate.LolStatistics.StatisticsChampionList;
 import manuele.bryan.lolwinrate.R;
 
 
@@ -91,6 +92,8 @@ public class SplashScreenActivity extends ActionBarActivity {
 
             DataBaseIO dataBaseIO = new DataBaseIO(getBaseContext());
             dataBaseIO.addChampions(statisticsChampions);
+
+            LolStatsApplication.statisticsChampionList = new StatisticsChampionList(dataBaseIO.getChampions());
 
             return 1;
         }

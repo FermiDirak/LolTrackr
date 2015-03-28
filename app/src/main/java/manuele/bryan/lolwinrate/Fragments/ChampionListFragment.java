@@ -11,35 +11,44 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import manuele.bryan.lolwinrate.Adapters.ChampionListItemAdapter;
-import manuele.bryan.lolwinrate.Databases.DataBaseIO;
-import manuele.bryan.lolwinrate.LolStatistics.QueryPreferences;
-import manuele.bryan.lolwinrate.LolStatistics.SortPreferences;
+import manuele.bryan.lolwinrate.Helpers.LolStatsApplication;
 import manuele.bryan.lolwinrate.LolStatistics.StatisticsChampionList;
 import manuele.bryan.lolwinrate.R;
 
 public class ChampionListFragment extends Fragment {
     private ChampionListItemAdapter championListItemAdapter;
 
-    private QueryPreferences queryPreferences;
-    private SortPreferences sortPreferences;
+    public static final String SORT_TYPE = "sorttype";
+
+    public static final int SORT_BY_POPULARITY = 0;
+    public static final int SORT_BY_WINRATE = 1;
+
+    public int sortType;
 
     static Context context;
 
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
 
-    public static ChampionListFragment newInstance() {
+    StatisticsChampionList statisticsChampionList = null;
+
+    public static ChampionListFragment newInstance(int sortType) {
         ChampionListFragment championListFragment = new ChampionListFragment();
 
-        Bundle args = new Bundle();
-        championListFragment.setArguments(args);
+        Bundle bundle = new Bundle();
+        bundle.putInt(SORT_TYPE, sortType);
 
+        championListFragment.setArguments(bundle);
         return championListFragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            sortType = getArguments().getInt(SORT_TYPE);
+        }
+
     }
 
     @Override
@@ -52,13 +61,32 @@ public class ChampionListFragment extends Fragment {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        DataBaseIO dataBaseIO = new DataBaseIO(context);
-        final StatisticsChampionList statisticsChampionList = new StatisticsChampionList(dataBaseIO.getChampions());
+        statisticsChampionList = LolStatsApplication.statisticsChampionList;
+
+        if (sortType == SORT_BY_POPULARITY) {
+            statisticsChampionList.sortByPopularity();
+        } else {
+            statisticsChampionList.sortByWinrate();
+        }
 
         championListItemAdapter = new ChampionListItemAdapter(context, statisticsChampionList.statisticsChampions);
         recyclerView.setAdapter(championListItemAdapter);
 
         return view;
+    }
+
+    public void sortList(int sortType) {
+        this.sortType = sortType;
+
+        if (sortType == SORT_BY_POPULARITY) {
+            statisticsChampionList.sortByPopularity();
+        } else {
+            statisticsChampionList.sortByWinrate();
+        }
+
+        championListItemAdapter = new ChampionListItemAdapter(context, statisticsChampionList.statisticsChampions);
+        recyclerView.setAdapter(championListItemAdapter);
+
     }
 
     public static void openChampionInfoActivity(String champName, String winrate, String popularity) {
@@ -68,7 +96,6 @@ public class ChampionListFragment extends Fragment {
     }
 
     public static void replaceFragment(Fragment newFragment) {
-
         Activity activity = (Activity) context;
 
         activity.getFragmentManager().beginTransaction()

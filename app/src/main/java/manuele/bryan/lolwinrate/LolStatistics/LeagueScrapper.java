@@ -14,7 +14,7 @@ import java.util.List;
 public class LeagueScrapper {
     public QueryPreferences queryPreferences;
 
-    public static final int NUMBEROFCHAMPIONS = 123;
+    public static final int NUMBEROFCHAMPIONS = 124;
 
     public LeagueScrapper(Context context) {
         this.queryPreferences = new QueryPreferences(context);
