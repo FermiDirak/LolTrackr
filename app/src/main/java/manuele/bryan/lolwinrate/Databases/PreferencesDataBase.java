@@ -32,7 +32,8 @@ public class PreferencesDataBase {
 
     public static final String KEY_JSON_USER_INFO = "jsoninfo",
         KEY_JSON_USER_STATS = "jsonstats",
-        KEY_JSON_USER_SUMMARY = "jsonsummary";
+        KEY_JSON_USER_SUMMARY = "jsonsummary",
+        KEY_JSON_USER_LEAGUE = "jsonleague";
 
 
     public PreferencesDataBase(Context context) {
@@ -96,16 +97,18 @@ public class PreferencesDataBase {
         return settings.getInt(KEY_LAST_OPENED_TAB, 2);
     }
 
-    public void updateJSON(String jsonUserInfo, String jsonUserStats, String jsonUserSummary) {
+    public void updateJSON(String jsonUserInfo, String jsonUserStats, String jsonUserSummary, String userLeagueInfo) {
         updateSetting(KEY_JSON_USER_INFO, jsonUserInfo);
         updateSetting(KEY_JSON_USER_SUMMARY, jsonUserSummary);
         updateSetting(KEY_JSON_USER_STATS, jsonUserStats);
+        updateSetting(KEY_JSON_USER_LEAGUE, userLeagueInfo);
     }
 
     public void emptyJSON() {
         updateSetting(KEY_JSON_USER_INFO, "");
         updateSetting(KEY_JSON_USER_SUMMARY, "");
         updateSetting(KEY_JSON_USER_STATS, "");
+        updateSetting(KEY_JSON_USER_LEAGUE, "");
     }
 
     public void updateUser(String username, String region) {
@@ -121,6 +124,10 @@ public class PreferencesDataBase {
     public String getUserRegion() {
         SharedPreferences settings = getSharedPreferences();
         return settings.getString(KEY_USER_REGION, DEFAULT_USER_REGION);
+    }
+
+    public void defaultUserInfo() {
+        updateUser(PreferencesDataBase.DEFAULT_USER_NAME, PreferencesDataBase.DEFAULT_USER_REGION);
     }
 
     public HashMap<String, Integer> getQueryPreferences() {

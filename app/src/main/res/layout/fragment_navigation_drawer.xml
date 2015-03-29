@@ -7,8 +7,10 @@
     tools:context="manuele.bryan.lolwinrate.Fragments.NavigationDrawerFragment">
 
     <RelativeLayout
+        android:id="@+id/navDrawerUserLayout"
+        android:layout_weight="2.5"
         android:layout_width="match_parent"
-        android:layout_height="150dp">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/champBanner"
@@ -17,15 +19,20 @@
             android:layout_height="match_parent" />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_marginLeft="14dp"
+            android:layout_marginBottom="14dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="14dp"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/porifle_image"
-                android:layout_margin="18dp"
-                android:layout_width="56dp"
-                android:layout_height="56dp" />
+            <ImageView
+                android:id="@+id/profile_image"
+                android:layout_width="64dp"
+                android:layout_height="64dp" />
             
             <TextView
                 android:id="@+id/accountName"
@@ -34,9 +41,7 @@
                 android:text="User001"
                 android:textColor="@color/textwhite"
                 android:textSize="18dp"
-                android:layout_gravity="center_vertical"
-                android:padding="10dp"
-                />
+                android:layout_gravity="center_vertical" />
 
         </LinearLayout>
 
@@ -48,16 +53,11 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="@color/darkgray"
+        android:layout_weight="1"
         android:choiceMode="singleChoice"
         android:dividerHeight="0dp"
         android:foreground="?android:attr/selectableItemBackground"
         tools:listitem="@layout/drawer_item"/>
-
-    <TextView
-        android:text="League Statistics"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
 
 
 

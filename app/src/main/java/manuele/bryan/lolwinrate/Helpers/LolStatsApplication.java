@@ -9,6 +9,7 @@ import manuele.bryan.lolwinrate.LolStatistics.StatisticsChampionList;
 import manuele.bryan.lolwinrate.UserStatistics.RankedStatsInfo;
 import manuele.bryan.lolwinrate.UserStatistics.UserInfo;
 import manuele.bryan.lolwinrate.UserStatistics.UserSummaryInfo;
+import manuele.bryan.lolwinrate.UserStatistics.UsersLeagueInfo;
 
 public class LolStatsApplication extends Application {
     public static String riotApiKey = "";
@@ -17,6 +18,7 @@ public class LolStatsApplication extends Application {
     public static UserInfo userInfo = null;
     public static RankedStatsInfo rankedStatsInfo = null;
     public static UserSummaryInfo userSummaryInfo = null;
+    public static UsersLeagueInfo usersLeagueInfo = null;
 
     public static StatisticsChampionList statisticsChampionList = null;
 

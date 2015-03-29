@@ -3,34 +3,35 @@ package manuele.bryan.lolwinrate.UserStatistics;
 import java.util.HashMap;
 
 public class UsersLeagueInfo {
-    HashMap<String, RankedQueue> queuesList;
+    public static final String QUEUE_RANKED_SOLO_FIVES = "RANKED_SOLO_5x5";
+    public static final String QUEUE_RANKED_TEAM_FIVES = "RANKED_TEAM_5x5";
+    public static final String QUEUE_RANKED_TEAM_THREE = "RANKED_TEAM_3X3";
+
+    public HashMap<String, RankedQueue> queuesList;
 
     public UsersLeagueInfo(HashMap<String, RankedQueue> queuesList) {
         this.queuesList = queuesList;
     }
 
     public static class RankedQueue {
-        public static final String QUEUE_RANKED_SOLO_FIVES = "RANKED_SOLO_5x5";
-        public static final String QUEUE_RANKED_TEAM_FIVES = "RANKED_TEAM_5x5";
-        public static final String QUEUE_RANKED_TEAM_THREE = "RANKED_TEAM_3X3";
 
-        String divisionName;
-        String tier;
-        String queueType;
+        public String divisionName;
+        public String tier;
+        public String queueType;
 
-        String teamOrPlayerName;
-        String division;
-        int leaguePoints;
-        int wins;
-        int losses;
-        boolean isHotStreak;
-        boolean isVeteran;
-        boolean isFreshBlood;
-        boolean isInactive;
+        public String teamOrPlayerName;
+        public String division;
+        public int leaguePoints;
+        public int wins;
+        public int losses;
+        public boolean isHotStreak;
+        public boolean isVeteran;
+        public boolean isFreshBlood;
+        public boolean isInactive;
 
-        boolean isInSeries;
-        int seriesWins;
-        int seriesLosses;
+        public boolean isInSeries;
+        public int seriesWins;
+        public int seriesLosses;
 
         public RankedQueue(String divisionName, String tier, String queueType, String teamOrPlayerName, String division,
                            int leaguePoints, int wins, int losses,

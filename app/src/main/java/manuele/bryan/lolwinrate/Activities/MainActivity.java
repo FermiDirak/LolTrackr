@@ -15,6 +15,7 @@ import manuele.bryan.lolwinrate.Fragments.ChampionListFragment;
 import manuele.bryan.lolwinrate.Fragments.NavigationDrawerFragment;
 import manuele.bryan.lolwinrate.Fragments.QueryFragment;
 import manuele.bryan.lolwinrate.Fragments.SettingsFragment;
+import manuele.bryan.lolwinrate.Fragments.UserStatsMainFragment;
 import manuele.bryan.lolwinrate.R;
 
 
@@ -90,12 +91,16 @@ public class MainActivity extends ActionBarActivity
 
         switch (lastOpenedTabPosition) {
             case 0:
-                //user lookup
+                //user stats
+                replaceFragment(UserStatsMainFragment.newInstance());
                 return;
             case 1:
-                //items
+                //user lookup
                 return;
             case 2:
+                //items
+                return;
+            case 3:
                 //champion winrates
                 if (currentFragment instanceof ChampionListFragment) {
                     ((ChampionListFragment) currentFragment).sortList(ChampionListFragment.SORT_BY_WINRATE);
@@ -103,7 +108,7 @@ public class MainActivity extends ActionBarActivity
                     replaceFragment(ChampionListFragment.newInstance(ChampionListFragment.SORT_BY_WINRATE));
                 }
                 return;
-            case 3:
+            case 4:
                 //champion popularity
                 if (currentFragment instanceof ChampionListFragment) {
                     ((ChampionListFragment) currentFragment).sortList(ChampionListFragment.SORT_BY_POPULARITY);
@@ -111,11 +116,11 @@ public class MainActivity extends ActionBarActivity
                     replaceFragment(ChampionListFragment.newInstance(ChampionListFragment.SORT_BY_POPULARITY));
                 }
                 return;
-            case 4:
+            case 5:
                 //settings
                 replaceFragment(SettingsFragment.newInstance());
                 return;
-            case 5:
+            case 6:
                 //about
                 return;
         }

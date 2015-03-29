@@ -3,6 +3,8 @@ package manuele.bryan.lolwinrate.Activities;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -56,6 +58,8 @@ public class SetUpSummonerActivity extends Activity {
             }
         });
 
+        accountNameInput.getBackground().setColorFilter(Color.rgb(255, 255, 255), PorterDuff.Mode.SRC_IN);
+
     }
 
     private void infoPopup() {
@@ -91,6 +95,14 @@ public class SetUpSummonerActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
     private class VerifyUserTask extends AsyncTask<String, String, Integer> {
@@ -132,6 +144,7 @@ public class SetUpSummonerActivity extends Activity {
                     PreferencesDataBase preferences = new PreferencesDataBase(getBaseContext());
                     preferences.emptyJSON();
                     preferences.updateUser(username, region);
+                    preferences.updateLastOpenedTab(3);
                     Intent intent = new Intent(SetUpSummonerActivity.this, SplashScreenActivity.class);
                     startActivity(intent);
                     return;
@@ -142,5 +155,7 @@ public class SetUpSummonerActivity extends Activity {
 
         }
     }
+
+
 
 }

@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
+import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
@@ -19,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -27,8 +30,10 @@ import java.util.List;
 
 import manuele.bryan.lolwinrate.Adapters.DrawerAdapter;
 import manuele.bryan.lolwinrate.Databases.PreferencesDataBase;
+import manuele.bryan.lolwinrate.Helpers.LolStatsApplication;
 import manuele.bryan.lolwinrate.Items.DrawerItem;
 import manuele.bryan.lolwinrate.R;
+import manuele.bryan.lolwinrate.UserStatistics.UsersLeagueInfo;
 
 public class NavigationDrawerFragment extends Fragment {
     public NavigationDrawerListener navigationDrawerListener;
@@ -53,9 +58,13 @@ public class NavigationDrawerFragment extends Fragment {
     DrawerAdapter drawerAdapter;
     DrawerLayout mDrawerLayout;
 
+    public RelativeLayout userLayout;
     public ImageView champBanner;
+    public ImageView profileIcon;
     public TextView userName;
     public ListView listView;
+
+    public Typeface typeface;
 
     public static NavigationDrawerFragment newInstance() {
         NavigationDrawerFragment fragment = new NavigationDrawerFragment();
@@ -76,16 +85,46 @@ public class NavigationDrawerFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
 
+        this.typeface = Typeface.createFromAsset(context.getAssets(), "fonts/robotolight.ttf");
+
+        userLayout = (RelativeLayout) view.findViewById(R.id.navDrawerUserLayout);
         champBanner = (ImageView) view.findViewById(R.id.champBanner);
+        profileIcon = (ImageView) view.findViewById(R.id.profile_image);
         userName = (TextView) view.findViewById(R.id.accountName);
         listView = (ListView) view.findViewById(R.id.drawer_list);
 
+        userLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectItem(0);
+            }
+        });
+
+        userName.setText(LolStatsApplication.userInfo.name);
+        userName.setTypeface(typeface);
+
+        try {
+            if (LolStatsApplication.usersLeagueInfo.queuesList.containsKey(UsersLeagueInfo.QUEUE_RANKED_SOLO_FIVES)) {
+                String tier = LolStatsApplication.usersLeagueInfo.queuesList.get(UsersLeagueInfo.QUEUE_RANKED_SOLO_FIVES).tier.toLowerCase();
+
+                Drawable rankIcon = Drawable.createFromStream(context.getAssets().open("images/tiers/" + tier + ".png"), null);
+                profileIcon.setImageDrawable(rankIcon);
+            } else {
+                Drawable rankIcon = Drawable.createFromStream(context.getAssets().open("images/tiers/unranked.png"), null);
+                profileIcon.setImageDrawable(rankIcon);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         updateDrawer();
+
+
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                selectItem(position);
+                selectItem(position + 1);
             }
         });
 
@@ -103,7 +142,7 @@ public class NavigationDrawerFragment extends Fragment {
         dataList = new ArrayList<>();
 
         PreferencesDataBase preferences = new PreferencesDataBase(context);
-        int lastOpenedTab = preferences.getLastOpenedTab();
+        int lastOpenedTab = preferences.getLastOpenedTab() - 1;
 
         for (int i = 0; i < drawerStrings.size(); i++) {
             DrawerItem drawerItem = new DrawerItem(drawerStrings.get(i), drawerImages.getResourceId(i, -1));
@@ -125,9 +164,10 @@ public class NavigationDrawerFragment extends Fragment {
 
     private void selectItem(int position) {
         mCurrentSelectedPosition = position;
-        if (listView != null) {
-            listView.setItemChecked(position, true);
+        if (listView != null && position != 0) {
+            listView.setItemChecked(position - 1, true);
         }
+
         if (mDrawerLayout != null) {
             mDrawerLayout.closeDrawer(view);
         }

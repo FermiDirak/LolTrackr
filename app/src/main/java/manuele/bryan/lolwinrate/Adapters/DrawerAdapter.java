@@ -1,6 +1,7 @@
 package manuele.bryan.lolwinrate.Adapters;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,10 +21,14 @@ public class DrawerAdapter extends BaseAdapter {
 
     List<DrawerItem> drawerItemList;
 
+    Typeface typeface;
+
     public DrawerAdapter(Context context, List<DrawerItem> drawerItemList) {
         this.context = context;
         this.drawerItemList = drawerItemList;
         layoutInflater = LayoutInflater.from(context);
+
+        typeface = Typeface.createFromAsset(context.getAssets(), "fonts/robotolight.ttf");
     }
 
     @Override
@@ -54,6 +59,8 @@ public class DrawerAdapter extends BaseAdapter {
         }
 
         DrawerItem drawerItem = drawerItemList.get(position);
+
+        holder.itemName.setTypeface(typeface);
 
         if (drawerItem.currentlySelected) {
             holder.backgroundLayout.setBackgroundColor(context.getResources().getColor(

@@ -125,7 +125,13 @@ public class SplashScreenActivity extends ActionBarActivity {
                 String summaryJsonString = JsonIO.getJSONFromWeb(summaryURLString);
                 LolStatsApplication.userSummaryInfo = JsonIO.parseUserSummaryJson(summaryJsonString);
 
-                preferences.updateJSON(infoJsonString, statsJsonString, summaryJsonString);
+                String userLeagueURLString = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v2.5/league/by-summoner/" + id +
+                        "?api_key=" + LolStatsApplication.riotApiKey;
+
+                String userLeagueJsonString = JsonIO.getJSONFromWeb(userLeagueURLString);
+                LolStatsApplication.usersLeagueInfo = JsonIO.parseUsersLeagueJSon(userLeagueJsonString);
+
+                preferences.updateJSON(infoJsonString, statsJsonString, summaryJsonString, userLeagueJsonString);
 
             } catch (Exception e) {
                 e.printStackTrace();
