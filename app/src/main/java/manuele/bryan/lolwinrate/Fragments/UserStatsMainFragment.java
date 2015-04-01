@@ -36,14 +36,19 @@ public class UserStatsMainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user_stats_main, container, false);
-
-        viewPager = (ViewPager) view.findViewById(R.id.userStatsViewPager);
-        pagerAdapter = new UserStatsPagerAdapter(getActivity(), getChildFragmentManager());
-        viewPager.setAdapter(pagerAdapter);
-
         return view;
     }
 
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        viewPager = (ViewPager) view.findViewById(R.id.userStatsViewPager);
+        viewPager.setOffscreenPageLimit(5);
+        pagerAdapter = new UserStatsPagerAdapter(viewPager);
+        viewPager.setAdapter(pagerAdapter);
+
+    }
 
     @Override
     public void onAttach(Activity activity) {

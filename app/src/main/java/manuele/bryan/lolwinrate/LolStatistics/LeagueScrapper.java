@@ -21,41 +21,47 @@ public class LeagueScrapper {
     }
 
     public List<StatisticsChampion> createDataTable() throws IOException {
-        Document doc = Jsoup.connect(queryPreferences.createLink()).get();
-        Element body = doc.body();
-        Elements tbodys = body.getElementsByTag("tbody");
-        Element champTable = tbodys.get(12);
 
-		Elements champOrder = champTable.getElementsByClass("ar1"); //useless
-        Elements champName = champTable.getElementsByClass("ar2");
-        Elements champWinRate = champTable.getElementsByClass("ar3");
-        Elements champMatches = champTable.getElementsByClass("ar4");
-        Elements champWins = champTable.getElementsByClass("ar5");
-        Elements champLosses = champTable.getElementsByClass("ar6");
+        try {
+            Document doc = Jsoup.connect(queryPreferences.createLink()).get();
+            Element body = doc.body();
+            Elements tbodys = body.getElementsByTag("tbody");
+            Element champTable = tbodys.get(12);
 
-        List<StatisticsChampion> table = new ArrayList<>();
+            Elements champOrder = champTable.getElementsByClass("ar1"); //useless
+            Elements champName = champTable.getElementsByClass("ar2");
+            Elements champWinRate = champTable.getElementsByClass("ar3");
+            Elements champMatches = champTable.getElementsByClass("ar4");
+            Elements champWins = champTable.getElementsByClass("ar5");
+            Elements champLosses = champTable.getElementsByClass("ar6");
 
-        for (int i = 0; i < NUMBEROFCHAMPIONS; i++) {
-            String name = nameOfChamp(champName, i);
-            String winrate = winrateOfChamp(champWinRate, i); //useless
-            String matchCount = matchCountOfChamp(champMatches, i);
-            String winCount = winCountOfChamp(champWins, i);
-            String lossCount = lossCountOfChamp(champLosses, i);
+            List<StatisticsChampion> table = new ArrayList<>();
 
-            matchCount = matchCount.replaceAll("[^0-9]", "");
-            winCount = winCount.replaceAll("[^0-9]", "");
-            lossCount = lossCount.replaceAll("[^0-9]", "");
+            for (int i = 0; i < NUMBEROFCHAMPIONS; i++) {
+                String name = nameOfChamp(champName, i);
+                String winrate = winrateOfChamp(champWinRate, i); //useless
+                String matchCount = matchCountOfChamp(champMatches, i);
+                String winCount = winCountOfChamp(champWins, i);
+                String lossCount = lossCountOfChamp(champLosses, i);
 
-            int matchCountInt = Integer.parseInt(matchCount);
-            int winCountInt = Integer.parseInt(winCount);
-            int lossCountInt = Integer.parseInt(lossCount);
+                matchCount = matchCount.replaceAll("[^0-9]", "");
+                winCount = winCount.replaceAll("[^0-9]", "");
+                lossCount = lossCount.replaceAll("[^0-9]", "");
 
-            StatisticsChampion champ = new StatisticsChampion(name, winCountInt, lossCountInt, matchCountInt);
+                int matchCountInt = Integer.parseInt(matchCount);
+                int winCountInt = Integer.parseInt(winCount);
+                int lossCountInt = Integer.parseInt(lossCount);
 
-            table.add(champ);
+                StatisticsChampion champ = new StatisticsChampion(name, winCountInt, lossCountInt, matchCountInt);
+
+                table.add(champ);
+            }
+
+            return table;
+        } catch (IndexOutOfBoundsException e) {
+            return null;
         }
 
-        return table;
     }
 
     private static String nameOfChamp(Elements champName, int position) {

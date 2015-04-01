@@ -1,42 +1,42 @@
 package manuele.bryan.lolwinrate.Adapters;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.content.Context;
-import android.support.v13.app.FragmentPagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.view.View;
 
-import manuele.bryan.lolwinrate.Fragments.UserStatsPage0;
-import manuele.bryan.lolwinrate.Fragments.UserStatsPage1;
-import manuele.bryan.lolwinrate.Fragments.UserStatsPage2;
+import manuele.bryan.lolwinrate.R;
 
-public class UserStatsPagerAdapter extends FragmentPagerAdapter {
-    Context context;
+public class UserStatsPagerAdapter extends PagerAdapter {
+    View parentView;
 
-    FragmentManager fragmentManager;
-
-    public UserStatsPagerAdapter(Context context, FragmentManager fragmentManager) {
-        super(fragmentManager);
-        this.fragmentManager = fragmentManager;
-        this.context = context;
+    public UserStatsPagerAdapter(View parentView) {
+        this.parentView = parentView;
     }
 
-
     @Override
-    public Fragment getItem(int position) {
-        switch(position) {
+    public Object instantiateItem(View collection, int position) {
+        int resId = 0;
+        switch (position) {
             case 0:
-                return UserStatsPage0.newInstance();
+                resId = R.id.usersStatsPage0;
+                break;
             case 1:
-                return UserStatsPage1.newInstance();
+                resId = R.id.usersStatsPage1;
+                break;
             case 2:
-                return UserStatsPage2.newInstance();
-            default:
-                return UserStatsPage0.newInstance();
+                resId = R.id.usersStatsPage2;
+                break;
         }
+
+        return parentView.findViewById(resId);
     }
 
     @Override
     public int getCount() {
         return 3;
+    }
+
+    @Override
+    public boolean isViewFromObject(View view, Object object) {
+        return view == ((View) object);
     }
 }
