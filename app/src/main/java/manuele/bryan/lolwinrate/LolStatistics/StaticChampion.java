@@ -13,6 +13,7 @@ public class StaticChampion {
     public String name = "";
     public String title = "";
     public String lore = "";
+    public String blurb = "";
     public List<String> allytips = new ArrayList<>();
     public List<String> enemytips = new ArrayList<>();
     public List<String> tags = new ArrayList<>();
@@ -25,7 +26,7 @@ public class StaticChampion {
     public int magicRank = 0;
     public int difficultyRank = 0;
 
-    public StaticChampion(String name, int key, String title, String lore,
+    public StaticChampion(String name, int key, String title, String lore, String blurb,
                           List<String> allytips, List<String> enemytips,
                           List<String> tags, String resoucetype, StaticSpell[] spells,
                           int attackRank, int defenseRank, int magicRank, int difficultyRank) {
@@ -33,6 +34,7 @@ public class StaticChampion {
         this.key = key;
         this.title = title;
         this.lore = StringHelper.formatChampionBio(lore);
+        this.blurb = blurb;
         this.allytips = allytips;
         this.enemytips = enemytips;
         this.tags = tags;

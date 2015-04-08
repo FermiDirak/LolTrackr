@@ -131,6 +131,7 @@ public class JsonIO {
             int key = champion.getInt("key");
             String title = champion.getString("title");
             String lore = champion.getString("lore");
+            String blurb = champion.getString("blurb");
             JSONArray JSONallytips = champion.getJSONArray("allytips");
             JSONArray JSONenemytips = champion.getJSONArray("enemytips");
             JSONArray JSONtags = champion.getJSONArray("tags");
@@ -166,7 +167,7 @@ public class JsonIO {
                 }
             }
 
-            staticChampion = new StaticChampion(name, key, title, lore,
+            staticChampion = new StaticChampion(name, key, title, lore, blurb,
                     allytips, enemytips,
                     tags, resourcetype, spells,
                     attackRank, defenseRank, magicRank, difficultyRank);

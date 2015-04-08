@@ -264,7 +264,7 @@ public class ChampionInfoFragment extends Fragment {
 
 
 
-        bioTextView.setText(championInfo.lore);
+        bioTextView.setText(championInfo.blurb);
 
         String allytips = StringHelper.createBulletPointText(championInfo.allytips);
         String enemytips = StringHelper.createBulletPointText(championInfo.enemytips);
