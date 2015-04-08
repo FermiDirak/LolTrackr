@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,14 +11,32 @@
     android:id="@+id/noConnectivityLayout"
     tools:context="manuele.bryan.lolwinrate.Activities.NoConnectivityActivity">
 
+    <ImageView
+        android:id="@+id/noconnection_icon"
+        android:src="@drawable/noconnection"
+        android:layout_centerHorizontal="true"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp"
+        android:paddingTop="14dp"
+        android:paddingBottom="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <TextView
         android:id="@+id/retryText1"
         android:layout_gravity="center_horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="28sp"
+        android:textSize="14sp"
         android:textColor="@color/textgray"
         android:gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/noconnection_icon"
+        android:padding="14dp"
         android:text="No connection could be found. Click to Retry." />
 
-</LinearLayout>
+
+
+</RelativeLayout>

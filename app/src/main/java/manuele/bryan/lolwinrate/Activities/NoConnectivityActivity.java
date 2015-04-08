@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import manuele.bryan.lolwinrate.R;
@@ -16,7 +17,7 @@ import manuele.bryan.lolwinrate.R;
 
 public class NoConnectivityActivity extends ActionBarActivity {
 
-    LinearLayout noConnectivityLayout;
+    RelativeLayout noConnectivityLayout;
     TextView retryText1;
 
     @Override
@@ -24,7 +25,7 @@ public class NoConnectivityActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_no_connectivity);
 
-        noConnectivityLayout = (LinearLayout) findViewById(R.id.noConnectivityLayout);
+        noConnectivityLayout = (RelativeLayout) findViewById(R.id.noConnectivityLayout);
         retryText1 = (TextView) findViewById(R.id.retryText1);
 
         Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/robotolight.ttf");
