@@ -14,8 +14,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.Space;
 import android.widget.TextView;
 
+import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
+import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
+import com.github.ksoichiro.android.observablescrollview.ScrollState;
+import com.nineoldandroids.view.ViewHelper;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -31,7 +37,7 @@ import manuele.bryan.lolwinrate.LolStatistics.StaticChampion;
 import manuele.bryan.lolwinrate.R;
 import manuele.bryan.lolwinrate.UserStatistics.RankedStatsInfo;
 
-public class ChampionInfoFragment extends Fragment {
+public class ChampionInfoFragment extends Fragment implements ObservableScrollViewCallbacks {
     private Context context;
 
     public static final String KEY_CHAMPNAME = "champname";
@@ -41,6 +47,10 @@ public class ChampionInfoFragment extends Fragment {
     String champDisplayName = "";
     String winrate = "";
     String popularity = "";
+
+    RelativeLayout topLayout;
+    ObservableScrollView observableScrollView;
+    Space compensationSpace;
 
     ImageView championBanner;
 
@@ -78,6 +88,8 @@ public class ChampionInfoFragment extends Fragment {
     TextView enemyTitleStaticTextView;
     TextView winrateStaticTextview;
     TextView popularityStaticTextView;
+
+    int parallaxImageHeight;
 
 
     public static ChampionInfoFragment newInstance(String champName, String winrate, String popularity) {
@@ -145,6 +157,10 @@ public class ChampionInfoFragment extends Fragment {
         enemyTitleStaticTextView = (TextView) view.findViewById(R.id.championInfoStaticEnemyTips);
         enemyTipsTextView = (TextView) view.findViewById(R.id.enemytips);
 
+        topLayout = (RelativeLayout) view.findViewById(R.id.championInfoTopLayout);
+        observableScrollView = (ObservableScrollView) view.findViewById(R.id.observableScrollView);
+        compensationSpace = (Space) view.findViewById(R.id.compensationSpace);
+
         //________________________________TYPE_FACE_SETTING________________________________
 
         Typeface typeface = Typeface.createFromAsset(context.getAssets(), "fonts/robotolight.ttf");
@@ -181,6 +197,7 @@ public class ChampionInfoFragment extends Fragment {
 
         Picasso.with(context)
                 .load("http://www.mobafire.com/images/champion/skins/landscape/" + champName + "-classic.jpg")
+                .placeholder(R.drawable.placeholder)
                 .into(championBanner);
 
         championNameTextView.setText(championInfo.name);
@@ -262,8 +279,6 @@ public class ChampionInfoFragment extends Fragment {
             }
         });
 
-
-
         bioTextView.setText(championInfo.blurb);
 
         String allytips = StringHelper.createBulletPointText(championInfo.allytips);
@@ -272,10 +287,25 @@ public class ChampionInfoFragment extends Fragment {
         allyTipsTextView.setText(allytips);
         enemyTipsTextView.setText(enemytips);
 
-
-
+        observableScrollView.setScrollViewCallbacks(this);
 
         return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        view.post(new Runnable() {
+            @Override
+            public void run() {
+                parallaxImageHeight = championBanner.getHeight();
+
+                ViewGroup.LayoutParams spaceLayoutParams = compensationSpace.getLayoutParams();
+                spaceLayoutParams.height = parallaxImageHeight;
+                compensationSpace.setLayoutParams(spaceLayoutParams);
+            }
+        });
     }
 
     @Override
@@ -295,4 +325,19 @@ public class ChampionInfoFragment extends Fragment {
         return new BitmapDrawable(x);
     }
 
+
+    @Override
+    public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {
+        ViewHelper.setTranslationY(topLayout, -scrollY / 2);
+    }
+
+    @Override
+    public void onDownMotionEvent() {
+
+    }
+
+    @Override
+    public void onUpOrCancelMotionEvent(ScrollState scrollState) {
+
+    }
 }

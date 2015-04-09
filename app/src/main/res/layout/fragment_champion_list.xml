@@ -1,21 +1,19 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/backgroundgray"
+    android:background="@color/darkgray"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="manuele.bryan.lolwinrate.Fragments.ChampionListFragment">
-
-    <Space
-        android:layout_height="10dp"
-        android:layout_width="0dp" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/mainRecyclerView"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
+        android:paddingTop="5dp"
+        android:clipToPadding="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:dividerHeight="5dp"
         tools:listitem="@layout/main_list_item" />
 
-</FrameLayout>
+</LinearLayout>

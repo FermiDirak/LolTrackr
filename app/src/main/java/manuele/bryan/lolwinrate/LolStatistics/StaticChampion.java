@@ -34,7 +34,7 @@ public class StaticChampion {
         this.key = key;
         this.title = title;
         this.lore = StringHelper.formatChampionBio(lore);
-        this.blurb = blurb;
+        this.blurb = StringHelper.formatChampionBio(blurb);
         this.allytips = allytips;
         this.enemytips = enemytips;
         this.tags = tags;

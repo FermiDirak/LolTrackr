@@ -8,5 +8,6 @@
     <item name="darkgray" type="color">#343434</item>
     <item name="darkergray" type="color">#1A1A1A</item>
     <item name="highlightgray" type="color">#383838</item>
+    <item name="lightgray" type="color">#646464</item>
 
 </resources>

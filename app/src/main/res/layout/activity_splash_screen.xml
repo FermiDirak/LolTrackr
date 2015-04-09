@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:gravity="center"
-    android:background="@color/bright_foreground_disabled_material_light"
     tools:context="manuele.bryan.lolwinrate.Activities.SplashScreenActivity">
 
     <ImageView

@@ -1,16 +1,13 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/darkgray"
-    tools:context="manuele.bryan.lolwinrate.Activities.ChampionInfoActivity">
-
-<LinearLayout
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    tools:context="manuele.bryan.lolwinrate.Activities.ChampionInfoActivity">
 
-    <RelativeLayout android:layout_width="match_parent"
+    <RelativeLayout
+        android:id="@+id/championInfoTopLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <ImageView
@@ -25,8 +22,9 @@
             android:layout_centerVertical="true"
             android:layout_margin="10dp"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <TextView
                 android:id="@+id/championName"
                 android:layout_width="wrap_content"
@@ -80,9 +78,9 @@
                 <TextView
                     android:id="@+id/championInfoKDA"
                     android:text="4.02"
-                    android:textColor="@android:color/holo_red_light"
+                    android:textColor="@android:color/holo_green_light"
                     android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"/>
+                    android:layout_width="wrap_content" />
 
             </LinearLayout>
 
@@ -92,11 +90,12 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+
                     android:id="@+id/championInfoStaticWinLoss"
                     android:text="win-loss: "
                     android:textColor="@android:color/white"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
 
                 <TextView
                     android:id="@+id/championInfoWins"
@@ -110,7 +109,7 @@
                     android:text="-"
                     android:textColor="@android:color/white"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
 
                 <TextView
                     android:id="@+id/championInfoLosses"
@@ -125,272 +124,289 @@
 
     </RelativeLayout>
 
-    <android.support.v7.widget.CardView
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="4dp"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent">
-    <LinearLayout
+    <com.github.ksoichiro.android.observablescrollview.ObservableScrollView
+        android:id="@+id/observableScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/highlightgray"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/championInfoAggregateStatisticsStatic"
-            android:text="Aggregate Statistics"
-            android:textColor="@color/textwhite"
-            android:textSize="18sp"
-            android:paddingTop="14dp"
-            android:paddingBottom="14dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        android:overScrollMode="never"
+        android:scrollbars="none">
 
         <LinearLayout
-            android:paddingBottom="14dp"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <Space
+                android:id="@+id/compensationSpace"
+                android:layout_height="300dp"
+                android:layout_width="match_parent" />
+
             <LinearLayout
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:background="@color/darkgray"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/championInfoWinrateStatic"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="winrate: "
-                    android:textSize="16sp"
-                    android:textColor="@color/textwhite" />
+                    android:padding="7dp"
+                    android:background="@color/highlightgray"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/winrate"
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/championInfoAggregateStatisticsStatic"
+                        android:text="Aggregate Statistics"
+                        android:textColor="@color/textwhite"
+                        android:textSize="18sp"
+                        android:padding="7dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <LinearLayout
+                        android:padding="7dp"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_weight="1"
+                            android:gravity="center_horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/championInfoWinrateStatic"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="winrate: "
+                                android:textSize="16sp"
+                                android:textColor="@color/textwhite" />
+
+                            <TextView
+                                android:id="@+id/winrate"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="56%"
+                                android:textSize="18sp"
+                                android:textColor="@color/textgold" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:id="@+id/championInfoMatchesStatic"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Matches Played: "
+                                android:textSize="16sp"
+                                android:textColor="@color/textwhite" />
+
+                            <TextView
+                                android:id="@+id/popularity"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="55k"
+                                android:textSize="18sp"
+                                android:textColor="@color/textgold" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <ImageView
+                    android:background="@color/darkergray"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+                <LinearLayout
+                    android:layout_margin="14dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="56%"
-                    android:textSize="18sp"
-                    android:textColor="@color/textgold" />
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:src="@drawable/aatrox"
+                            android:id="@+id/championInfoSpellIcon1"
+                            android:adjustViewBounds="true"
+                            android:layout_weight="1"
+                            android:padding="8dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <Space
+                            android:layout_width="7dp"
+                            android:layout_height="0dp" />
+
+                        <ImageView
+                            android:src="@drawable/aatrox"
+                            android:id="@+id/championInfoSpellIcon2"
+                            android:adjustViewBounds="true"
+                            android:layout_weight="1"
+                            android:padding="8dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <Space
+                            android:layout_width="7dp"
+                            android:layout_height="0dp" />
+
+                        <ImageView
+                            android:src="@drawable/aatrox"
+                            android:id="@+id/championInfoSpellIcon3"
+                            android:adjustViewBounds="true"
+                            android:layout_weight="1"
+                            android:padding="8dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <Space
+                            android:layout_width="7dp"
+                            android:layout_height="0dp" />
+
+                        <ImageView
+                            android:src="@drawable/aatrox"
+                            android:id="@+id/championInfoSpellIcon4"
+                            android:adjustViewBounds="true"
+                            android:layout_weight="1"
+                            android:padding="8dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/spellName"
+                        android:textColor="@color/textwhite"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="7dp"
+                        android:textSize="18sp"
+                        android:text="SpellName" />
+
+                    <TextView
+                        android:id="@+id/spellDescription"
+                        android:textColor="@color/textwhite"
+                        android:text="blah blah blah"
+                        android:textSize="14sp"
+                        android:paddingLeft="7dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:background="@color/darkergray"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+                <LinearLayout
+                    android:background="@color/highlightgray"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/championInfoStaticLoreTitle"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Champion Lore"
+                        android:textSize="18sp"
+                        android:padding="7dp"
+                        android:textColor="@color/textwhite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/bioText"
+                        android:textSize="14sp"
+                        android:text="bio text"
+                        android:paddingLeft="24dp"
+                        android:paddingRight="14dp"
+                        android:paddingBottom="14dp"
+                        android:textColor="@color/textgray"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:background="@color/darkergray"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/championInfoStaticAllyTips"
+                        android:text="Ally Tips:"
+                        android:textSize="18sp"
+                        android:layout_gravity="center_horizontal"
+                        android:padding="7dp"
+                        android:textColor="@color/textwhite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/allytips"
+                        android:textSize="14sp"
+                        android:paddingLeft="24dp"
+                        android:paddingRight="14dp"
+                        android:paddingBottom="14dp"
+                        android:text="\u2022 swag \n\u2022 money"
+                        android:textColor="@color/textgray"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/championInfoStaticEnemyTips"
+                        android:text="Enemy Tips:"
+                        android:textSize="18dp"
+                        android:padding="7dp"
+                        android:layout_gravity="center_horizontal"
+                        android:textColor="@color/textwhite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/enemytips"
+                        android:textSize="14sp"
+                        android:paddingLeft="24dp"
+                        android:paddingRight="14dp"
+                        android:paddingBottom="14dp"
+                        android:text="\u2022 swag \n\u2022 money"
+                        android:textColor="@color/textgray"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <TextView
-                    android:id="@+id/championInfoMatchesStatic"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Matches Played: "
-                    android:textSize="16sp"
-                    android:textColor="@color/textwhite" />
-
-                <TextView
-                    android:id="@+id/popularity"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="55k"
-                    android:textSize="18sp"
-                    android:textColor="@color/textgold" />
-
-            </LinearLayout>
 
         </LinearLayout>
+    </com.github.ksoichiro.android.observablescrollview.ObservableScrollView>
 
-    </LinearLayout>
-    </android.support.v7.widget.CardView>
-
-
-    <!--TODO: make spells-->
-    <android.support.v7.widget.CardView
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent">
-    <LinearLayout
-        android:padding="14dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/highlightgray"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:src="@drawable/aatrox"
-                android:id="@+id/championInfoSpellIcon1"
-                android:adjustViewBounds="true"
-                android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <Space
-                android:layout_width="14dp"
-                android:layout_height="0dp"/>
-
-            <ImageView
-                android:src="@drawable/aatrox"
-                android:id="@+id/championInfoSpellIcon2"
-                android:adjustViewBounds="true"
-                android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <Space
-                android:layout_width="14dp"
-                android:layout_height="0dp"/>
-
-            <ImageView
-                android:src="@drawable/aatrox"
-                android:id="@+id/championInfoSpellIcon3"
-                android:adjustViewBounds="true"
-                android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <Space
-                android:layout_width="14dp"
-                android:layout_height="0dp"/>
-
-            <ImageView
-                android:src="@drawable/aatrox"
-                android:id="@+id/championInfoSpellIcon4"
-                android:adjustViewBounds="true"
-                android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/spellName"
-            android:textColor="@color/textwhite"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="14dp"
-            android:textSize="18sp"
-            android:text="spellName"/>
-
-        <TextView
-            android:id="@+id/spellDescription"
-            android:textColor="@color/textwhite"
-            android:text="blah blah blah"
-            android:textSize="14sp"
-            android:paddingLeft="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-    </android.support.v7.widget.CardView>
-
-    <android.support.v7.widget.CardView
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent">
-    <LinearLayout
-        android:background="@color/highlightgray"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/championInfoStaticLoreTitle"
-            android:layout_gravity="center_horizontal"
-            android:text="Champion Lore"
-            android:textSize="18sp"
-            android:padding="14dp"
-            android:textColor="@color/textwhite"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/bioText"
-            android:textSize="14sp"
-            android:text="bio text"
-            android:paddingLeft="24dp"
-            android:paddingRight="14dp"
-            android:paddingBottom="14dp"
-            android:textColor="@color/textgray"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-    </android.support.v7.widget.CardView>
-
-    <android.support.v7.widget.CardView
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="8dp"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent">
-    <LinearLayout
-        android:background="@color/highlightgray"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/championInfoStaticAllyTips"
-            android:text="Ally Tips:"
-            android:textSize="18sp"
-            android:layout_gravity="center_horizontal"
-            android:padding="14dp"
-            android:textColor="@color/textwhite"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/allytips"
-            android:textSize="14sp"
-            android:paddingLeft="24dp"
-            android:paddingRight="14dp"
-            android:paddingBottom="14dp"
-            android:text="\u2022 swag \n\u2022 money"
-            android:textColor="@color/textgray"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/championInfoStaticEnemyTips"
-            android:text="Enemy Tips:"
-            android:textSize="18dp"
-            android:padding="14dp"
-            android:layout_gravity="center_horizontal"
-            android:textColor="@color/textwhite"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/enemytips"
-            android:textSize="14sp"
-            android:paddingLeft="24dp"
-            android:paddingRight="14dp"
-            android:paddingBottom="14dp"
-            android:text="\u2022 swag \n\u2022 money"
-            android:textColor="@color/textgray"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-    </android.support.v7.widget.CardView>
-
-</LinearLayout>
-
-</ScrollView>
+</FrameLayout>

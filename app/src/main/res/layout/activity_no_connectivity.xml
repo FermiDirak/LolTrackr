@@ -17,10 +17,7 @@
         android:layout_centerHorizontal="true"
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
-        android:paddingLeft="14dp"
-        android:paddingRight="14dp"
-        android:paddingTop="14dp"
-        android:paddingBottom="14dp"
+        android:padding="32dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
