@@ -56,6 +56,11 @@ public class PreferencesDataBase {
         settingsEditor.apply();
     }
 
+    public String getSetting(String key) {
+        SharedPreferences settings = getSharedPreferences();
+        return settings.getString(key, "");
+    }
+
     private SharedPreferences getSharedPreferences() {
         return context.getSharedPreferences(PACKAGE_NAME,
                 Context.MODE_PRIVATE);

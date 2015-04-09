@@ -6,6 +6,8 @@ import java.util.List;
 public class StringHelper {
 
     public static String capitalizeFirstLetter(String string) {
+        string = string.toLowerCase();
+
         if (string.length() <= 1) {
             return string.toUpperCase();
         } else {

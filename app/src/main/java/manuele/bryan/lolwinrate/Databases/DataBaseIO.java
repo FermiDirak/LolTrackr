@@ -19,6 +19,25 @@ public class DataBaseIO {
 
     //______________________CHAMPIONS__________________________
 
+    public boolean championsNull() {
+        DataBase dataBase = new DataBase(context);
+        SQLiteDatabase qdb = dataBase.getReadableDatabase();
+
+        int count = 0;
+        String countArg = "SELECT count(*) FROM " + DataBase.KEY_TABLE_CHAMPIONS;
+        Cursor cursor = qdb.rawQuery(countArg, null);
+
+        if (cursor != null) {
+            cursor.moveToFirst();
+            count = cursor.getCount();
+
+        }
+        cursor.close();
+
+        return (count == 0);
+
+    }
+
     public List<StatisticsChampion> getChampions() {
         List<StatisticsChampion> statisticsChampions = new ArrayList<>();
 

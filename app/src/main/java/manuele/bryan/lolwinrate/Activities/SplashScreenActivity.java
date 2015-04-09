@@ -83,19 +83,23 @@ public class SplashScreenActivity extends ActionBarActivity {
                 //no internet connection!!
 
                 System.out.println("no internet connection");
-                return 0;
-            }
-
-            if (statisticsChampions == null) {
-                return 0;
             }
 
             DataBaseIO dataBaseIO = new DataBaseIO(getBaseContext());
-            dataBaseIO.addChampions(statisticsChampions);
 
-            LolStatsApplication.statisticsChampionList = new StatisticsChampionList(dataBaseIO.getChampions());
+            if (statisticsChampions == null) {
+                if (dataBaseIO.championsNull()) {
+                    return 0;
+                } else {
+                    LolStatsApplication.statisticsChampionList = new StatisticsChampionList(dataBaseIO.getChampions());
+                    return 1;
+                }
 
-            return 1;
+            } else {
+                dataBaseIO.addChampions(statisticsChampions);
+                LolStatsApplication.statisticsChampionList = new StatisticsChampionList(dataBaseIO.getChampions());
+                return 1;
+            }
         }
 
         protected Integer updateUser() {
@@ -126,18 +130,36 @@ public class SplashScreenActivity extends ActionBarActivity {
                 LolStatsApplication.userSummaryInfo = JsonIO.parseUserSummaryJson(summaryJsonString);
 
                 String userLeagueURLString = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v2.5/league/by-summoner/" + id +
-                        "?api_key=" + LolStatsApplication.riotApiKey;
+                        "/entry?api_key=" + LolStatsApplication.riotApiKey;
 
                 String userLeagueJsonString = JsonIO.getJSONFromWeb(userLeagueURLString);
                 LolStatsApplication.usersLeagueInfo = JsonIO.parseUsersLeagueJSon(userLeagueJsonString);
 
                 preferences.updateJSON(infoJsonString, statsJsonString, summaryJsonString, userLeagueJsonString);
 
+                return 1;
+
             } catch (Exception e) {
-                e.printStackTrace();
+                System.out.println("Still no internet connection!");
             }
 
-            return 1;
+            String infoJsonString = preferences.getSetting(PreferencesDataBase.KEY_JSON_USER_INFO);
+            String statsJsonString = preferences.getSetting(PreferencesDataBase.KEY_JSON_USER_STATS);
+            String summaryJsonString = preferences.getSetting(PreferencesDataBase.KEY_JSON_USER_SUMMARY);
+            String userLeagueJsonString = preferences.getSetting(PreferencesDataBase.KEY_JSON_USER_LEAGUE);
+
+            if (infoJsonString.equals("") || statsJsonString.equals("") || summaryJsonString.equals("") || userLeagueJsonString.equals("")) {
+                return 0;
+            } else {
+                LolStatsApplication.userInfo = JsonIO.parseUserJson(username, infoJsonString);
+                LolStatsApplication.rankedStatsInfo = JsonIO.parseRankedStatsJson(statsJsonString);
+                LolStatsApplication.userSummaryInfo = JsonIO.parseUserSummaryJson(summaryJsonString);
+                LolStatsApplication.usersLeagueInfo = JsonIO.parseUsersLeagueJSon(userLeagueJsonString);
+
+                return 1;
+            }
+
+
         }
 
          @Override

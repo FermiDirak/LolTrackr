@@ -16,9 +16,11 @@ import android.widget.TextView;
 import manuele.bryan.lolwinrate.Adapters.UserStatsPagerAdapter;
 import manuele.bryan.lolwinrate.Databases.PreferencesDataBase;
 import manuele.bryan.lolwinrate.Helpers.LolStatsApplication;
+import manuele.bryan.lolwinrate.Helpers.StringHelper;
 import manuele.bryan.lolwinrate.R;
 import manuele.bryan.lolwinrate.UserStatistics.RankedStatsInfo;
 import manuele.bryan.lolwinrate.UserStatistics.UserInfo;
+import manuele.bryan.lolwinrate.UserStatistics.UsersLeagueInfo;
 
 public class UserStatsMainFragment extends Fragment {
     Context context;
@@ -95,7 +97,7 @@ public class UserStatsMainFragment extends Fragment {
         regionTextView.setTypeface(typeface);
 
         int level = LolStatsApplication.userInfo.summonerLevel;
-        levelTextView.setText(level);
+        levelTextView.setText(level + "");
 
         PreferencesDataBase preferencesDataBase = new PreferencesDataBase(context);
         regionTextView.setText(preferencesDataBase.getUserRegion());
@@ -159,9 +161,36 @@ public class UserStatsMainFragment extends Fragment {
         team5v5LossesTextView.setTypeface(typeface);
         team5v5LossesStaticTextView.setTypeface(typeface);
 
-        RankedStatsInfo rankedStatsInfo = LolStatsApplication.rankedStatsInfo;
+        UsersLeagueInfo usersLeagueInfo = LolStatsApplication.usersLeagueInfo;
+        if (usersLeagueInfo.queuesList.containsKey(UsersLeagueInfo.QUEUE_RANKED_TEAM_THREE)) {
+            UsersLeagueInfo.RankedQueue team3v3 = usersLeagueInfo.queuesList.get(UsersLeagueInfo.QUEUE_RANKED_TEAM_THREE);
 
-        rankedStatsInfo.
+            team3v3RankTextView.setText(StringHelper.capitalizeFirstLetter(team3v3.tier) + " " + team3v3.division);
+            team3v3pointsTextView.setText(team3v3.leaguePoints + "");
+            team3v3WinsTextView.setText(team3v3.wins + "");
+            team3v3LossesTextView.setText(team3v3.losses + "");
+
+        }
+
+        if (usersLeagueInfo.queuesList.containsKey(UsersLeagueInfo.QUEUE_RANKED_SOLO_FIVES)) {
+            UsersLeagueInfo.RankedQueue solo5v5 = usersLeagueInfo.queuesList.get(UsersLeagueInfo.QUEUE_RANKED_SOLO_FIVES);
+
+            solo5v5RankTextView.setText(StringHelper.capitalizeFirstLetter(solo5v5.tier) + " " + solo5v5.division);
+            solo5v5pointsTextView.setText(solo5v5.leaguePoints + "");
+            solo5v5WinsTextView.setText(solo5v5.wins + "");
+            solo5v5LossesTextView.setText(solo5v5.losses + "");
+
+        }
+
+        if (usersLeagueInfo.queuesList.containsKey(UsersLeagueInfo.QUEUE_RANKED_TEAM_FIVES)) {
+            UsersLeagueInfo.RankedQueue team5v5 = usersLeagueInfo.queuesList.get(UsersLeagueInfo.QUEUE_RANKED_TEAM_FIVES);
+
+            team5v5RankTextView.setText(StringHelper.capitalizeFirstLetter(team5v5.tier) + " " + team5v5.division);
+            team5v5pointsTextView.setText(team5v5.leaguePoints + "");
+            team5v5WinsTextView.setText(team5v5.wins + "");
+            team5v5LossesTextView.setText(team5v5.losses + "");
+
+        }
 
 
 
@@ -173,6 +202,8 @@ public class UserStatsMainFragment extends Fragment {
 
         return view;
     }
+
+
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
