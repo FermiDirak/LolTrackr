@@ -7,6 +7,14 @@ public class UsersLeagueInfo {
     public static final String QUEUE_RANKED_TEAM_FIVES = "RANKED_TEAM_5x5";
     public static final String QUEUE_RANKED_TEAM_THREE = "RANKED_TEAM_3X3";
 
+    public static final String DIVISION_BRONZE = "BRONZE";
+    public static final String DIVISION_SILVER = "SILVER";
+    public static final String DIVISION_GOLD = "GOLD";
+    public static final String DIVISION_PLAT = "PLATINUM";
+    public static final String DIVISION_DIAMOND = "DIAMOND";
+    public static final String DIVISION_MASTERS = "MASTER";
+    public static final String DIVISION_CHALLENGER = "CHALLENGER";
+
     public HashMap<String, RankedQueue> queuesList;
 
     public UsersLeagueInfo(HashMap<String, RankedQueue> queuesList) {

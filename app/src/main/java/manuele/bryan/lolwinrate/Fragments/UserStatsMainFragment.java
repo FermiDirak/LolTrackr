@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import manuele.bryan.lolwinrate.Adapters.UserStatsPagerAdapter;
 import manuele.bryan.lolwinrate.Databases.PreferencesDataBase;
+import manuele.bryan.lolwinrate.Helpers.ImageHelper;
 import manuele.bryan.lolwinrate.Helpers.LolStatsApplication;
 import manuele.bryan.lolwinrate.Helpers.StringHelper;
 import manuele.bryan.lolwinrate.R;
@@ -165,6 +166,8 @@ public class UserStatsMainFragment extends Fragment {
         if (usersLeagueInfo.queuesList.containsKey(UsersLeagueInfo.QUEUE_RANKED_TEAM_THREE)) {
             UsersLeagueInfo.RankedQueue team3v3 = usersLeagueInfo.queuesList.get(UsersLeagueInfo.QUEUE_RANKED_TEAM_THREE);
 
+            team3v3RankedIconImageView.setImageResource(ImageHelper.getTierIcon(team3v3.tier));
+
             team3v3RankTextView.setText(StringHelper.capitalizeFirstLetter(team3v3.tier) + " " + team3v3.division);
             team3v3pointsTextView.setText(team3v3.leaguePoints + "");
             team3v3WinsTextView.setText(team3v3.wins + "");
@@ -175,6 +178,8 @@ public class UserStatsMainFragment extends Fragment {
         if (usersLeagueInfo.queuesList.containsKey(UsersLeagueInfo.QUEUE_RANKED_SOLO_FIVES)) {
             UsersLeagueInfo.RankedQueue solo5v5 = usersLeagueInfo.queuesList.get(UsersLeagueInfo.QUEUE_RANKED_SOLO_FIVES);
 
+            solo5v5RankedIconImageView.setImageResource(ImageHelper.getTierIcon(solo5v5.tier));
+
             solo5v5RankTextView.setText(StringHelper.capitalizeFirstLetter(solo5v5.tier) + " " + solo5v5.division);
             solo5v5pointsTextView.setText(solo5v5.leaguePoints + "");
             solo5v5WinsTextView.setText(solo5v5.wins + "");
@@ -184,6 +189,8 @@ public class UserStatsMainFragment extends Fragment {
 
         if (usersLeagueInfo.queuesList.containsKey(UsersLeagueInfo.QUEUE_RANKED_TEAM_FIVES)) {
             UsersLeagueInfo.RankedQueue team5v5 = usersLeagueInfo.queuesList.get(UsersLeagueInfo.QUEUE_RANKED_TEAM_FIVES);
+
+            team5v5RankedIconImageView.setImageResource(ImageHelper.getTierIcon(team5v5.tier));
 
             team5v5RankTextView.setText(StringHelper.capitalizeFirstLetter(team5v5.tier) + " " + team5v5.division);
             team5v5pointsTextView.setText(team5v5.leaguePoints + "");
@@ -202,8 +209,6 @@ public class UserStatsMainFragment extends Fragment {
 
         return view;
     }
-
-
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {

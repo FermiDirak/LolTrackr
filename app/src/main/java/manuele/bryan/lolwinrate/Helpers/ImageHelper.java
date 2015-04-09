@@ -1,5 +1,6 @@
 package manuele.bryan.lolwinrate.Helpers;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -9,6 +10,12 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+
+import java.io.IOError;
+import java.io.IOException;
+
+import manuele.bryan.lolwinrate.R;
+import manuele.bryan.lolwinrate.UserStatistics.UsersLeagueInfo;
 
 public class ImageHelper {
 
@@ -34,6 +41,30 @@ public class ImageHelper {
         canvas.drawBitmap(bitmap, rect, rect, paint);
 
         return new BitmapDrawable(output);
+    }
+
+
+    //todo: add challengour and master tier images
+    public static int getTierIcon(String tier) {
+        switch (tier) {
+            case UsersLeagueInfo.DIVISION_BRONZE:
+                return R.drawable.bronze;
+            case UsersLeagueInfo.DIVISION_SILVER:
+                return R.drawable.silver;
+            case UsersLeagueInfo.DIVISION_GOLD:
+                return R.drawable.gold;
+            case UsersLeagueInfo.DIVISION_PLAT:
+                return R.drawable.plat;
+            case UsersLeagueInfo.DIVISION_DIAMOND:
+                return R.drawable.diamond;
+            case UsersLeagueInfo.DIVISION_MASTERS:
+                return R.drawable.silver;
+            case UsersLeagueInfo.DIVISION_CHALLENGER:
+                return R.drawable.silver;
+            default:
+                return R.drawable.silver;
+        }
+
     }
 
 }
