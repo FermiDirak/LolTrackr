@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.List;
 
 import manuele.bryan.lolwinrate.Fragments.ChampionListFragment;
+import manuele.bryan.lolwinrate.Helpers.ProgressBarAnimation;
 import manuele.bryan.lolwinrate.LolStatistics.StatisticsChampion;
 import manuele.bryan.lolwinrate.R;
 
@@ -55,12 +56,18 @@ public class ChampionListItemAdapter extends RecyclerView.Adapter<ChampionListIt
         //progressBar max value is 100 bc max winrate is 60%; lowest is 40%
 
         int displayWinrate = (int) ((champ.winrate * 500.0) - 200.0);
-        holder.winRateBar.setProgress(displayWinrate);
+
+        ProgressBarAnimation progressBarAnimationWinRate = new ProgressBarAnimation(holder.winRateBar, 0, displayWinrate);
+        progressBarAnimationWinRate.setDuration(500);
+        holder.winRateBar.startAnimation(progressBarAnimationWinRate);
 
         holder.matchesTextView.setText("" + ((int) (champ.matches / 1000.0)) + "k");
 
         int displayPopularity = (int) (champ.popularity * 3333.0);
-        holder.popularityBar.setProgress(displayPopularity);
+
+        ProgressBarAnimation progressBarAnimationPopularity = new ProgressBarAnimation(holder.popularityBar, 0, displayPopularity);
+        progressBarAnimationPopularity.setDuration(500);
+        holder.popularityBar.startAnimation(progressBarAnimationPopularity);
 
     }
 

@@ -10,4 +10,15 @@
     <item name="highlightgray" type="color">#383838</item>
     <item name="lightgray" type="color">#646464</item>
 
+
+    <item name="maingold" type="color">#A5894F</item>
+    <item name="maindark" type="color">#060E10</item>
+    <item name="maingray" type="color">#566263</item>
+    <item name="maindarkergray" type="color">#383F3A</item>
+
+    <item name="maindarkblue" type="color">#354257</item>
+    <item name="mainblue" type="color">#3A4C61</item>
+    <item name="maingreen" type="color">#458C6B</item>
+
+
 </resources>

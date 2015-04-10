@@ -31,7 +31,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Tryndamere"
-                android:textColor="@color/textwhite"
+                style="@style/textAddShadow"
+                android:textColor="@android:color/white"
                 android:textSize="36sp" />
 
             <TextView
@@ -40,14 +41,16 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="The Barbarian King"
+                style="@style/textAddShadow"
                 android:textSize="14sp"
-                android:textColor="@color/textgray" />
+                android:textColor="@android:color/white" />
         </LinearLayout>
 
         <TextView
             android:id="@+id/championInfoStaticNoRanked"
             android:text="No ranked matches played"
-            android:textColor="@color/textwhite"
+            style="@style/textAddShadow"
+            android:textColor="@android:color/white"
             android:padding="14dp"
             android:layout_alignEnd="@id/champBanner"
             android:layout_alignBottom="@id/champBanner"
@@ -71,8 +74,9 @@
                 <TextView
                     android:id="@+id/championInfoStaticKDA"
                     android:text="average KDA: "
-                    android:textColor="@color/textwhite"
+                    android:textColor="@android:color/white"
                     android:layout_height="wrap_content"
+                    style="@style/textAddShadow"
                     android:layout_width="wrap_content" />
 
                 <TextView
@@ -90,9 +94,9 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-
                     android:id="@+id/championInfoStaticWinLoss"
                     android:text="win-loss: "
+                    style="@style/textAddShadow"
                     android:textColor="@android:color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -136,10 +140,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <Space
-                android:id="@+id/compensationSpace"
-                android:layout_height="300dp"
-                android:layout_width="match_parent" />
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <Space
+                    android:id="@+id/compensationSpace"
+                    android:layout_height="300dp"
+                    android:layout_width="match_parent" />
+
+                <ImageView
+                    android:src="@drawable/gradient"
+                    android:scaleType="fitXY"
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
 
             <LinearLayout
                 android:orientation="vertical"
