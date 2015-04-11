@@ -121,7 +121,7 @@ public class ChampionListItemAdapter extends RecyclerView.Adapter<ChampionListIt
                     String winrate = "" + champion.winrateString + "%";
                     String popularity = "" + ((int) (champion.matches / 1000.0)) + "k";
 
-                    ChampionListFragment.openChampionInfoActivity(championName, winrate, popularity);
+                    ChampionListFragment.openChampionInfoFragment(championName, winrate, popularity);
                 }
             });
         }

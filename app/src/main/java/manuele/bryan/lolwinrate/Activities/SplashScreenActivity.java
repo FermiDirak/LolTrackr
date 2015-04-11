@@ -133,7 +133,7 @@ public class SplashScreenActivity extends ActionBarActivity {
                         "/entry?api_key=" + LolStatsApplication.riotApiKey;
 
                 String userLeagueJsonString = JsonIO.getJSONFromWeb(userLeagueURLString);
-                LolStatsApplication.usersLeagueInfo = JsonIO.parseUsersLeagueJSon(userLeagueJsonString);
+                LolStatsApplication.usersLeagueInfo = JsonIO.parseUsersLeagueJson(userLeagueJsonString);
 
                 preferences.updateJSON(infoJsonString, statsJsonString, summaryJsonString, userLeagueJsonString);
 
@@ -154,7 +154,7 @@ public class SplashScreenActivity extends ActionBarActivity {
                 LolStatsApplication.userInfo = JsonIO.parseUserJson(username, infoJsonString);
                 LolStatsApplication.rankedStatsInfo = JsonIO.parseRankedStatsJson(statsJsonString);
                 LolStatsApplication.userSummaryInfo = JsonIO.parseUserSummaryJson(summaryJsonString);
-                LolStatsApplication.usersLeagueInfo = JsonIO.parseUsersLeagueJSon(userLeagueJsonString);
+                LolStatsApplication.usersLeagueInfo = JsonIO.parseUsersLeagueJson(userLeagueJsonString);
 
                 return 1;
             }
@@ -162,9 +162,11 @@ public class SplashScreenActivity extends ActionBarActivity {
 
         }
 
-         @Override
+        @Override
         protected Integer doInBackground(String... params) {
-            if ( leagueScrape() == 1) {
+            LolStatsApplication.staticLolItemsList = JsonIO.parseLolItemListJson(getAssets());
+
+            if (leagueScrape() == 1) {
                 return updateUser();
             }
 

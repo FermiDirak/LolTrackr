@@ -5,6 +5,7 @@ import android.app.Application;
 import constant.Region;
 import main.java.riotapi.RiotApi;
 import manuele.bryan.lolwinrate.Databases.JsonIO;
+import manuele.bryan.lolwinrate.LolItems.StaticLolItemsList;
 import manuele.bryan.lolwinrate.LolStatistics.StatisticsChampionList;
 import manuele.bryan.lolwinrate.UserStatistics.RankedStatsInfo;
 import manuele.bryan.lolwinrate.UserStatistics.UserInfo;
@@ -19,6 +20,8 @@ public class LolStatsApplication extends Application {
     public static RankedStatsInfo rankedStatsInfo = null;
     public static UserSummaryInfo userSummaryInfo = null;
     public static UsersLeagueInfo usersLeagueInfo = null;
+
+    public static StaticLolItemsList staticLolItemsList = null; //huge
 
     public static StatisticsChampionList statisticsChampionList = null;
 

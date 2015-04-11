@@ -60,7 +60,6 @@ public class NavigationDrawerFragment extends Fragment {
 
     public RelativeLayout userLayout;
     public ImageView champBanner;
-    public ImageView profileIcon;
     public TextView userName;
     public ListView listView;
 
@@ -89,7 +88,6 @@ public class NavigationDrawerFragment extends Fragment {
 
         userLayout = (RelativeLayout) view.findViewById(R.id.navDrawerUserLayout);
         champBanner = (ImageView) view.findViewById(R.id.champBanner);
-        profileIcon = (ImageView) view.findViewById(R.id.profile_image);
         userName = (TextView) view.findViewById(R.id.accountName);
         listView = (ListView) view.findViewById(R.id.drawer_list);
 
@@ -102,20 +100,6 @@ public class NavigationDrawerFragment extends Fragment {
 
         userName.setText(LolStatsApplication.userInfo.name);
         userName.setTypeface(typeface);
-
-        try {
-            if (LolStatsApplication.usersLeagueInfo.queuesList.containsKey(UsersLeagueInfo.QUEUE_RANKED_SOLO_FIVES)) {
-                String tier = LolStatsApplication.usersLeagueInfo.queuesList.get(UsersLeagueInfo.QUEUE_RANKED_SOLO_FIVES).tier.toLowerCase();
-
-                Drawable rankIcon = Drawable.createFromStream(context.getAssets().open("images/tiers/" + tier + ".png"), null);
-                profileIcon.setImageDrawable(rankIcon);
-            } else {
-                Drawable rankIcon = Drawable.createFromStream(context.getAssets().open("images/tiers/unranked.png"), null);
-                profileIcon.setImageDrawable(rankIcon);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         updateDrawer();
 

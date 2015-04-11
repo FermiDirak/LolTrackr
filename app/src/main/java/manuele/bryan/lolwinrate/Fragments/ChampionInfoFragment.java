@@ -48,6 +48,8 @@ public class ChampionInfoFragment extends Fragment implements ObservableScrollVi
     String winrate = "";
     String popularity = "";
 
+    int selectedSpell = 0;
+
     RelativeLayout topLayout;
     ObservableScrollView observableScrollView;
     Space compensationSpace;

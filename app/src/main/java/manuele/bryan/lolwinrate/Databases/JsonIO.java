@@ -17,9 +17,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import manuele.bryan.lolwinrate.Helpers.StringHelper;
+import manuele.bryan.lolwinrate.LolItems.StaticLolItemsList;
 import manuele.bryan.lolwinrate.LolStatistics.StaticChampion;
 import manuele.bryan.lolwinrate.UserStatistics.RankedStatsInfo;
 import manuele.bryan.lolwinrate.UserStatistics.UserInfo;
@@ -331,7 +333,7 @@ public class JsonIO {
 
     //_______________________________USER_LEAGUE_INFO___________________________________
 
-    public static UsersLeagueInfo parseUsersLeagueJSon(String jsonString) {
+    public static UsersLeagueInfo parseUsersLeagueJson(String jsonString) {
         UsersLeagueInfo usersLeagueInfo = null;
 
         try {
@@ -383,6 +385,73 @@ public class JsonIO {
         }
 
         return usersLeagueInfo;
+    }
+
+    //_______________________________LOL_ITEMS___________________________________
+
+    public static StaticLolItemsList parseLolItemListJson(AssetManager assets) {
+        String lolItemListJsonString = loadLolItemListJson(assets);
+
+        StaticLolItemsList lolItemList = null;
+
+        try {
+            JSONObject jsonObject = new JSONObject(lolItemListJsonString);
+            JSONObject itemsDataList = jsonObject.getJSONObject("data");
+
+            Iterator<String> keys = itemsDataList.keys();
+
+            HashMap<String, StaticLolItemsList.LolItem> itemList = new HashMap<>();
+
+            while (keys.hasNext()) {
+                String key = keys.next();
+                JSONObject itemData = itemsDataList.getJSONObject(key);
+
+                String name = itemData.getString("name");
+                String description = itemData.getString("description");
+                String shortDescription = itemData.getString("plaintext");
+                ArrayList<String> into = JSONArrayToArrayList(itemData.getJSONArray("into"));
+
+                JSONObject goldJsonObject = itemData.getJSONObject("gold");
+                int cost = goldJsonObject.getInt("total");
+                int sell = goldJsonObject.getInt("sell");
+                boolean purchasable = goldJsonObject.getBoolean("purchasable");
+
+                ArrayList<String> tags = JSONArrayToArrayList(itemData.getJSONArray("tags"));
+
+                StaticLolItemsList.LolItem lolItem = new StaticLolItemsList.LolItem(key, name, description, shortDescription, into, cost, sell, purchasable, tags);
+
+                itemList.put(key, lolItem);
+            }
+
+            lolItemList = new StaticLolItemsList(itemList);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return lolItemList;
+    }
+
+    public static String loadLolItemListJson(AssetManager assets) {
+        String json = "";
+
+        try {
+            InputStream inputStream = assets.open("json/lolitems.json");
+            int size = inputStream.available();
+
+            byte[] buffer = new byte[size];
+
+            inputStream.read(buffer);
+            inputStream.close();
+
+            json = new String(buffer, "UTF-8");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return FAIL;
+        }
+
+        return json;
     }
 
 }

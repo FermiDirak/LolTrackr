@@ -2,6 +2,7 @@ package manuele.bryan.lolwinrate.Fragments;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -89,7 +90,7 @@ public class ChampionListFragment extends Fragment {
 
     }
 
-    public static void openChampionInfoActivity(String champName, String winrate, String popularity) {
+    public static void openChampionInfoFragment(String champName, String winrate, String popularity) {
         Fragment championInfoFragment = ChampionInfoFragment.newInstance(champName, winrate, popularity);
         replaceFragment(championInfoFragment);
 
@@ -98,8 +99,10 @@ public class ChampionListFragment extends Fragment {
     public static void replaceFragment(Fragment newFragment) {
         Activity activity = (Activity) context;
 
-        activity.getFragmentManager().beginTransaction()
-                .replace(R.id.content_frame, newFragment)
+        FragmentTransaction transaction = activity.getFragmentManager().beginTransaction();
+        transaction.setCustomAnimations(R.anim.translate_fragment_new, R.anim.translate_fragment_old);
+
+        transaction.replace(R.id.content_frame, newFragment)
                 .addToBackStack(null)
                 .commit();
     }
