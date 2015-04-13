@@ -1,43 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/usersStatsPage0"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/soloQueue"
         android:orientation="vertical"
+        android:layout_margin="4dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content">
 
-    <ImageView
-        android:src="@color/backgroundgray"
-        android:paddingLeft="14dp"
-        android:paddingRight="14dp"
-        android:layout_width="match_parent"
-        android:layout_height="2dp" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
+            <LinearLayout
+                android:id="@+id/soloQueue"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-    <LinearLayout
-        android:id="@+id/team5v5"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <ImageView
-        android:src="@color/backgroundgray"
-        android:paddingLeft="14dp"
-        android:paddingRight="14dp"
-        android:layout_width="match_parent"
-        android:layout_height="2dp" />
-
-    <LinearLayout
-        android:id="@+id/team3v3"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+            <ImageView
+                android:src="@color/backgroundgray"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp"
+                android:layout_width="match_parent"
+                android:layout_height="2dp" />
 
 
-</LinearLayout>
+            <LinearLayout
+                android:id="@+id/team5v5"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:src="@color/backgroundgray"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp"
+                android:layout_width="match_parent"
+                android:layout_height="2dp" />
+
+            <LinearLayout
+                android:id="@+id/team3v3"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <include
+            android:id="@+id/favoritesView"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout="@layout/user_stats_favorites" />
+
+    </LinearLayout>
+
+</ScrollView>

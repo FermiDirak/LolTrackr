@@ -13,6 +13,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.github.mikephil.charting.animation.AnimationEasing;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.utils.ColorTemplate;
+
+import java.util.ArrayList;
+
 import manuele.bryan.lolwinrate.Adapters.UserStatsPagerAdapter;
 import manuele.bryan.lolwinrate.Helpers.ImageHelper;
 import manuele.bryan.lolwinrate.Helpers.LolStatsApplication;
@@ -35,6 +41,8 @@ public class UserStatsMainFragment extends Fragment {
     LinearLayout soloQueueView;
     LinearLayout team5v5View;
     LinearLayout team3v3View;
+
+    View favoritesView;
 
     View minimizedQueueView;
     View maximizedQueueView;
@@ -102,6 +110,24 @@ public class UserStatsMainFragment extends Fragment {
             }
         });
 
+        favoritesView = view.findViewById(R.id.favoritesView);
+
+        PieChart rolesPieChart = (PieChart) favoritesView.findViewById(R.id.rolesPieChart);
+        rolesPieChart.setUsePercentValues(true);
+        rolesPieChart.setDescription("");
+        rolesPieChart.setDrawHoleEnabled(true);
+        rolesPieChart.setHoleColorTransparent(true);
+        rolesPieChart.setHoleRadius(58f);
+        rolesPieChart.setTransparentCircleRadius(61f);
+        rolesPieChart.setDrawCenterText(true);
+        rolesPieChart.setRotationAngle(0);
+        rolesPieChart.setRotationEnabled(true);
+        rolesPieChart.setCenterText("Favorite Roles");
+
+        setPieChartData(rolesPieChart);
+
+        rolesPieChart.animateY(1500, AnimationEasing.EasingOption.EaseInOutQuad);
+
 
         userStatsPage1 = view.findViewById(R.id.usersStatsPage1);
         userStatsPage2 = view.findViewById(R.id.usersStatsPage2);
@@ -146,6 +172,32 @@ public class UserStatsMainFragment extends Fragment {
 
         }
 
+    }
+
+    private void setPieChartData(PieChart pieChart) {
+
+
+        //TODO:refactor this into somewhere else so that it can be globally accessible
+        ArrayList<Integer> colors = new ArrayList<>();
+
+        for (int color : ColorTemplate.VORDIPLOM_COLORS) {
+            colors.add(color);
+        }
+
+        for (int color : ColorTemplate.JOYFUL_COLORS)
+            colors.add(color);
+
+        for (int color : ColorTemplate.COLORFUL_COLORS)
+            colors.add(color);
+
+        for (int color : ColorTemplate.LIBERTY_COLORS)
+            colors.add(color);
+
+        for (int color : ColorTemplate.PASTEL_COLORS)
+            colors.add(color);
+
+        pieChart.highlightValues(null);
+        pieChart.invalidate();
     }
 
     @Override
