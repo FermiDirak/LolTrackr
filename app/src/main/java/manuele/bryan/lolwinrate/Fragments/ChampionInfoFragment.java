@@ -282,7 +282,6 @@ public class ChampionInfoFragment extends Fragment implements ObservableScrollVi
         });
 
         bioTextView.setText(championInfo.blurb);
-
         String allytips = StringHelper.createBulletPointText(championInfo.allytips);
         String enemytips = StringHelper.createBulletPointText(championInfo.enemytips);
 

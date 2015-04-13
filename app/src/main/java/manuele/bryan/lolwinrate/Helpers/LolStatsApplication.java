@@ -34,6 +34,8 @@ public class LolStatsApplication extends Application {
         riotApi = new RiotApi(riotApiKey, Region.NA);
 
         //TODO: make regions changeable
+
+        //TODO: add global typefaces here
     }
 
 }

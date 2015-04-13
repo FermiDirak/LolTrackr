@@ -4,42 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:padding="8dp"
-        android:background="@color/darkergray"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/userStatsMainLevelStatic"
-                android:text="level "
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/userStatsMainLevel"
-                android:text="30"
-                android:textSize="18dp"
-                android:textColor="@color/textgold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/userStatsRegion"
-            android:layout_weight="1"
-            android:text="North America"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-
     <android.support.v4.view.ViewPager
         android:id="@+id/userStatsViewPager"
         android:layout_width="match_parent"

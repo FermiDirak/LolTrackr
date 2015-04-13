@@ -43,8 +43,6 @@ public class ImageHelper {
         return new BitmapDrawable(output);
     }
 
-
-    //todo: add challengour and master tier images
     public static int getTierIcon(String tier) {
         switch (tier) {
             case UsersLeagueInfo.DIVISION_BRONZE:
@@ -67,4 +65,32 @@ public class ImageHelper {
 
     }
 
+    //todo: add challengour and master tier images
+    public static Drawable getTierIcon(Context context, String tier) {
+        try {
+            switch (tier) {
+                case UsersLeagueInfo.DIVISION_BRONZE:
+                    return Drawable.createFromStream(context.getAssets().open("images/tiers/bronze.png"), null);
+                case UsersLeagueInfo.DIVISION_SILVER:
+                    return Drawable.createFromStream(context.getAssets().open("images/tiers/silver.png"), null);
+                case UsersLeagueInfo.DIVISION_GOLD:
+                    return Drawable.createFromStream(context.getAssets().open("images/tiers/gold.png"), null);
+                case UsersLeagueInfo.DIVISION_PLAT:
+                    return Drawable.createFromStream(context.getAssets().open("images/tiers/plat.png"), null);
+                case UsersLeagueInfo.DIVISION_DIAMOND:
+                    return Drawable.createFromStream(context.getAssets().open("images/tiers/diamond.png"), null);
+                case UsersLeagueInfo.DIVISION_MASTERS:
+                    return Drawable.createFromStream(context.getAssets().open("images/tiers/diamond.png"), null);
+                case UsersLeagueInfo.DIVISION_CHALLENGER:
+                    return Drawable.createFromStream(context.getAssets().open("images/tiers/diamond.png"), null);
+                default:
+                    return Drawable.createFromStream(context.getAssets().open("images/tiers/diamond.png"), null);
+            }
+
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+
+        return null;
+    }
 }
