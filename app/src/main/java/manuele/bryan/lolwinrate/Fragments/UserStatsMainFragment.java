@@ -110,23 +110,23 @@ public class UserStatsMainFragment extends Fragment {
             }
         });
 
-        favoritesView = view.findViewById(R.id.favoritesView);
+//        favoritesView = view.findViewById(R.id.favoritesView);
 
-        PieChart rolesPieChart = (PieChart) favoritesView.findViewById(R.id.rolesPieChart);
-        rolesPieChart.setUsePercentValues(true);
-        rolesPieChart.setDescription("");
-        rolesPieChart.setDrawHoleEnabled(true);
-        rolesPieChart.setHoleColorTransparent(true);
-        rolesPieChart.setHoleRadius(58f);
-        rolesPieChart.setTransparentCircleRadius(61f);
-        rolesPieChart.setDrawCenterText(true);
-        rolesPieChart.setRotationAngle(0);
-        rolesPieChart.setRotationEnabled(true);
-        rolesPieChart.setCenterText("Favorite Roles");
-
-        setPieChartData(rolesPieChart);
-
-        rolesPieChart.animateY(1500, AnimationEasing.EasingOption.EaseInOutQuad);
+//        PieChart rolesPieChart = (PieChart) favoritesView.findViewById(R.id.rolesPieChart);
+//        rolesPieChart.setUsePercentValues(true);
+//        rolesPieChart.setDescription("");
+//        rolesPieChart.setDrawHoleEnabled(true);
+//        rolesPieChart.setHoleColorTransparent(true);
+//        rolesPieChart.setHoleRadius(58f);
+//        rolesPieChart.setTransparentCircleRadius(61f);
+//        rolesPieChart.setDrawCenterText(true);
+//        rolesPieChart.setRotationAngle(0);
+//        rolesPieChart.setRotationEnabled(true);
+//        rolesPieChart.setCenterText("Favorite Roles");
+//
+//        setPieChartData(rolesPieChart);
+//
+//        rolesPieChart.animateY(1500, AnimationEasing.EasingOption.EaseInOutQuad);
 
 
         userStatsPage1 = view.findViewById(R.id.usersStatsPage1);

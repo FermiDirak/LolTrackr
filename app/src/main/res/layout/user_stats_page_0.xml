@@ -8,9 +8,48 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_margin="4dp"
+        android:layout_margin="12dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <include
+                android:id="@+id/recent0"
+                layout="@layout/user_stats_recent_item" />
+
+            <Space
+                android:layout_width="12dp"
+                android:layout_height="wrap_content" />
+
+            <include
+                android:id="@+id/recent1"
+                layout="@layout/user_stats_recent_item" />
+
+            <Space
+                android:layout_width="12dp"
+                android:layout_height="wrap_content" />
+
+            <include
+                android:id="@+id/recent2"
+                layout="@layout/user_stats_recent_item" />
+
+            <Space
+                android:layout_width="12dp"
+                android:layout_height="wrap_content" />
+
+            <include
+                android:id="@+id/recent3"
+                layout="@layout/user_stats_recent_item" />
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="12dp" />
 
         <LinearLayout
             android:orientation="vertical"
@@ -52,11 +91,11 @@
 
         </LinearLayout>
 
-        <include
-            android:id="@+id/favoritesView"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:layout="@layout/user_stats_favorites" />
+        <!--<include-->
+            <!--android:id="@+id/favoritesView"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout="@layout/user_stats_favorites" />-->
 
     </LinearLayout>
 
