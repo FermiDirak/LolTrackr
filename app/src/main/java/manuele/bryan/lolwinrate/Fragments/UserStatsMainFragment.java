@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import manuele.bryan.lolwinrate.Adapters.UserStatsPagerAdapter;
 import manuele.bryan.lolwinrate.Helpers.ImageHelper;
 import manuele.bryan.lolwinrate.Helpers.LolStatsApplication;
+import manuele.bryan.lolwinrate.Helpers.RiotAPIConstantsHelper;
 import manuele.bryan.lolwinrate.R;
 import manuele.bryan.lolwinrate.UserStatistics.MatchHistory;
 import manuele.bryan.lolwinrate.UserStatistics.UsersLeagueInfo;
@@ -226,7 +227,7 @@ public class UserStatsMainFragment extends Fragment {
             view.addView(layoutInflater.inflate(R.layout.user_rank_maximized, null));
 
             if (!LolStatsApplication.usersLeagueInfo.queuesList.containsKey(rankQueue)) {
-                ((TextView) view.findViewById(R.id.userRankMaximizedQueueType)).setText(UsersLeagueInfo.getQueueTypePlainText(rankQueue));
+                ((TextView) view.findViewById(R.id.userRankMaximizedQueueType)).setText(RiotAPIConstantsHelper.getQueueTypePlainText(rankQueue));
                 ((TextView) view.findViewById(R.id.userRankMaximizedTier)).setText("NONE");
                 ((TextView) view.findViewById(R.id.userRankMaximizedLP)).setText(0 + "");
                 ((TextView) view.findViewById(R.id.userRankMaximizedWins)).setText(0 + "");
@@ -234,7 +235,7 @@ public class UserStatsMainFragment extends Fragment {
                 return;
             }
 
-            ((TextView) view.findViewById(R.id.userRankMaximizedQueueType)).setText(UsersLeagueInfo.getQueueTypePlainText(rankQueue));
+            ((TextView) view.findViewById(R.id.userRankMaximizedQueueType)).setText(RiotAPIConstantsHelper.getQueueTypePlainText(rankQueue));
             ((ImageView) view.findViewById(R.id.userRankMaximizedIcon)).setImageResource(ImageHelper.getTierIcon(rankedQueueInfo.tier));
             ((TextView) view.findViewById(R.id.userRankMaximizedTier)).setText(rankedQueueInfo.tier + " " + rankedQueueInfo.division);
             ((TextView) view.findViewById(R.id.userRankMaximizedLP)).setText(rankedQueueInfo.leaguePoints + "");
@@ -246,13 +247,13 @@ public class UserStatsMainFragment extends Fragment {
 
             if (!LolStatsApplication.usersLeagueInfo.queuesList.containsKey(rankQueue)) {
                 ((TextView) view.findViewById(R.id.userRankMinimizedRank)).setText("NONE");
-                ((TextView) view.findViewById(R.id.userRankMinimizedQueueType)).setText(UsersLeagueInfo.getQueueTypePlainText(rankQueue));
+                ((TextView) view.findViewById(R.id.userRankMinimizedQueueType)).setText(RiotAPIConstantsHelper.getQueueTypePlainText(rankQueue));
                 return;
             }
 
             ((ImageView) view.findViewById(R.id.userRankMinimizedIcon)).setImageResource(ImageHelper.getTierIcon(rankedQueueInfo.tier));
             ((TextView) view.findViewById(R.id.userRankMinimizedRank)).setText(rankedQueueInfo.tier + " " + rankedQueueInfo.division);
-            ((TextView) view.findViewById(R.id.userRankMinimizedQueueType)).setText(UsersLeagueInfo.getQueueTypePlainText(rankQueue));
+            ((TextView) view.findViewById(R.id.userRankMinimizedQueueType)).setText(RiotAPIConstantsHelper.getQueueTypePlainText(rankQueue));
 
             //TODO: handle case where team name and username are the same
 

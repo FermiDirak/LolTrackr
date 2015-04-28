@@ -2,18 +2,9 @@ package manuele.bryan.lolwinrate.UserStatistics;
 
 import java.util.HashMap;
 
-public class UsersLeagueInfo {
-    public static final String QUEUE_RANKED_SOLO_FIVES = "RANKED_SOLO_5x5";
-    public static final String QUEUE_RANKED_TEAM_FIVES = "RANKED_TEAM_5x5";
-    public static final String QUEUE_RANKED_TEAM_THREE = "RANKED_TEAM_3X3";
+import manuele.bryan.lolwinrate.Helpers.RiotAPIConstants;
 
-    public static final String DIVISION_BRONZE = "BRONZE";
-    public static final String DIVISION_SILVER = "SILVER";
-    public static final String DIVISION_GOLD = "GOLD";
-    public static final String DIVISION_PLAT = "PLATINUM";
-    public static final String DIVISION_DIAMOND = "DIAMOND";
-    public static final String DIVISION_MASTERS = "MASTER";
-    public static final String DIVISION_CHALLENGER = "CHALLENGER";
+public class UsersLeagueInfo implements RiotAPIConstants {
 
     public HashMap<String, RankedQueue> queuesList;
 
@@ -65,19 +56,6 @@ public class UsersLeagueInfo {
             this.seriesLosses = seriesLosses;
         }
 
-    }
-
-    public static String getQueueTypePlainText(String queue) {
-        switch (queue) {
-            case QUEUE_RANKED_SOLO_FIVES:
-                return "Solo Queue";
-            case QUEUE_RANKED_TEAM_FIVES:
-                return "Team 5v5";
-            case QUEUE_RANKED_TEAM_THREE:
-                return "Team 3v3";
-            default:
-                return "Ranked";
-        }
     }
 
 }
