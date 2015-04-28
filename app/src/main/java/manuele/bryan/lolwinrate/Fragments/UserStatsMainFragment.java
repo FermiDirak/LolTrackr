@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import manuele.bryan.lolwinrate.Adapters.UserStatsPagerAdapter;
@@ -35,38 +37,12 @@ public class UserStatsMainFragment extends Fragment {
     ViewPager viewPager;
 
     View userStatsPage0;
-
     View recentMatchView0;
-    ImageView recentMatchIcon0;
-    TextView recentMatchKills0;
-    TextView recentMatchDeaths0;
-    TextView recentMatchAssists0;
-    TextView recentMatchCs0;
-    View recentMatchWin0;
-
     View recentMatchView1;
-    ImageView recentMatchIcon1;
-    TextView recentMatchKills1;
-    TextView recentMatchDeaths1;
-    TextView recentMatchAssists1;
-    TextView recentMatchCs1;
-    View recentMatchWin1;
-
     View recentMatchView2;
-    ImageView recentMatchIcon2;
-    TextView recentMatchKills2;
-    TextView recentMatchDeaths2;
-    TextView recentMatchAssists2;
-    TextView recentMatchCs2;
-    View recentMatchWin2;
-
     View recentMatchView3;
-    ImageView recentMatchIcon3;
-    TextView recentMatchKills3;
-    TextView recentMatchDeaths3;
-    TextView recentMatchAssists3;
-    TextView recentMatchCs3;
-    View recentMatchWin3;
+
+    MatchHistory matchHistory;
 
     LayoutInflater layoutInflater;
     boolean[] selectedRankQueue = {true, false, false};
@@ -104,55 +80,23 @@ public class UserStatsMainFragment extends Fragment {
 
         userStatsPage0 = view.findViewById(R.id.usersStatsPage0);
 
-        MatchHistory matchHistory = LolStatsApplication.matchHistory;
-
-
+        //____RECENT_MATCH_INFLATION____
+        matchHistory = LolStatsApplication.matchHistory;
         recentMatchView0 = view.findViewById(R.id.recent0);
-        recentMatchIcon0 = (ImageView) recentMatchView0.findViewById(R.id.recentItemIcon);
-        recentMatchKills0 = (TextView) recentMatchView0.findViewById(R.id.recentItemKills);
-        recentMatchDeaths0 = (TextView) recentMatchView0.findViewById(R.id.recentItemDeaths);
-        recentMatchAssists0 = (TextView) recentMatchView0.findViewById(R.id.recentItemAssists);
-        recentMatchCs0 = (TextView) recentMatchView0.findViewById(R.id.recentItemCsCounter);
-        recentMatchWin0 = recentMatchView0.findViewById(R.id.recentItemWin);
-
-        MatchHistory.Match match0 = matchHistory.matches.get(0);
-
-        recentMatchKills0.setText(match0.kills + " ");
-        recentMatchDeaths0.setText(match0.deaths + " ");
-        recentMatchAssists0.setText(match0.assists + " ");
-        recentMatchCs0.setText(match0.cs + " ");
-        recentMatchWin0.setBackgroundColor(match0.winner ? getResources().getColor(R.color.wingreen) : getResources().getColor(R.color.losered));
-
-        MatchHistory.Match match1 = matchHistory.matches.get(1);
-
         recentMatchView1 = view.findViewById(R.id.recent1);
-        recentMatchIcon1 = (ImageView) recentMatchView1.findViewById(R.id.recentItemIcon);
-        recentMatchKills1 = (TextView) recentMatchView1.findViewById(R.id.recentItemKills);
-        recentMatchDeaths1 = (TextView) recentMatchView1.findViewById(R.id.recentItemDeaths);
-        recentMatchAssists1 = (TextView) recentMatchView1.findViewById(R.id.recentItemAssists);
-        recentMatchCs1 = (TextView) recentMatchView1.findViewById(R.id.recentItemCsCounter);
-        recentMatchWin1 = recentMatchView1.findViewById(R.id.recentItemWin);
-
-        MatchHistory.Match match2 = matchHistory.matches.get(2);
-
         recentMatchView2 = view.findViewById(R.id.recent2);
-        recentMatchIcon2 = (ImageView) recentMatchView2.findViewById(R.id.recentItemIcon);
-        recentMatchKills2 = (TextView) recentMatchView2.findViewById(R.id.recentItemKills);
-        recentMatchDeaths2 = (TextView) recentMatchView2.findViewById(R.id.recentItemDeaths);
-        recentMatchAssists2 = (TextView) recentMatchView2.findViewById(R.id.recentItemAssists);
-        recentMatchCs2 = (TextView) recentMatchView2.findViewById(R.id.recentItemCsCounter);
-        recentMatchWin2 = recentMatchView2.findViewById(R.id.recentItemWin);
-
-        MatchHistory.Match match3 = matchHistory.matches.get(3);
-
         recentMatchView3 = view.findViewById(R.id.recent3);
-        recentMatchIcon3 = (ImageView) recentMatchView3.findViewById(R.id.recentItemIcon);
-        recentMatchKills3 = (TextView) recentMatchView3.findViewById(R.id.recentItemKills);
-        recentMatchDeaths3 = (TextView) recentMatchView3.findViewById(R.id.recentItemDeaths);
-        recentMatchAssists3 = (TextView) recentMatchView3.findViewById(R.id.recentItemAssists);
-        recentMatchCs3 = (TextView) recentMatchView3.findViewById(R.id.recentItemCsCounter);
-        recentMatchWin3 = recentMatchView3.findViewById(R.id.recentItemWin);
+        try {
+            inflateRecentMatchView(recentMatchView0, 0);
+            inflateRecentMatchView(recentMatchView1, 1);
+            inflateRecentMatchView(recentMatchView2, 2);
+            inflateRecentMatchView(recentMatchView3, 3);
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        //____LEAGUE_INFO_INFLATION____
         layoutInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         minimizedQueueView = layoutInflater.inflate(R.layout.user_rank_minimized, null);
         maximizedQueueView = layoutInflater.inflate(R.layout.user_rank_maximized, null);
@@ -216,6 +160,38 @@ public class UserStatsMainFragment extends Fragment {
 
 
         return view;
+    }
+
+    private void inflateRecentMatchView(View recentMatchView, int i) throws IOException {
+        ImageView recentMatchIcon = (ImageView) recentMatchView.findViewById(R.id.recentItemIcon);
+        TextView recentMatchKills = (TextView) recentMatchView.findViewById(R.id.recentItemKills);
+        TextView recentMatchDeaths = (TextView) recentMatchView.findViewById(R.id.recentItemDeaths);
+        TextView recentMatchAssists = (TextView) recentMatchView.findViewById(R.id.recentItemAssists);
+        TextView recentMatchCs = (TextView) recentMatchView.findViewById(R.id.recentItemCsCounter);
+        View recentMatchWin = recentMatchView.findViewById(R.id.recentItemWin);
+
+        TextView recentMatchKillsStatic = (TextView) recentMatchView.findViewById(R.id.recentItemKillsStatic);
+        TextView recentMatchDeathsStatic = (TextView) recentMatchView.findViewById(R.id.recentItemDeathsStatic);
+        TextView recentMatchAssistsStatic = (TextView) recentMatchView.findViewById(R.id.recentItemAssistsStatic);
+        TextView recentMatchCsStatic = (TextView) recentMatchView.findViewById(R.id.recentItemCsCounterStatic);
+
+        recentMatchKillsStatic.setTypeface(typeface);
+        recentMatchDeathsStatic.setTypeface(typeface);
+        recentMatchAssistsStatic.setTypeface(typeface);
+        recentMatchCsStatic.setTypeface(typeface);
+
+        recentMatchKills.setTypeface(typeface);
+        recentMatchDeaths.setTypeface(typeface);
+        recentMatchAssists.setTypeface(typeface);
+        recentMatchCs.setTypeface(typeface);
+
+        MatchHistory.Match match = matchHistory.matches.get(i);
+        recentMatchIcon.setImageDrawable(Drawable.createFromStream(context.getAssets().open("images/champiconshq/" + RiotAPIConstantsHelper.championDictionary.get(match.championId) + ".png"), null));
+        recentMatchKills.setText(match.kills + " ");
+        recentMatchDeaths.setText(match.deaths + " ");
+        recentMatchAssists.setText(match.assists + " ");
+        recentMatchCs.setText(match.cs + " ");
+        recentMatchWin.setBackgroundColor(match.winner ? getResources().getColor(R.color.wingreen) : getResources().getColor(R.color.losered));
     }
 
     private void inflateRankedView(LinearLayout view, String rankQueue, boolean expand) {

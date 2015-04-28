@@ -20,8 +20,8 @@
     <LinearLayout
         android:paddingTop="2dp"
         android:paddingBottom="2dp"
-        android:paddingStart="8dp"
-        android:paddingRight="0dp"
+        android:paddingStart="4dp"
+        android:paddingEnd="0dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -37,6 +37,7 @@
                 android:layout_height="wrap_content" />
 
             <TextView
+                android:id="@+id/recentItemKillsStatic"
                 android:text="@string/kills"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -54,6 +55,7 @@
                 android:layout_height="wrap_content" />
 
             <TextView
+                android:id="@+id/recentItemDeathsStatic"
                 android:text="@string/deaths"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -71,6 +73,7 @@
                 android:layout_height="wrap_content" />
 
             <TextView
+                android:id="@+id/recentItemAssistsStatic"
                 android:text="@string/assists"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -88,6 +91,7 @@
                 android:layout_height="wrap_content" />
 
             <TextView
+                android:id="@+id/recentItemCsCounterStatic"
                 android:text="@string/cs"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
