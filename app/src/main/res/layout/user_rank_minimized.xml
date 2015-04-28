@@ -2,82 +2,51 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/userRankMinimizedLayout"
     android:orientation="horizontal"
+    android:background="@color/cccwhite"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
+    <Space
+        android:layout_width="14dp"
+        android:layout_height="wrap_content" />
 
     <ImageView
         android:id="@+id/userRankMinimizedIcon"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:src="@drawable/unranked"
-        android:layout_weight="2.8"
+        android:layout_weight="1"
         android:adjustViewBounds="true"
-        android:scaleType="fitStart"
+        android:scaleType="centerInside"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/userRankMinimizedQueueType"
+        android:layout_gravity="center_horizontal"
+        android:text="Solo Queue"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:textColor="@android:color/primary_text_light"
+        android:textSize="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/userRankMinimizedRank"
+        android:textColor="@android:color/primary_text_light"
+        android:text="SILVER IV"
+        android:layout_weight="1"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
 
-    <LinearLayout
-        android:layout_gravity="center_vertical"
-        android:layout_weight="2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/userRankMinimizedRank"
-                android:text="SILVER IV"
-                android:layout_gravity="center_horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/userRankMinimizedLP"
-                android:text="69 LP"
-                android:layout_gravity="center_horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_gravity="center_vertical"
-        android:orientation="vertical"
-        android:layout_weight="2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/userRankMinimizedQueueType"
-                android:layout_gravity="center_horizontal"
-                android:text="Solo Queue"
-                android:textColor="@color/textgold"
-                android:textSize="16dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/userRankMInimizedTeamName"
-                android:layout_gravity="center_horizontal"
-                android:text="Team Name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
+    <Space
+        android:layout_width="14dp"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

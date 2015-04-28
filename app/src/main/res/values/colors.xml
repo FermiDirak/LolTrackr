@@ -20,5 +20,16 @@
     <item name="mainblue" type="color">#3A4C61</item>
     <item name="maingreen" type="color">#458C6B</item>
 
+    <item name="teal" type="color">#009688</item>
+    <item name="darkteal" type="color">#00796b</item>
+
+    <item name="brown" type="color">#ac9d93</item>
+
+    <item name="cccwhite" type="color">#cccccc</item>
+
+    <item name="wingreen" type="color">#00966e</item>
+    <item name="losered" type="color">#d62612</item>
+
+    <item name="backgray" type="color">#333333</item>
 
 </resources>

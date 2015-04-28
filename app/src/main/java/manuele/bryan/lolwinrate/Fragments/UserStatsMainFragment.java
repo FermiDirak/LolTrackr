@@ -20,9 +20,11 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import java.util.ArrayList;
 
 import manuele.bryan.lolwinrate.Adapters.UserStatsPagerAdapter;
+import manuele.bryan.lolwinrate.Databases.PreferencesDataBase;
 import manuele.bryan.lolwinrate.Helpers.ImageHelper;
 import manuele.bryan.lolwinrate.Helpers.LolStatsApplication;
 import manuele.bryan.lolwinrate.R;
+import manuele.bryan.lolwinrate.UserStatistics.LeagueUser;
 import manuele.bryan.lolwinrate.UserStatistics.UsersLeagueInfo;
 
 public class UserStatsMainFragment extends Fragment {
@@ -35,14 +37,44 @@ public class UserStatsMainFragment extends Fragment {
 
     View userStatsPage0;
 
+    View recentMatchView0;
+    ImageView recentMatchIcon0;
+    TextView recentMatchKills0;
+    TextView recentMatchDeaths0;
+    TextView recentMatchAssists0;
+    TextView recentMatchCs0;
+    View recentMatchWin0;
+
+    View recentMatchView1;
+    ImageView recentMatchIcon1;
+    TextView recentMatchKills1;
+    TextView recentMatchDeaths1;
+    TextView recentMatchAssists1;
+    TextView recentMatchCs1;
+    View recentMatchWin1;
+
+    View recentMatchView2;
+    ImageView recentMatchIcon2;
+    TextView recentMatchKills2;
+    TextView recentMatchDeaths2;
+    TextView recentMatchAssists2;
+    TextView recentMatchCs2;
+    View recentMatchWin2;
+
+    View recentMatchView3;
+    ImageView recentMatchIcon3;
+    TextView recentMatchKills3;
+    TextView recentMatchDeaths3;
+    TextView recentMatchAssists3;
+    TextView recentMatchCs3;
+    View recentMatchWin3;
+
     LayoutInflater layoutInflater;
     boolean[] selectedRankQueue = {true, false, false};
 
     LinearLayout soloQueueView;
     LinearLayout team5v5View;
     LinearLayout team3v3View;
-
-    View favoritesView;
 
     View minimizedQueueView;
     View maximizedQueueView;
@@ -73,10 +105,44 @@ public class UserStatsMainFragment extends Fragment {
 
         userStatsPage0 = view.findViewById(R.id.usersStatsPage0);
 
+        //TODO: fetch matchhistory, brah
+        LeagueUser leagueUser = new LeagueUser(new PreferencesDataBase(getActivity()).getUsername());
+
+        recentMatchView0 = view.findViewById(R.id.recent0);
+        recentMatchIcon0 = (ImageView) recentMatchView0.findViewById(R.id.recentItemIcon);
+        recentMatchKills0 = (TextView) recentMatchView0.findViewById(R.id.recentItemKills);
+        recentMatchDeaths0 = (TextView) recentMatchView0.findViewById(R.id.recentItemDeaths);
+        recentMatchAssists0 = (TextView) recentMatchView0.findViewById(R.id.recentItemAssists);
+        recentMatchCs0 = (TextView) recentMatchView0.findViewById(R.id.recentItemCsCounter);
+        recentMatchWin0 = recentMatchView0.findViewById(R.id.recentItemWin);
+
+        recentMatchView1 = view.findViewById(R.id.recent1);
+        recentMatchIcon1 = (ImageView) recentMatchView1.findViewById(R.id.recentItemIcon);
+        recentMatchKills1 = (TextView) recentMatchView1.findViewById(R.id.recentItemKills);
+        recentMatchDeaths1 = (TextView) recentMatchView1.findViewById(R.id.recentItemDeaths);
+        recentMatchAssists1 = (TextView) recentMatchView1.findViewById(R.id.recentItemAssists);
+        recentMatchCs1 = (TextView) recentMatchView1.findViewById(R.id.recentItemCsCounter);
+        recentMatchWin1 = recentMatchView1.findViewById(R.id.recentItemWin);
+        
+        recentMatchView2 = view.findViewById(R.id.recent2);
+        recentMatchIcon2 = (ImageView) recentMatchView2.findViewById(R.id.recentItemIcon);
+        recentMatchKills2 = (TextView) recentMatchView2.findViewById(R.id.recentItemKills);
+        recentMatchDeaths2 = (TextView) recentMatchView2.findViewById(R.id.recentItemDeaths);
+        recentMatchAssists2 = (TextView) recentMatchView2.findViewById(R.id.recentItemAssists);
+        recentMatchCs2 = (TextView) recentMatchView2.findViewById(R.id.recentItemCsCounter);
+        recentMatchWin2 = recentMatchView2.findViewById(R.id.recentItemWin);
+        
+        recentMatchView3 = view.findViewById(R.id.recent3);
+        recentMatchIcon3 = (ImageView) recentMatchView3.findViewById(R.id.recentItemIcon);
+        recentMatchKills3 = (TextView) recentMatchView3.findViewById(R.id.recentItemKills);
+        recentMatchDeaths3 = (TextView) recentMatchView3.findViewById(R.id.recentItemDeaths);
+        recentMatchAssists3 = (TextView) recentMatchView3.findViewById(R.id.recentItemAssists);
+        recentMatchCs3 = (TextView) recentMatchView3.findViewById(R.id.recentItemCsCounter);
+        recentMatchWin3 = recentMatchView3.findViewById(R.id.recentItemWin);
+
         layoutInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         minimizedQueueView = layoutInflater.inflate(R.layout.user_rank_minimized, null);
         maximizedQueueView = layoutInflater.inflate(R.layout.user_rank_maximized, null);
-
 
         soloQueueView = (LinearLayout) view.findViewById(R.id.soloQueue);
         team5v5View = (LinearLayout) view.findViewById(R.id.team5v5);
@@ -85,6 +151,9 @@ public class UserStatsMainFragment extends Fragment {
         inflateRankedView(soloQueueView, UsersLeagueInfo.QUEUE_RANKED_SOLO_FIVES, selectedRankQueue[0]);
         inflateRankedView(team5v5View, UsersLeagueInfo.QUEUE_RANKED_TEAM_FIVES, selectedRankQueue[1]);
         inflateRankedView(team3v3View, UsersLeagueInfo.QUEUE_RANKED_TEAM_THREE, selectedRankQueue[2]);
+
+        //TODO: remove this at a later time
+        System.out.println("Team Name: " + LolStatsApplication.usersLeagueInfo.queuesList.get(UsersLeagueInfo.QUEUE_RANKED_TEAM_FIVES).teamOrPlayerName);
 
         soloQueueView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,6 +214,11 @@ public class UserStatsMainFragment extends Fragment {
             view.addView(layoutInflater.inflate(R.layout.user_rank_maximized, null));
 
             if (!LolStatsApplication.usersLeagueInfo.queuesList.containsKey(rankQueue)) {
+                ((TextView) view.findViewById(R.id.userRankMaximizedQueueType)).setText(UsersLeagueInfo.getQueueTypePlainText(rankQueue));
+                ((TextView) view.findViewById(R.id.userRankMaximizedTier)).setText("NONE");
+                ((TextView) view.findViewById(R.id.userRankMaximizedLP)).setText(0 + "");
+                ((TextView) view.findViewById(R.id.userRankMaximizedWins)).setText(0 + "");
+                ((TextView) view.findViewById(R.id.userRankMaximizedLosses)).setText(0 + "");
                 return;
             }
 
@@ -159,14 +233,14 @@ public class UserStatsMainFragment extends Fragment {
             view.addView(layoutInflater.inflate(R.layout.user_rank_minimized, null));
 
             if (!LolStatsApplication.usersLeagueInfo.queuesList.containsKey(rankQueue)) {
+                ((TextView) view.findViewById(R.id.userRankMinimizedRank)).setText("NONE");
+                ((TextView) view.findViewById(R.id.userRankMinimizedQueueType)).setText(UsersLeagueInfo.getQueueTypePlainText(rankQueue));
                 return;
             }
 
             ((ImageView) view.findViewById(R.id.userRankMinimizedIcon)).setImageResource(ImageHelper.getTierIcon(rankedQueueInfo.tier));
             ((TextView) view.findViewById(R.id.userRankMinimizedRank)).setText(rankedQueueInfo.tier + " " + rankedQueueInfo.division);
-            ((TextView) view.findViewById(R.id.userRankMinimizedLP)).setText(rankedQueueInfo.leaguePoints + "");
             ((TextView) view.findViewById(R.id.userRankMinimizedQueueType)).setText(UsersLeagueInfo.getQueueTypePlainText(rankQueue));
-            ((TextView) view.findViewById(R.id.userRankMInimizedTeamName)).setText(rankedQueueInfo.teamOrPlayerName);
 
             //TODO: handle case where team name and username are the same
 

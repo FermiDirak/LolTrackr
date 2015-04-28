@@ -2,56 +2,78 @@
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/usersStatsPage0"
+    android:background="@color/backgray"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_margin="12dp"
+        android:layout_margin="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:orientation="horizontal"
+            android:background="@color/cccwhite"
+            android:orientation="vertical"
+            android:padding="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <include
-                android:id="@+id/recent0"
-                layout="@layout/user_stats_recent_item" />
-
-            <Space
-                android:layout_width="12dp"
+            <TextView
+                android:text="Recent Matches:"
+                android:textSize="16sp"
+                android:textColor="@android:color/primary_text_light"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
-            <include
-                android:id="@+id/recent1"
-                layout="@layout/user_stats_recent_item" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-            <Space
-                android:layout_width="12dp"
-                android:layout_height="wrap_content" />
+                <include
+                    android:id="@+id/recent0"
+                    layout="@layout/user_stats_recent_item" />
 
-            <include
-                android:id="@+id/recent2"
-                layout="@layout/user_stats_recent_item" />
+                <Space
+                    android:layout_width="14dp"
+                    android:layout_height="wrap_content" />
 
-            <Space
-                android:layout_width="12dp"
-                android:layout_height="wrap_content" />
+                <include
+                    android:id="@+id/recent1"
+                    layout="@layout/user_stats_recent_item" />
 
-            <include
-                android:id="@+id/recent3"
-                layout="@layout/user_stats_recent_item" />
+                <Space
+                    android:layout_width="14dp"
+                    android:layout_height="wrap_content" />
+
+                <include
+                    android:id="@+id/recent2"
+                    layout="@layout/user_stats_recent_item" />
+
+                <Space
+                    android:layout_width="14dp"
+                    android:layout_height="wrap_content" />
+
+                <include
+                    android:id="@+id/recent3"
+                    layout="@layout/user_stats_recent_item" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
         <Space
             android:layout_width="wrap_content"
-            android:layout_height="12dp" />
+            android:layout_height="8dp" />
 
         <LinearLayout
+            android:background="@color/cccwhite"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -63,11 +85,11 @@
                 android:layout_height="wrap_content" />
 
             <ImageView
-                android:src="@color/backgroundgray"
+                android:src="@drawable/gradient_divider"
                 android:paddingLeft="14dp"
                 android:paddingRight="14dp"
                 android:layout_width="match_parent"
-                android:layout_height="2dp" />
+                android:layout_height="1dp" />
 
 
             <LinearLayout
@@ -77,11 +99,11 @@
                 android:layout_height="wrap_content" />
 
             <ImageView
-                android:src="@color/backgroundgray"
+                android:src="@drawable/gradient_divider"
                 android:paddingLeft="14dp"
                 android:paddingRight="14dp"
                 android:layout_width="match_parent"
-                android:layout_height="2dp" />
+                android:layout_height="1dp" />
 
             <LinearLayout
                 android:id="@+id/team3v3"
@@ -92,10 +114,10 @@
         </LinearLayout>
 
         <!--<include-->
-            <!--android:id="@+id/favoritesView"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout="@layout/user_stats_favorites" />-->
+        <!--android:id="@+id/favoritesView"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout="@layout/user_stats_favorites" />-->
 
     </LinearLayout>
 

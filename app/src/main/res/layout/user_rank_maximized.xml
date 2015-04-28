@@ -1,91 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/userRankMaximizedLayout"
+    android:background="@color/cccwhite"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <RelativeLayout
+    <Space
+        android:layout_width="14dp"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/userRankMaximizedIcon"
+        android:src="@drawable/unranked"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:padding="8dp"
         android:layout_weight="1"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/userRankMaximizedQueueType"
-            android:layout_centerHorizontal="true"
-            android:text="Team 3v3"
-            android:textSize="18dp"
-            android:padding="14dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
 
-        <ImageView
-            android:id="@+id/userRankMaximizedIcon"
-            android:src="@drawable/unranked"
-            android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </RelativeLayout>
+    <TextView
+        android:id="@+id/userRankMaximizedQueueType"
+        android:textColor="@android:color/primary_text_light"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Team \n 3v3"
+        android:textSize="18dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <LinearLayout
-        android:layout_weight="0.7"
-        android:padding="8dp"
+        android:layout_weight="1"
         android:orientation="vertical"
         android:layout_gravity="center"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_gravity="center"
-            android:orientation="horizontal"
-            android:layout_weight="1"
+            android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
+            <TextView
+                android:id="@+id/userRankMaximizedTier"
+                android:layout_gravity="center"
+                android:text="No Rating"
+                android:textSize="18sp"
+                android:textColor="@android:color/primary_text_light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
             <LinearLayout
-                android:layout_gravity="center_vertical"
-                android:orientation="vertical"
+                android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/userRankMaximizedTier"
-                    android:layout_gravity="center"
-                    android:text="No Rating"
-                    android:textSize="24dp"
+                    android:id="@+id/userRankMaximizedLP"
+                    android:textColor="@android:color/secondary_text_light"
+                    android:text="0"
+                    android:textSize="14dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
-                <LinearLayout
-                    android:layout_gravity="center"
+                <TextView
+                    android:id="@+id/userRankMaximizedLPStatic"
+                    android:textColor="@android:color/secondary_text_light"
+                    android:text=" Points"
+                    android:textSize="14dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/userRankMaximizedLP"
-                        android:text="0"
-                        android:textSize="14dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/userRankMaximizedLPStatic"
-                        android:text=" Points"
-                        android:textSize="14dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_weight="1"
-            android:padding="14dp"
             android:orientation="horizontal"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
@@ -112,6 +107,7 @@
 
                     <TextView
                         android:id="@+id/userRankMaximizedWinsStatic"
+                        android:textColor="@android:color/secondary_text_light"
                         android:text=" Wins"
                         android:textSize="14dp"
                         android:layout_width="wrap_content"
@@ -133,6 +129,7 @@
 
                     <TextView
                         android:id="@+id/userRankMaximizedLossesStatic"
+                        android:textColor="@android:color/secondary_text_light"
                         android:text=" Losses"
                         android:textSize="14dp"
                         android:layout_width="wrap_content"
@@ -144,5 +141,9 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <Space
+        android:layout_width="14dp"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
