@@ -46,10 +46,10 @@
     <string name="title_activity_champion_info">ChampionInfoActivity</string>
 
 
-    <string name="_kills"> kills</string>
-    <string name="_deaths"> deaths</string>
-    <string name="_assists"> assists</string>
-
+    <string name="kills">kills</string>
+    <string name="assists">assists</string>
+    <string name="deaths">deaths</string>
+    <string name="cs">cs</string>
     <string name="champion">champion</string>
 
 </resources>

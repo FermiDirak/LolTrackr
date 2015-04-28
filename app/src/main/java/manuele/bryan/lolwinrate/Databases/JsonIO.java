@@ -23,6 +23,7 @@ import java.util.List;
 import manuele.bryan.lolwinrate.Helpers.StringHelper;
 import manuele.bryan.lolwinrate.LolItems.StaticLolItemsList;
 import manuele.bryan.lolwinrate.LolStatistics.StaticChampion;
+import manuele.bryan.lolwinrate.UserStatistics.MatchHistory;
 import manuele.bryan.lolwinrate.UserStatistics.RankedStatsInfo;
 import manuele.bryan.lolwinrate.UserStatistics.UserInfo;
 import manuele.bryan.lolwinrate.UserStatistics.UserSummaryInfo;
@@ -385,6 +386,115 @@ public class JsonIO {
         }
 
         return usersLeagueInfo;
+    }
+
+    //______________________________________MATCH_HISTORY_________________________________________
+
+    public static MatchHistory parseMatchHistoryJson(String jsonString) {
+        MatchHistory matchHistory = null;
+
+        try {
+            JSONObject jsonObject = new JSONObject(jsonString);
+            JSONArray jsonMatches = jsonObject.getJSONArray("matches");
+
+            ArrayList<MatchHistory.Match> matches = new ArrayList<>();
+            for (int i = 0; i < jsonMatches.length(); i++) {
+                JSONObject jsonMatch = jsonMatches.getJSONObject(i);
+
+                long matchId = jsonMatch.getLong("matchId");
+                String region = jsonMatch.getString("region");
+
+                long matchCreation = jsonMatch.getLong("matchCreation");
+                long matchDuration = jsonMatch.getLong("matchDuration");
+
+                String queueType = jsonMatch.getString("queueType");
+                int mapId = jsonMatch.getInt("mapId");
+                String season = jsonMatch.getString("season");
+
+                JSONObject participant = jsonMatch.getJSONArray("participants").getJSONObject(0);
+                if (participant == null) {
+                    //this should never happen, or we're fucked
+                    return null;
+                }
+
+                int teamSide = participant.getInt("teamId");
+                int spell1Id = participant.getInt("spell1Id");
+                int spell2Id = participant.getInt("spell2Id");
+
+                int championId = participant.getInt("championId");
+
+                JSONObject matchStats = participant.getJSONObject("stats");
+
+                boolean winner = matchStats.getBoolean("winner");
+                int championLevel = matchStats.getInt("champLevel");
+
+                int item0 = matchStats.getInt("item0");
+                int item1 = matchStats.getInt("item1");
+                int item2 = matchStats.getInt("item2");
+                int item3 = matchStats.getInt("item3");
+                int item4 = matchStats.getInt("item4");
+                int item5 = matchStats.getInt("item5");
+                int item6 = matchStats.getInt("item6");
+
+                int kills = matchStats.getInt("kills");
+                int deaths = matchStats.getInt("deaths");
+                int assists = matchStats.getInt("assists");
+
+                int doubleKills = matchStats.getInt("doubleKills");
+                int tripleKills = matchStats.getInt("tripleKills");
+                int quadraKills = matchStats.getInt("quadraKills");
+                int pentaKills = matchStats.getInt("pentaKills");
+
+                int largestKillingSpree = matchStats.getInt("largestKillingSpree");
+
+                int totalDamageDealt = matchStats.getInt("totalDamageDealt");
+                int totalDamageDealtToChampions = matchStats.getInt("totalDamageDealtToChampions");
+                int totalDamageTaken = matchStats.getInt("totalDamageTaken");
+                int largestCriticalStrike = matchStats.getInt("largestCriticalStrike");
+
+                int totalHeal = matchStats.getInt("totalHeal");
+
+                int cs = matchStats.getInt("minionsKilled");
+
+                int neutralMinionsKilled = matchStats.getInt("neutralMinionsKilled");
+
+                int neutralMinionsKilledTeamJungle = matchStats.getInt("neutralMinionsKilledTeamJungle");
+                int neutralMinionsKilledEnemyJungle = matchStats.getInt("neutralMinionsKilledEnemyJungle");
+
+                int goldEarned = matchStats.getInt("goldEarned");
+                int goldSpent = matchStats.getInt("goldSpent");
+
+                int combatPlayerScore = matchStats.getInt("combatPlayerScore");
+                int objectivePlayerScore = matchStats.getInt("objectivePlayerScore");
+                int totalPlayerScore = matchStats.getInt("totalPlayerScore");
+                int totalScoreRank = matchStats.getInt("totalScoreRank");
+
+                int magicDamageDealtToChampions = matchStats.getInt("magicDamageDealtToChampions");
+                int physicalDamageDealtToChampions = matchStats.getInt("physicalDamageDealtToChampions");
+
+                int wardsBought = matchStats.getInt("visionWardsBoughtInGame");
+                int sightWardsBought = matchStats.getInt("sightWardsBoughtInGame");
+
+                MatchHistory.Match match = new MatchHistory.Match(matchId, region, matchCreation, matchDuration,
+                        queueType, mapId, season, teamSide,
+                        spell1Id, spell2Id, championId, winner, championLevel,
+                        item0, item1, item2, item3, item4, item5, item6,
+                        kills, deaths, assists, doubleKills, tripleKills, quadraKills, pentaKills,
+                        largestKillingSpree, totalDamageDealt, totalDamageDealtToChampions, totalDamageTaken, largestCriticalStrike,
+                        totalHeal, cs, neutralMinionsKilled, neutralMinionsKilledTeamJungle, neutralMinionsKilledEnemyJungle,
+                        goldEarned, goldSpent, combatPlayerScore, objectivePlayerScore, totalPlayerScore, totalScoreRank,
+                        magicDamageDealtToChampions, physicalDamageDealtToChampions, wardsBought, sightWardsBought);
+
+                matches.add(match);
+            }
+
+            matchHistory = new MatchHistory(matches);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return matchHistory;
     }
 
     //_______________________________LOL_ITEMS___________________________________

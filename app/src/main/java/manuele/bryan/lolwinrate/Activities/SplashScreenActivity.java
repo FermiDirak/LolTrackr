@@ -135,7 +135,13 @@ public class SplashScreenActivity extends ActionBarActivity {
                 String userLeagueJsonString = JsonIO.getJSONFromWeb(userLeagueURLString);
                 LolStatsApplication.usersLeagueInfo = JsonIO.parseUsersLeagueJson(userLeagueJsonString);
 
-                preferences.updateJSON(infoJsonString, statsJsonString, summaryJsonString, userLeagueJsonString);
+                String matchHistoryURLString = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v2.2/matchhistory/" + id +
+                        "?rankedQueues=RANKED_SOLO_5x5,RANKED_TEAM_3x3,RANKED_TEAM_5x5&beginIndex=0&endIndex=10&api_key=" + LolStatsApplication.riotApiKey;
+
+                String matchHistoryJsonString = JsonIO.getJSONFromWeb(matchHistoryURLString);
+                LolStatsApplication.matchHistory = JsonIO.parseMatchHistoryJson(matchHistoryJsonString);
+
+                preferences.updateJSON(infoJsonString, statsJsonString, summaryJsonString, userLeagueJsonString, matchHistoryJsonString);
 
                 return 1;
 
@@ -143,18 +149,22 @@ public class SplashScreenActivity extends ActionBarActivity {
                 System.out.println("Still no internet connection!");
             }
 
+            //If you get here, there is no internet connection
+
             String infoJsonString = preferences.getSetting(PreferencesDataBase.KEY_JSON_USER_INFO);
             String statsJsonString = preferences.getSetting(PreferencesDataBase.KEY_JSON_USER_STATS);
             String summaryJsonString = preferences.getSetting(PreferencesDataBase.KEY_JSON_USER_SUMMARY);
             String userLeagueJsonString = preferences.getSetting(PreferencesDataBase.KEY_JSON_USER_LEAGUE);
+            String matchHistoryJsonString = preferences.getSetting(PreferencesDataBase.KEY_JSON_MATCH_HISTORY);
 
-            if (infoJsonString.equals("") || statsJsonString.equals("") || summaryJsonString.equals("") || userLeagueJsonString.equals("")) {
+            if (infoJsonString.equals("") || statsJsonString.equals("") || summaryJsonString.equals("") || userLeagueJsonString.equals("") || matchHistoryJsonString.equals("")) {
                 return 0;
             } else {
                 LolStatsApplication.userInfo = JsonIO.parseUserJson(username, infoJsonString);
                 LolStatsApplication.rankedStatsInfo = JsonIO.parseRankedStatsJson(statsJsonString);
                 LolStatsApplication.userSummaryInfo = JsonIO.parseUserSummaryJson(summaryJsonString);
                 LolStatsApplication.usersLeagueInfo = JsonIO.parseUsersLeagueJson(userLeagueJsonString);
+                LolStatsApplication.matchHistory = JsonIO.parseMatchHistoryJson(matchHistoryJsonString);
 
                 return 1;
             }

@@ -13,18 +13,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.github.mikephil.charting.animation.AnimationEasing;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 
 import manuele.bryan.lolwinrate.Adapters.UserStatsPagerAdapter;
-import manuele.bryan.lolwinrate.Databases.PreferencesDataBase;
 import manuele.bryan.lolwinrate.Helpers.ImageHelper;
 import manuele.bryan.lolwinrate.Helpers.LolStatsApplication;
 import manuele.bryan.lolwinrate.R;
-import manuele.bryan.lolwinrate.UserStatistics.LeagueUser;
+import manuele.bryan.lolwinrate.UserStatistics.MatchHistory;
 import manuele.bryan.lolwinrate.UserStatistics.UsersLeagueInfo;
 
 public class UserStatsMainFragment extends Fragment {
@@ -105,8 +103,8 @@ public class UserStatsMainFragment extends Fragment {
 
         userStatsPage0 = view.findViewById(R.id.usersStatsPage0);
 
-        //TODO: fetch matchhistory, brah
-        LeagueUser leagueUser = new LeagueUser(new PreferencesDataBase(getActivity()).getUsername());
+        MatchHistory matchHistory = LolStatsApplication.matchHistory;
+
 
         recentMatchView0 = view.findViewById(R.id.recent0);
         recentMatchIcon0 = (ImageView) recentMatchView0.findViewById(R.id.recentItemIcon);
@@ -116,6 +114,16 @@ public class UserStatsMainFragment extends Fragment {
         recentMatchCs0 = (TextView) recentMatchView0.findViewById(R.id.recentItemCsCounter);
         recentMatchWin0 = recentMatchView0.findViewById(R.id.recentItemWin);
 
+        MatchHistory.Match match0 = matchHistory.matches.get(0);
+
+        recentMatchKills0.setText(match0.kills + " ");
+        recentMatchDeaths0.setText(match0.deaths + " ");
+        recentMatchAssists0.setText(match0.assists + " ");
+        recentMatchCs0.setText(match0.cs + " ");
+        recentMatchWin0.setBackgroundColor(match0.winner ? getResources().getColor(R.color.wingreen) : getResources().getColor(R.color.losered));
+
+        MatchHistory.Match match1 = matchHistory.matches.get(1);
+
         recentMatchView1 = view.findViewById(R.id.recent1);
         recentMatchIcon1 = (ImageView) recentMatchView1.findViewById(R.id.recentItemIcon);
         recentMatchKills1 = (TextView) recentMatchView1.findViewById(R.id.recentItemKills);
@@ -123,7 +131,9 @@ public class UserStatsMainFragment extends Fragment {
         recentMatchAssists1 = (TextView) recentMatchView1.findViewById(R.id.recentItemAssists);
         recentMatchCs1 = (TextView) recentMatchView1.findViewById(R.id.recentItemCsCounter);
         recentMatchWin1 = recentMatchView1.findViewById(R.id.recentItemWin);
-        
+
+        MatchHistory.Match match2 = matchHistory.matches.get(2);
+
         recentMatchView2 = view.findViewById(R.id.recent2);
         recentMatchIcon2 = (ImageView) recentMatchView2.findViewById(R.id.recentItemIcon);
         recentMatchKills2 = (TextView) recentMatchView2.findViewById(R.id.recentItemKills);
@@ -131,7 +141,9 @@ public class UserStatsMainFragment extends Fragment {
         recentMatchAssists2 = (TextView) recentMatchView2.findViewById(R.id.recentItemAssists);
         recentMatchCs2 = (TextView) recentMatchView2.findViewById(R.id.recentItemCsCounter);
         recentMatchWin2 = recentMatchView2.findViewById(R.id.recentItemWin);
-        
+
+        MatchHistory.Match match3 = matchHistory.matches.get(3);
+
         recentMatchView3 = view.findViewById(R.id.recent3);
         recentMatchIcon3 = (ImageView) recentMatchView3.findViewById(R.id.recentItemIcon);
         recentMatchKills3 = (TextView) recentMatchView3.findViewById(R.id.recentItemKills);

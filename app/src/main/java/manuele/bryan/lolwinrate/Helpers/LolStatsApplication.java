@@ -7,6 +7,7 @@ import main.java.riotapi.RiotApi;
 import manuele.bryan.lolwinrate.Databases.JsonIO;
 import manuele.bryan.lolwinrate.LolItems.StaticLolItemsList;
 import manuele.bryan.lolwinrate.LolStatistics.StatisticsChampionList;
+import manuele.bryan.lolwinrate.UserStatistics.MatchHistory;
 import manuele.bryan.lolwinrate.UserStatistics.RankedStatsInfo;
 import manuele.bryan.lolwinrate.UserStatistics.UserInfo;
 import manuele.bryan.lolwinrate.UserStatistics.UserSummaryInfo;
@@ -20,6 +21,7 @@ public class LolStatsApplication extends Application {
     public static RankedStatsInfo rankedStatsInfo = null;
     public static UserSummaryInfo userSummaryInfo = null;
     public static UsersLeagueInfo usersLeagueInfo = null;
+    public static MatchHistory matchHistory = null;
 
     public static StaticLolItemsList staticLolItemsList = null; //huge
 

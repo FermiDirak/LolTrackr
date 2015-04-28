@@ -20,7 +20,8 @@
     <LinearLayout
         android:paddingTop="2dp"
         android:paddingBottom="2dp"
-        android:paddingLeft="8dp"
+        android:paddingStart="8dp"
+        android:paddingRight="0dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -36,7 +37,7 @@
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:text="@string/_kills"
+                android:text="@string/kills"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -53,7 +54,7 @@
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:text="@string/_deaths"
+                android:text="@string/deaths"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -70,7 +71,7 @@
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:text="@string/_assists"
+                android:text="@string/assists"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -87,7 +88,7 @@
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:text=" cs"
+                android:text="@string/cs"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 

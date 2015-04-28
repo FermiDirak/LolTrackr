@@ -33,7 +33,8 @@ public class PreferencesDataBase {
     public static final String KEY_JSON_USER_INFO = "jsoninfo",
         KEY_JSON_USER_STATS = "jsonstats",
         KEY_JSON_USER_SUMMARY = "jsonsummary",
-        KEY_JSON_USER_LEAGUE = "jsonleague";
+        KEY_JSON_USER_LEAGUE = "jsonleague",
+        KEY_JSON_MATCH_HISTORY = "matchhistory";
 
 
     public PreferencesDataBase(Context context) {
@@ -87,8 +88,7 @@ public class PreferencesDataBase {
         settingsEditor.putString(KEY_USER_NAME, DEFAULT_USER_NAME);
         settingsEditor.putString(KEY_USER_REGION, DEFAULT_USER_REGION);
 
-        settingsEditor.putString(KEY_JSON_USER_STATS, "");
-        settingsEditor.putString(KEY_JSON_USER_SUMMARY, "");
+        emptyJSON();
 
         settingsEditor.apply();
     }
@@ -102,11 +102,12 @@ public class PreferencesDataBase {
         return settings.getInt(KEY_LAST_OPENED_TAB, 2);
     }
 
-    public void updateJSON(String jsonUserInfo, String jsonUserStats, String jsonUserSummary, String userLeagueInfo) {
+    public void updateJSON(String jsonUserInfo, String jsonUserStats, String jsonUserSummary, String userLeagueInfo, String matchHistory) {
         updateSetting(KEY_JSON_USER_INFO, jsonUserInfo);
         updateSetting(KEY_JSON_USER_SUMMARY, jsonUserSummary);
         updateSetting(KEY_JSON_USER_STATS, jsonUserStats);
         updateSetting(KEY_JSON_USER_LEAGUE, userLeagueInfo);
+        updateSetting(KEY_JSON_MATCH_HISTORY, matchHistory);
     }
 
     public void emptyJSON() {
@@ -114,6 +115,7 @@ public class PreferencesDataBase {
         updateSetting(KEY_JSON_USER_SUMMARY, "");
         updateSetting(KEY_JSON_USER_STATS, "");
         updateSetting(KEY_JSON_USER_LEAGUE, "");
+        updateSetting(KEY_JSON_MATCH_HISTORY, "");
     }
 
     public void updateUser(String username, String region) {
