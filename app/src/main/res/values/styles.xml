@@ -1,8 +1,15 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="ThemeOverlay.AppCompat.Dark">
+    <style name="AppTheme" parent="AppTheme.Base">
         <!-- Customize your theme here. -->
+    </style>
+
+    <style name="AppTheme.Base" parent="Theme.AppCompat">
+        <item name="colorPrimary">@color/teal</item>
+        <item name="colorPrimaryDark">@color/darkteal</item>
+        <item name="colorAccent">@color/backgray</item>
+
     </style>
 
     <style name="textAddShadow">

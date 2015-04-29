@@ -245,8 +245,8 @@ public class UserStatsMainFragment extends Fragment {
         pieChart.setDescription("");
         pieChart.setDrawHoleEnabled(true);
         pieChart.setHoleColorTransparent(true);
-        pieChart.setHoleRadius(58f);
-        pieChart.setTransparentCircleRadius(61f);
+        pieChart.setHoleRadius(48f);
+        pieChart.setTransparentCircleRadius(51f);
         pieChart.setDrawCenterText(true);
         pieChart.setRotationAngle(0);
         pieChart.setRotationEnabled(true);

@@ -3,13 +3,14 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/usersStatsPage0"
     android:background="@color/backgray"
-    android:padding="8dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <LinearLayout
+        android:layout_margin="5dp"
         android:orientation="vertical"
+        android:clipToPadding="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -129,6 +130,10 @@
                 layout="@layout/user_stats_favorites" />
 
         </LinearLayout>
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
 
     </LinearLayout>
 
