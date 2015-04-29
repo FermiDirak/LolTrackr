@@ -155,7 +155,7 @@ public class UserStatsMainFragment extends Fragment {
         PieChart rolesPieChart = (PieChart) favoritesView.findViewById(R.id.rolesPieChart);
         setupRolePieChart(rolesPieChart);
 
-        rolesPieChart.animateY(1500, AnimationEasing.EasingOption.EaseInOutQuad);
+        rolesPieChart.animateXY(1800, 1800);
 
 
         userStatsPage1 = view.findViewById(R.id.usersStatsPage1);

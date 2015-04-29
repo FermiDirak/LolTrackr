@@ -25,7 +25,7 @@
 
     <item name="brown" type="color">#ac9d93</item>
 
-    <item name="cccwhite" type="color">#cccccc</item>
+    <item name="cccwhite" type="color">#f0f0f0</item>
 
     <item name="wingreen" type="color">#00966e</item>
     <item name="losered" type="color">#d62612</item>

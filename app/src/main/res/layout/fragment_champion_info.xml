@@ -160,7 +160,7 @@
 
             <LinearLayout
                 android:orientation="vertical"
-                android:background="@color/darkgray"
+                android:background="@color/cccwhite"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -168,13 +168,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="7dp"
-                    android:background="@color/highlightgray"
+                    android:background="@android:color/white"
                     android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/championInfoAggregateStatisticsStatic"
                         android:text="Aggregate Statistics"
-                        android:textColor="@color/textwhite"
+                        android:textColor="@android:color/primary_text_light"
                         android:textSize="18sp"
                         android:padding="7dp"
                         android:layout_gravity="center_horizontal"
@@ -199,7 +199,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="winrate: "
                                 android:textSize="16sp"
-                                android:textColor="@color/textwhite" />
+                                android:textColor="@android:color/secondary_text_light" />
 
                             <TextView
                                 android:id="@+id/winrate"
@@ -207,7 +207,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="56%"
                                 android:textSize="18sp"
-                                android:textColor="@color/textgold" />
+                                android:textColor="@android:color/primary_text_light" />
 
                         </LinearLayout>
 
@@ -222,7 +222,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Matches Played: "
                                 android:textSize="16sp"
-                                android:textColor="@color/textwhite" />
+                                android:textColor="@android:color/secondary_text_light" />
 
                             <TextView
                                 android:id="@+id/popularity"
@@ -230,7 +230,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="55k"
                                 android:textSize="18sp"
-                                android:textColor="@color/textgold" />
+                                android:textColor="@android:color/primary_text_light" />
 
                         </LinearLayout>
 
@@ -309,7 +309,7 @@
 
                     <TextView
                         android:id="@+id/spellName"
-                        android:textColor="@color/textwhite"
+                        android:textColor="@android:color/primary_text_light"
                         android:layout_gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -319,7 +319,7 @@
 
                     <TextView
                         android:id="@+id/spellDescription"
-                        android:textColor="@color/textwhite"
+                        android:textColor="@android:color/secondary_text_light"
                         android:text="blah blah blah"
                         android:textSize="14sp"
                         android:paddingLeft="7dp"
@@ -336,7 +336,7 @@
                     android:layout_height="1dp" />
 
                 <LinearLayout
-                    android:background="@color/highlightgray"
+                    android:background="@android:color/white"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -347,7 +347,7 @@
                         android:text="Champion Lore"
                         android:textSize="18sp"
                         android:padding="7dp"
-                        android:textColor="@color/textwhite"
+                        android:textColor="@android:color/primary_text_light"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -358,7 +358,7 @@
                         android:paddingLeft="24dp"
                         android:paddingRight="14dp"
                         android:paddingBottom="14dp"
-                        android:textColor="@color/textgray"
+                        android:textColor="@android:color/secondary_text_light"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -382,7 +382,7 @@
                         android:textSize="18sp"
                         android:layout_gravity="center_horizontal"
                         android:padding="7dp"
-                        android:textColor="@color/textwhite"
+                        android:textColor="@android:color/primary_text_light"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -393,7 +393,7 @@
                         android:paddingRight="14dp"
                         android:paddingBottom="14dp"
                         android:text="\u2022 swag \n\u2022 money"
-                        android:textColor="@color/textgray"
+                        android:textColor="@android:color/secondary_text_light"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -403,7 +403,7 @@
                         android:textSize="18dp"
                         android:padding="7dp"
                         android:layout_gravity="center_horizontal"
-                        android:textColor="@color/textwhite"
+                        android:textColor="@android:color/primary_text_light"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -414,7 +414,7 @@
                         android:paddingRight="14dp"
                         android:paddingBottom="14dp"
                         android:text="\u2022 swag \n\u2022 money"
-                        android:textColor="@color/textgray"
+                        android:textColor="@android:color/secondary_text_light"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 

@@ -45,7 +45,7 @@ public class ChampionListItemAdapter extends RecyclerView.Adapter<ChampionListIt
         Drawable portraitImage = null;
 
         try {
-            portraitImage = Drawable.createFromStream(context.getAssets().open("images/champicons/" + champ.champName + ".png"), null);
+            portraitImage = Drawable.createFromStream(context.getAssets().open("images/champiconshq/" + champ.champName + ".png"), null);
             holder.portrait.setImageDrawable(portraitImage);
         } catch (IOException e) {
             e.printStackTrace();
