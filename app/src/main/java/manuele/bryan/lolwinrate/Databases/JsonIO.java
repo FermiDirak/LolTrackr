@@ -31,7 +31,7 @@ import manuele.bryan.lolwinrate.UserStatistics.UsersLeagueInfo;
 
 public class JsonIO {
     public static String KEY_RIOTAPI = "riotapi";
-    
+
     public static String FAIL = "fail";
 
     //_________________________WEB_____________________________
@@ -249,7 +249,7 @@ public class JsonIO {
                 int totalDoubleKills = statsObject.getInt("totalDoubleKills");
                 int totalTripleKills = statsObject.getInt("totalTripleKills");
                 int totalQuadraKills = statsObject.getInt("totalQuadraKills");
-                int totalPentaKills  = statsObject.getInt("totalPentaKills");
+                int totalPentaKills = statsObject.getInt("totalPentaKills");
                 int totalUnrealKills = statsObject.getInt("totalUnrealKills");
                 int totalDeathsPerSession = statsObject.getInt("totalDeathsPerSession");
                 int totalGoldEarned = statsObject.getInt("totalGoldEarned");
@@ -562,6 +562,62 @@ public class JsonIO {
         }
 
         return json;
+    }
+
+    //________________________CHAMPION_BRIEF_STATIC_DATA_AGGREGATED__________________________
+
+
+
+    public static ArrayList<ArrayList<String>> parseChampionBriefStaticJson(AssetManager assets) {
+        String jsonString = loadChampionBriefStaticJson(assets);
+
+        ArrayList<ArrayList<String>> championBriefStatic = new ArrayList<>();
+
+        try {
+            JSONObject json = new JSONObject(jsonString);
+
+            JSONObject data = json.getJSONObject("data");
+            ArrayList<String> championNames = new ArrayList<>();
+            Iterator<String> championNamesIterator = data.keys();
+            while (championNamesIterator.hasNext()) {
+                championNames.add(championNamesIterator.next());
+            }
+
+            for (int i = 0; i < championNames.size(); i++) {
+                JSONObject champion = data.getJSONObject(championNames.get(i));
+
+                ArrayList<String> tags = JSONArrayToArrayList(champion.getJSONArray("tags"));
+
+                championBriefStatic.add(tags);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return championBriefStatic;
+    }
+
+
+    public static String loadChampionBriefStaticJson(AssetManager assets) {
+        String jsonString = "";
+
+        try {
+            InputStream inputStream = assets.open("json/champion.json");
+            int size = inputStream.available();
+
+            byte[] buffer = new byte[size];
+
+            inputStream.read(buffer);
+            inputStream.close();
+
+            jsonString = new String(buffer, "UTF-8");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return jsonString;
+
     }
 
 }

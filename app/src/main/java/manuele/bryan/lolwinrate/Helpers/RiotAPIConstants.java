@@ -51,6 +51,14 @@ public interface RiotAPIConstants {
     String DIVISION_MASTERS = "MASTER";
     String DIVISION_CHALLENGER = "CHALLENGER";
 
+    //TAGS
+    String TAG_FIGHTER = "Fighter";
+    String TAG_TANK = "Tank";
+    String TAG_MAGE = "Mage";
+    String TAG_ASSASSIN = "Assassin";
+    String TAG_SUPPORT = "Support";
+    String TAG_MARKSMAN = "Marksman";
+
     SparseArray<String> championDictionary = new SparseArray<String>() {{
         put(266, "aatrox");
         put(103, "ahri");

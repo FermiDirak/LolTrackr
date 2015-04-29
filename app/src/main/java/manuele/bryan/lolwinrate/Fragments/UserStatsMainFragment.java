@@ -3,6 +3,7 @@ package manuele.bryan.lolwinrate.Fragments;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -14,35 +15,45 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.github.mikephil.charting.animation.AnimationEasing;
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.utils.ColorTemplate;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.utils.PercentFormatter;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
 
 import manuele.bryan.lolwinrate.Adapters.UserStatsPagerAdapter;
+import manuele.bryan.lolwinrate.Databases.JsonIO;
 import manuele.bryan.lolwinrate.Helpers.ImageHelper;
 import manuele.bryan.lolwinrate.Helpers.LolStatsApplication;
+import manuele.bryan.lolwinrate.Helpers.RiotAPIConstants;
 import manuele.bryan.lolwinrate.Helpers.RiotAPIConstantsHelper;
 import manuele.bryan.lolwinrate.R;
 import manuele.bryan.lolwinrate.UserStatistics.MatchHistory;
+import manuele.bryan.lolwinrate.UserStatistics.RankedStatsInfo;
 import manuele.bryan.lolwinrate.UserStatistics.UsersLeagueInfo;
 
 public class UserStatsMainFragment extends Fragment {
     Context context;
 
+    MatchHistory matchHistory;
     Typeface typeface;
 
     UserStatsPagerAdapter pagerAdapter;
     ViewPager viewPager;
 
+    //____PAGE_0____
     View userStatsPage0;
+
     View recentMatchView0;
     View recentMatchView1;
     View recentMatchView2;
     View recentMatchView3;
-
-    MatchHistory matchHistory;
 
     LayoutInflater layoutInflater;
     boolean[] selectedRankQueue = {true, false, false};
@@ -54,7 +65,12 @@ public class UserStatsMainFragment extends Fragment {
     View minimizedQueueView;
     View maximizedQueueView;
 
+    View favoritesView;
+
+    //____PAGE_1____
     View userStatsPage1;
+
+    //____PAGE_2____
     View userStatsPage2;
 
 
@@ -109,9 +125,6 @@ public class UserStatsMainFragment extends Fragment {
         inflateRankedView(team5v5View, UsersLeagueInfo.QUEUE_RANKED_TEAM_FIVES, selectedRankQueue[1]);
         inflateRankedView(team3v3View, UsersLeagueInfo.QUEUE_RANKED_TEAM_THREE, selectedRankQueue[2]);
 
-        //TODO: remove this at a later time
-        System.out.println("Team Name: " + LolStatsApplication.usersLeagueInfo.queuesList.get(UsersLeagueInfo.QUEUE_RANKED_TEAM_FIVES).teamOrPlayerName);
-
         soloQueueView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -136,23 +149,13 @@ public class UserStatsMainFragment extends Fragment {
             }
         });
 
-//        favoritesView = view.findViewById(R.id.favoritesView);
+        //____FAVORITES_VIEW_INFLATION____
+        favoritesView = view.findViewById(R.id.favoritesView);
 
-//        PieChart rolesPieChart = (PieChart) favoritesView.findViewById(R.id.rolesPieChart);
-//        rolesPieChart.setUsePercentValues(true);
-//        rolesPieChart.setDescription("");
-//        rolesPieChart.setDrawHoleEnabled(true);
-//        rolesPieChart.setHoleColorTransparent(true);
-//        rolesPieChart.setHoleRadius(58f);
-//        rolesPieChart.setTransparentCircleRadius(61f);
-//        rolesPieChart.setDrawCenterText(true);
-//        rolesPieChart.setRotationAngle(0);
-//        rolesPieChart.setRotationEnabled(true);
-//        rolesPieChart.setCenterText("Favorite Roles");
-//
-//        setPieChartData(rolesPieChart);
-//
-//        rolesPieChart.animateY(1500, AnimationEasing.EasingOption.EaseInOutQuad);
+        PieChart rolesPieChart = (PieChart) favoritesView.findViewById(R.id.rolesPieChart);
+        setupRolePieChart(rolesPieChart);
+
+        rolesPieChart.animateY(1500, AnimationEasing.EasingOption.EaseInOutQuad);
 
 
         userStatsPage1 = view.findViewById(R.id.usersStatsPage1);
@@ -237,30 +240,108 @@ public class UserStatsMainFragment extends Fragment {
 
     }
 
-    private void setPieChartData(PieChart pieChart) {
+    private void setupRolePieChart(PieChart pieChart) {
+        pieChart.setUsePercentValues(true);
+        pieChart.setDescription("");
+        pieChart.setDrawHoleEnabled(true);
+        pieChart.setHoleColorTransparent(true);
+        pieChart.setHoleRadius(58f);
+        pieChart.setTransparentCircleRadius(61f);
+        pieChart.setDrawCenterText(true);
+        pieChart.setRotationAngle(0);
+        pieChart.setRotationEnabled(true);
+        pieChart.setCenterText("Favorite Roles");
+        pieChart.getLegend().setEnabled(false);
 
 
-        //TODO:refactor this into somewhere else so that it can be globally accessible
-        ArrayList<Integer> colors = new ArrayList<>();
 
-        for (int color : ColorTemplate.VORDIPLOM_COLORS) {
-            colors.add(color);
+        HashMap<String, Integer> roleData = aggregatePlayerTagData();
+        ArrayList<String> xTitles = new ArrayList<>(roleData.keySet());
+
+        ArrayList<Entry> entries = new ArrayList<>();
+        for (int i = 0; i < xTitles.size(); i++) {
+            String role = xTitles.get(i);
+            entries.add(new Entry(roleData.get(role), i));
         }
 
-        for (int color : ColorTemplate.JOYFUL_COLORS)
-            colors.add(color);
+        PieDataSet dataSet = new PieDataSet(entries, "");
+        dataSet.setSliceSpace(3f);
+        dataSet.setSelectionShift(5f);
 
-        for (int color : ColorTemplate.COLORFUL_COLORS)
-            colors.add(color);
+        dataSet.setColors(LolStatsApplication.colors);
 
-        for (int color : ColorTemplate.LIBERTY_COLORS)
-            colors.add(color);
+        PieData data = new PieData(xTitles, dataSet);
+        data.setValueFormatter(new PercentFormatter());
+        data.setValueTextSize(11f);
+        data.setValueTextColor(Color.WHITE);
+        data.setValueTypeface(typeface);
 
-        for (int color : ColorTemplate.PASTEL_COLORS)
-            colors.add(color);
+        pieChart.setData(data);
 
         pieChart.highlightValues(null);
         pieChart.invalidate();
+    }
+    
+    private HashMap<String, Integer> aggregatePlayerTagData() {
+        int fighterCounter = 0;
+        int assassinCounter = 0;
+        int mageCounter = 0;
+        int marksmanCounter = 0;
+        int supportCounter = 0;
+        int tankCounter = 0;
+
+        //corresponds a champion to its respective amount of matches played in ranked
+        // champId : playCount
+        ArrayList<int[]> recordedMatches = new ArrayList<>();
+
+        HashMap<Integer, RankedStatsInfo.ChampionStats> championStats = LolStatsApplication.rankedStatsInfo.championList;
+        ArrayList<Integer> keys = new ArrayList<>(championStats.keySet());
+        for (int i = 0; i < keys.size(); i++) {
+            int key = keys.get(i);
+            int gamesPlayed = championStats.get(keys.get(i)).totalSessionsPlayed;
+
+            recordedMatches.add(new int[] {key, gamesPlayed});
+        }
+
+        ArrayList<ArrayList<String>> compiledTags = JsonIO.parseChampionBriefStaticJson(getActivity().getAssets());
+        for (int i = 0; i < compiledTags.size(); i++) {
+            ArrayList<String> champTags = compiledTags.get(i);
+
+            for (String tag : champTags) {
+                switch(tag) {
+                    case RiotAPIConstants.TAG_FIGHTER:
+                        fighterCounter += 1;
+                        break;
+                    case RiotAPIConstants.TAG_ASSASSIN:
+                        assassinCounter += 1;
+                        break;
+                    case RiotAPIConstants.TAG_MAGE:
+                        mageCounter += 1;
+                        break;
+                    case RiotAPIConstants.TAG_MARKSMAN:
+                        marksmanCounter += 1;
+                        break;
+                    case RiotAPIConstants.TAG_SUPPORT:
+                        supportCounter += 1;
+                        break;
+                    case RiotAPIConstants.TAG_TANK:
+                        tankCounter += 1;
+                        break;
+
+                }
+            }
+        }
+        
+        HashMap<String, Integer> playerRoleData = new HashMap<>();
+        playerRoleData.put(RiotAPIConstants.TAG_FIGHTER, fighterCounter);
+        playerRoleData.put(RiotAPIConstants.TAG_ASSASSIN, assassinCounter);
+        playerRoleData.put(RiotAPIConstants.TAG_MAGE, mageCounter);
+        playerRoleData.put(RiotAPIConstants.TAG_MARKSMAN, marksmanCounter);
+        playerRoleData.put(RiotAPIConstants.TAG_SUPPORT, supportCounter);
+        playerRoleData.put(RiotAPIConstants.TAG_TANK, tankCounter);
+
+        return playerRoleData;
+
     }
 
     @Override

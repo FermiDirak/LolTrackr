@@ -1,6 +1,11 @@
 package manuele.bryan.lolwinrate.Helpers;
 
 import android.app.Application;
+import android.graphics.Color;
+
+import com.github.mikephil.charting.utils.ColorTemplate;
+
+import java.util.ArrayList;
 
 import constant.Region;
 import main.java.riotapi.RiotApi;
@@ -22,6 +27,16 @@ public class LolStatsApplication extends Application {
     public static UserSummaryInfo userSummaryInfo = null;
     public static UsersLeagueInfo usersLeagueInfo = null;
     public static MatchHistory matchHistory = null;
+
+    public static ArrayList<Integer> colors = new ArrayList<>();
+    static {
+        colors.add(Color.rgb(255,209,140));
+        colors.add(Color.rgb(197,255,139));
+        colors.add(Color.rgb(139,234,255));
+        colors.add(Color.rgb(255,142,154));
+        colors.add(Color.rgb(107,243,173));
+        colors.add(ColorTemplate.getHoloBlue());
+    }
 
     public static StaticLolItemsList staticLolItemsList = null; //huge
 
